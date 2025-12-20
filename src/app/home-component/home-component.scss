@@ -1,0 +1,213 @@
+// Ensure global variables are imported if this is a component file
+@import '../../styles.scss'; 
+
+.hero {
+  height: 100vh;
+  width: 100%;
+  padding-top: calc(var(--navbar-height, 70px) + 20px);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 10%;
+  position: relative;
+  // Using an Unsplash Gaming Image
+  background: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+  
+  .overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(90deg, #050505 0%, rgba(5,5,5,0.8) 50%, rgba(5,5,5,0.2) 100%);
+  }
+
+  .content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+
+    .sub-headline {
+      color: var(--secondary);
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .headline {
+      font-size: 6rem;
+      line-height: 0.9;
+      margin-bottom: 20px;
+      
+      span {
+        color: var(--primary);
+        font-style: italic;
+      }
+    }
+
+    p {
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 20px;
+      
+      .secondary {
+        border-color: var(--text-main);
+        &:hover {
+          background: var(--text-main);
+          color: var(--bg-dark);
+          box-shadow: 0 0 20px rgba(255,255,255,0.5);
+        }
+      }
+    }
+  }
+}
+
+
+
+/* ================= HERO RESPONSIVE ================= */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .hero {
+    padding-left: 6%;
+    background-position: center right;
+
+    .content {
+      max-width: 520px;
+
+      .headline {
+        font-size: 4.5rem;
+      }
+
+      p {
+        font-size: 1.1rem;
+      }
+    }
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .hero {
+    padding: 0 20px;
+    justify-content: center;
+    text-align: center;
+
+    .overlay {
+      background: linear-gradient(
+        180deg,
+        rgba(5,5,5,0.95) 0%,
+        rgba(5,5,5,0.75) 60%,
+        rgba(5,5,5,0.5) 100%
+      );
+    }
+
+    .content {
+      max-width: 100%;
+
+      .sub-headline {
+        font-size: 1.2rem;
+      }
+
+      .headline {
+        font-size: 3.2rem;
+        line-height: 1;
+      }
+
+      p {
+        font-size: 1rem;
+        margin-bottom: 30px;
+      }
+
+      .cta-group {
+        flex-direction: column;
+        gap: 14px;
+
+        .cyber-btn {
+          width: 100%;
+        }
+      }
+    }
+
+    .social-side {
+      display: none; // Hide on mobile to reduce clutter
+    }
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .hero {
+    .content {
+      .headline {
+        font-size: 2.6rem;
+      }
+
+      .sub-headline {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+.glitch {
+  position: relative;
+  display: inline-block;
+  color: var(--primary);
+
+  &::before,
+  &::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &:hover::before {
+    animation: glitchTop 0.3s steps(2, end);
+    color: var(--secondary);
+    opacity: 1;
+  }
+
+  &:hover::after {
+    animation: glitchBottom 0.3s steps(2, end);
+    color: red;
+    opacity: 1;
+  }
+}
+
+@keyframes glitchTop {
+  0% { transform: translate(0); }
+  50% { transform: translate(-2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes glitchBottom {
+  0% { transform: translate(0); }
+  50% { transform: translate(2px, 2px); }
+  100% { transform: translate(0); }
+}
+
+.hero .content {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: heroEnter 0.8s ease-out forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes heroEnter {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero .cta-group {
+  opacity: 0;
+  animation: heroEnter 0.8s ease-out forwards;
+  animation-delay: 0.6s;
+}

@@ -1,1 +1,91 @@
-/* You can add global styles to this file, and also import other style files */
+// New Mixin for Zentry-style interactive glow
+@mixin neon-hover($color) {
+    transition: all 0.2s ease-in-out;
+    &:hover {
+        color: $color;
+        text-shadow: 0 0 5px $color, 0 0 10px rgba($color, 0.5);
+    }
+}
+
+// Ensure these variables are available (based on previous response)
+$z-black: #050505;
+$z-white: #ffffff;
+$z-accent-blue: #00f3ff;
+$z-accent-red: #ff003c; 
+// ... rest of your global styles
+
+:root {
+  --primary: #ff003c; /* Neon Red */
+  --secondary: #00f3ff; /* Cyber Blue */
+  --bg-dark: #050505;
+  --bg-panel: #121212;
+  --text-main: #ffffff;
+  --text-muted: #888888;
+  --navbar-height: 70px;
+  --logo-size: 70px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: 'Rajdhani', sans-serif;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Teko', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Custom Scrollbar for gamers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+/* Utility for Angled Buttons */
+.cyber-btn {
+  background: transparent;
+  color: var(--text-main);
+  border: 1px solid var(--primary);
+  padding: 10px 30px;
+  font-family: 'Teko', sans-serif;
+  font-size: 1.5rem;
+  cursor: pointer;
+  position: relative;
+  transition: 0.3s;
+  clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+
+  &:hover {
+    background: var(--primary);
+    box-shadow: 0 0 20px rgba(255, 0, 60, 0.5);
+  }
+}
+
+.main-content-wrapper {
+    // Add margin equal to the height of the fixed navbar (80px)
+    margin-top: 20px; 
+}
+
+// Or, if you apply it directly to the Hero component:
+app-hero {
+    display: block; // Ensure it takes up space
+    padding-top: 80px; // Push the hero content down
+}
