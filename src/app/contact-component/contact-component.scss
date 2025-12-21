@@ -1,0 +1,450 @@
+/* ROOT */
+
+.emerald-contact {
+  min-height: 100vh;
+  top: 44px;
+  background: #030b07;
+  color: #e6fff3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 40px;
+  font-family: 'EB Garamond', serif;
+  position: relative;
+}
+
+/* BACKGROUND */
+
+.emerald-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top, rgba(250, 48, 48, 0.18), transparent 65%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.8), rgb(11, 3, 3));
+  opacity: 0.85;
+}
+
+/* LAYOUT */
+
+.emerald-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+}
+
+/* LEFT PANEL */
+
+.emerald-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.emerald-title {
+  font-family: 'Cinzel', serif;
+  font-size: 46px;
+  letter-spacing: 3px;
+  color: #ff3a3a;
+  margin-bottom: 20px;
+  text-shadow: 0 0 25px rgba(248, 38, 38, 0.25);
+}
+
+.emerald-description {
+  font-size: 18px;
+  line-height: 1.6;
+  color: rgba(255, 230, 230, 0.75);
+  margin-bottom: 35px;
+}
+
+.emerald-status {
+  font-size: 14px;
+  color: rgba(255, 230, 230, 0.6);
+  margin-bottom: 30px;
+}
+
+.emerald-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  margin-right: 6px;
+  background: #ff3a3a;
+  box-shadow: 0 0 10px rgba(255, 58, 58, 0.6);
+}
+
+.emerald-links {
+  display: flex;
+  gap: 24px;
+}
+
+.emerald-link {
+  text-decoration: none;
+  color: #ff3a3a;
+  font-size: 14px;
+  position: relative;
+}
+
+.emerald-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #ff3a3a;
+  transition: width 0.3s ease;
+}
+
+.emerald-link:hover::after {
+  width: 100%;
+}
+
+/* FORM PANEL */
+
+.emerald-form-wrapper {
+  background: linear-gradient(
+    180deg,
+    rgba(19, 7, 7, 0.96),
+    rgba(11, 3, 3, 0.96)
+  );
+  border: 1px solid rgba(255, 58, 58, 0.35);
+  padding: 55px 50px;
+  box-shadow:
+    0 0 0 1px rgba(255, 58, 58, 0.12),
+    0 40px 80px rgba(0, 0, 0, 0.75);
+}
+
+/* SELECT */
+
+.emerald-select label {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: rgba(255, 230, 230, 0.55);
+  margin-bottom: 6px;
+}
+
+.emerald-select select {
+  width: 100%;
+  padding: 10px;
+  background: #0b0303;
+  border: 1px solid rgba(255, 58, 58, 0.3);
+  color: #ffe6e6;
+}
+
+/* INPUT FIELDS */
+
+.emerald-field {
+  position: relative;
+  margin-top: 35px;
+}
+
+.emerald-field input,
+.emerald-field textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 58, 58, 0.3);
+  padding: 10px 0;
+  color: #ffe6e6;
+  font-size: 16px;
+}
+
+.emerald-field label {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  font-size: 14px;
+  color: rgba(255, 230, 230, 0.6);
+  transition: all 0.25s ease;
+}
+
+.emerald-field input:focus + label,
+.emerald-field textarea:focus + label,
+.emerald-field input:valid + label,
+.emerald-field textarea:valid + label {
+  top: -10px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: #ff3a3a;
+}
+
+.emerald-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, #ff683a, #8f351f);
+  transition: width 0.35s ease;
+}
+
+.emerald-field input:focus ~ .emerald-line,
+.emerald-field textarea:focus ~ .emerald-line {
+  width: 100%;
+}
+
+/* BUTTON */
+
+.emerald-btn {
+  width: 100%;
+  margin-top: 40px;
+  padding: 14px;
+  background: transparent;
+  border: 1px solid #ff513a;
+  color: #ff473a;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 2px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.emerald-btn:hover {
+  background: linear-gradient(90deg, #ff513a, #8f301f);
+  color: #0b0303;
+}
+
+/* NOTE */
+
+.emerald-note {
+  margin-top: 18px;
+  font-size: 12px;
+  text-align: center;
+  color: rgba(255, 230, 230, 0.45);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+  .emerald-container {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+}
+
+/* ===============================
+   ANCIENT MAP SECTION
+================================ */
+
+.emerald-map-section {
+  margin-top: 140px;
+  padding-bottom: 120px;
+  text-align: center;
+}
+
+/* HEADER */
+
+.emerald-map-header {
+  margin-bottom: 40px;
+}
+
+.emerald-map-title {
+  font-family: 'Cinzel', serif;
+  font-size: 34px;
+  letter-spacing: 4px;
+  color: #ff513a;
+  text-shadow: 0 0 18px rgba(255, 71, 58, 0.3);
+  margin-bottom: 10px;
+}
+
+.emerald-map-subtitle {
+  font-size: 16px;
+  color: rgba(255, 230, 230, 0.65);
+}
+
+/* FRAME */
+
+.emerald-map-frame {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 14px;
+  background: linear-gradient(
+    180deg,
+    #1f0b0b,
+    #0b0303
+  );
+  border: 1px solid rgba(255, 58, 58, 0.35);
+  box-shadow:
+    inset 0 0 60px rgba(0, 0, 0, 0.85),
+    0 50px 100px rgba(0, 0, 0, 0.8);
+}
+
+.ancient-contact-info {
+  padding: 80px 60px;
+  background: radial-gradient(
+    circle at top,
+    rgba(255, 64, 58, 0.08),
+    transparent 70%
+  );
+}
+
+.ancient-frame {
+  border: 1px solid rgba(255, 58, 58, 0.35);
+  padding: 50px;
+  background: linear-gradient(
+    145deg,
+    rgba(15, 5, 5, 0.92),
+    rgba(0, 0, 0, 0.95)
+  );
+  box-shadow:
+    0 0 60px rgba(255, 58, 58, 0.15),
+    inset 0 0 40px rgba(0, 0, 0, 0.8);
+}
+
+.ancient-title {
+  font-size: 42px;
+  letter-spacing: 4px;
+  color: #ff3a3a;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.ancient-subtitle {
+  color: #b79f9f;
+  font-style: italic;
+  margin-bottom: 50px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 40px;
+}
+
+.info-block {
+  border-left: 2px solid rgba(255, 58, 58, 0.4);
+  padding-left: 20px;
+}
+
+.info-block h3 {
+  color: #ff3a3a;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.info-block p {
+  color: #d8b7b7;
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+.rune-icon {
+  font-size: 26px;
+  color: #ff3a3a;
+  display: block;
+  margin-bottom: 10px;
+  opacity: 0.85;
+}
+.info-block:hover {
+  box-shadow: 0 0 20px rgba(255, 58, 58, 0.2);
+  transform: translateY(-4px);
+  transition: all 0.3s ease;
+}
+.ancient-map-section {
+  padding: 90px 60px;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 58, 58, 0.06),
+    transparent 75%
+  );
+}
+
+.map-frame {
+  border: 1px solid rgba(255, 58, 58, 0.35);
+  padding: 50px;
+  background: linear-gradient(160deg, #0f0505, #000);
+  box-shadow:
+    inset 0 0 60px rgba(0, 0, 0, 0.9),
+    0 0 40px rgba(255, 58, 58, 0.15);
+}
+
+.map-title {
+  font-size: 40px;
+  color: #ff3a3a;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.map-subtitle {
+  color: #b79f9f;
+  margin-bottom: 40px;
+  font-style: italic;
+}
+
+.map-container {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 58, 58, 0.4);
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.9);
+}
+
+.ancient-map-image {
+  width: 100%;
+  display: block;
+  filter: sepia(0.9) contrast(1.1) brightness(0.9);
+}
+
+.rune-marker {
+  position: absolute;
+  top: 52%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  color: #ff3a3a;
+  font-size: 34px;
+  text-shadow: 0 0 20px rgba(255, 58, 58, 0.8);
+}
+
+.rune-marker .pulse {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border: 2px solid rgba(255, 58, 58, 0.6);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.6);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.4);
+    opacity: 0;
+  }
+}
+
+.map-footer {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.map-footer p {
+  color: #b79f9f;
+  font-size: 14px;
+}
+
+.map-button {
+  border: 1px solid #ff3a3a;
+  padding: 10px 26px;
+  color: #ff3a3a;
+  text-decoration: none;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+}
+
+.map-button:hover {
+  background: rgba(255, 81, 58, 0.15);
+  box-shadow: 0 0 15px rgba(255, 81, 58, 0.6);
+}

@@ -1,0 +1,443 @@
+/* ROOT */
+
+.emerald-team {
+  min-height: 100vh;
+  padding: 120px 60px;
+  background: #000;
+  color: #ffffff;
+  font-family: 'EB Garamond', serif;
+  position: relative;
+}
+
+/* BACKGROUND */
+
+.emerald-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top, rgba(180, 0, 0, 0.25), transparent 60%),
+    linear-gradient(180deg, #000000, #050000);
+  opacity: 0.95;
+}
+
+/* CONTAINER */
+
+.team-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* HEADER */
+
+.team-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.team-title {
+  font-family: 'Cinzel', serif;
+  font-size: 52px;
+  letter-spacing: 6px;
+  color: #d00000;
+  text-shadow: 0 0 25px rgba(208, 0, 0, 0.6);
+}
+
+.team-subtitle {
+  margin-top: 18px;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.65);
+  font-style: italic;
+}
+
+/* GRID */
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 50px;
+}
+
+/* CARD */
+
+.team-card {
+  position: relative;
+  padding: 40px 30px;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 0, 0, 0.95),
+    rgba(0, 0, 0, 0.98)
+  );
+  border: 1px solid rgba(200, 0, 0, 0.45);
+  box-shadow:
+    0 0 0 1px rgba(200, 0, 0, 0.15),
+    0 40px 80px rgba(0, 0, 0, 0.9);
+  text-align: center;
+  overflow: hidden;
+  transition: transform 0.4s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-8px);
+}
+
+/* GLOW ANIMATION */
+
+.rune-glow {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(200, 0, 0, 0.7);
+  filter: blur(10px);
+  opacity: 0.35;
+  animation: glowPulse 3.5s infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes glowPulse {
+  from { opacity: 0.2; }
+  to { opacity: 0.7; }
+}
+
+/* IMAGE */
+
+.team-card img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid rgba(200, 0, 0, 0.7);
+  margin-bottom: 25px;
+  box-shadow: 0 0 25px rgba(200, 0, 0, 0.6);
+}
+
+/* TEXT */
+
+.team-card h3 {
+  font-family: 'Cinzel', serif;
+  color: #ffffff;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+
+.team-card span {
+  display: block;
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 16px;
+}
+
+.team-card p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+  .emerald-team {
+    padding: 100px 30px;
+  }
+}
+
+/* ===============================
+   TEAM OATH
+================================ */
+
+.team-oath {
+  margin-top: 120px;
+  text-align: center;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: fadeRise 1.4s ease forwards;
+}
+
+.team-oath h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 38px;
+  letter-spacing: 4px;
+  color: #d00000;
+  margin-bottom: 20px;
+  text-shadow: 0 0 20px rgba(208, 0, 0, 0.6);
+}
+
+.team-oath p {
+  font-size: 17px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ===============================
+   DIVIDER RITUAL LINE
+================================ */
+
+.ritual-divider {
+  display: flex;
+  justify-content: center;
+  margin: 80px 0;
+}
+
+.ritual-divider span {
+  width: 160px;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #d00000,
+    transparent
+  );
+  box-shadow: 0 0 20px rgba(208, 0, 0, 0.6);
+}
+
+/* ===============================
+   TEAM VALUES
+================================ */
+
+.team-values {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 40px;
+  margin-bottom: 120px;
+}
+
+.value-card {
+  padding: 40px 30px;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 0, 0, 0.9),
+    rgba(0, 0, 0, 0.95)
+  );
+  border: 1px solid rgba(200, 0, 0, 0.4);
+  box-shadow:
+    inset 0 0 40px rgba(0, 0, 0, 0.8),
+    0 0 40px rgba(208, 0, 0, 0.15);
+  text-align: center;
+  transition: all 0.4s ease;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: revealUp 0.9s ease forwards;
+}
+
+.value-card:nth-child(1) { animation-delay: 0.2s; }
+.value-card:nth-child(2) { animation-delay: 0.4s; }
+.value-card:nth-child(3) { animation-delay: 0.6s; }
+
+.value-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow:
+    0 0 40px rgba(208, 0, 0, 0.5),
+    inset 0 0 30px rgba(0, 0, 0, 0.9);
+}
+
+.value-card h3 {
+  font-family: 'Cinzel', serif;
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+  color: #ffffff;
+}
+
+.value-card p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ===============================
+   ANIMATIONS
+================================ */
+
+@keyframes fadeRise {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes revealUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===============================
+   BLOOD ARCHIVES
+================================ */
+
+.blood-archives {
+  margin-top: 160px;
+  text-align: center;
+}
+
+.archive-title {
+  font-family: 'Cinzel', serif;
+  font-size: 44px;
+  color: #b30000;
+  letter-spacing: 5px;
+  text-shadow: 0 0 30px rgba(179, 0, 0, 0.6);
+}
+
+.archive-sub {
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.55);
+  font-style: italic;
+}
+
+.archive-columns {
+  margin-top: 90px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 60px;
+}
+
+.archive-slab {
+  padding: 60px 40px;
+  background: linear-gradient(160deg, #0b0b0b, #000);
+  border: 1px solid rgba(150, 0, 0, 0.45);
+  box-shadow:
+    inset 0 0 60px rgba(0, 0, 0, 0.95),
+    0 0 40px rgba(150, 0, 0, 0.25);
+  position: relative;
+  animation: rise 1.2s ease forwards;
+}
+
+.archive-slab::before {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border: 1px dashed rgba(150, 0, 0, 0.25);
+}
+
+.archive-slab:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 60px rgba(179, 0, 0, 0.6);
+}
+
+.rune {
+  display: block;
+  font-size: 36px;
+  color: #b30000;
+  margin-bottom: 20px;
+  text-shadow: 0 0 20px rgba(179, 0, 0, 0.8);
+}
+
+.archive-slab h3 {
+  letter-spacing: 3px;
+  margin-bottom: 16px;
+}
+
+.archive-slab p {
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+/* ===============================
+   RITUAL PATH
+================================ */
+
+.ritual-path {
+  margin-top: 180px;
+  text-align: center;
+}
+
+.ritual-path h2 {
+  font-family: 'Cinzel', serif;
+  color: #b30000;
+  letter-spacing: 4px;
+  margin-bottom: 80px;
+}
+
+.path {
+  display: flex;
+  justify-content: center;
+  gap: 120px;
+}
+
+.path-node {
+  position: relative;
+  color: #fff;
+  font-size: 13px;
+  letter-spacing: 2px;
+}
+
+.path-node span {
+  width: 16px;
+  height: 16px;
+  background: #b30000;
+  display: block;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  box-shadow: 0 0 25px rgba(179, 0, 0, 0.9);
+  animation: ember 2.5s infinite;
+}
+
+/* ===============================
+   BLOOD SEAL
+================================ */
+
+.blood-seal {
+  margin: 200px 0 140px;
+  text-align: center;
+}
+
+.blood-seal h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 46px;
+  color: #fff;
+}
+
+.blood-seal p {
+  margin: 18px 0 50px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.seal-btn {
+  padding: 18px 56px;
+  border: 1px solid #b30000;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 4px;
+  font-family: 'Cinzel', serif;
+  box-shadow: 0 0 40px rgba(179, 0, 0, 0.5);
+  transition: all 0.4s ease;
+}
+
+.seal-btn:hover {
+  background: #b30000;
+  box-shadow: 0 0 80px rgba(179, 0, 0, 0.9);
+}
+
+/* ===============================
+   ANIMATIONS
+================================ */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ember {
+  0% {
+    box-shadow: 0 0 10px rgba(179, 0, 0, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(179, 0, 0, 1);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(179, 0, 0, 0.4);
+  }
+}
