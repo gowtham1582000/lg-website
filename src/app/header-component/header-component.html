@@ -22,7 +22,7 @@
     <ul class="nav-links bracketed-links">
         <li><a routerLink="/" class="active">HOME</a></li>
         <li><a routerLink="/tournaments">About Us</a></li>
-        <li><a routerLink="/news">Team</a></li>
+        <li><a routerLink="/team">Team</a></li>
     </ul>
 </nav>
 
@@ -34,11 +34,11 @@
     </div>
     
     <ul class="mobile-nav-links">
-        <li><a routerLink="/" (click)="toggleMenu()">HOME</a></li>
-        <li><a routerLink="/tournaments" (click)="toggleMenu()">ABOUT US</a></li>
-        <li><a routerLink="/news" (click)="toggleMenu()">TEAM</a></li>
+        <li><a routerLink="/" routerLinkActive="active" (click)="toggleMenu()">HOME</a></li>
+        <li><a routerLink="/tournaments" routerLinkActive="active" (click)="toggleMenu()">ABOUT US</a></li>
+        <li><a routerLink="/team" routerLinkActive="active" (click)="toggleMenu()">TEAM</a></li>
         <li class="contact-item">
-            <a routerLink="/contact" class="contact-link command-style-link" (click)="toggleMenu()">
+            <a routerLink="/contact" routerLinkActive="active" class="contact-link command-style-link" (click)="toggleMenu()">
                 <i class="fas fa-headset"></i> <span class="label-text">GET IN TOUCH</span>
             </a>
         </li>

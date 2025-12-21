@@ -29,7 +29,7 @@ $tablet-break: 1024px;
   
   // 2. UPDATED BORDER: Subtle Cyan-to-Red gradient for a "wired" look
   border: 1px solid rgba(82, 81, 81, 0.5);
-  border-bottom: 2px solid rgba(0, 243, 255, 0.3); // Faint cyan glow at bottom
+  border-bottom: 2px solid rgba(255, 30, 0, 0.3); // Faint cyan glow at bottom
   
   border-radius: 8px;
   
@@ -331,7 +331,7 @@ $tablet-break: 1024px;
     // Headphone Icon Styling
     .fas {
         font-size: 1.4rem;
-        color: $z-accent-blue; /* Use Neon Blue for the icon */
+        color: $z-accent-red; /* Use Neon Blue for the icon */
         transition: color 0.3s;
     }
 
