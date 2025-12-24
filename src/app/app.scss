@@ -116,26 +116,47 @@
   }
 }
 
+.scanner-overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    transparent 0%,
+    rgba(255, 42, 42, 0.05) 50%,
+    transparent 100%
+  );
+  background-size: 100% 200px;
+  pointer-events: none;
+  z-index: 1;
+  animation: scanner-move 10s linear infinite;
+}
+
+@keyframes scanner-move {
+  from { background-position: 0 -200px; }
+  to { background-position: 0 100vh; }
+}
+
 .background-grid {
   position: fixed;
   inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 42, 42, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 42, 42, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
   z-index: -1;
-  background: #050505;
-  overflow: hidden;
-  pointer-events: none;
-  transition: transform 0.1s ease-out;
+  transform: perspective(1000px) rotateX(60deg) translateY(-20%);
+  transform-origin: top;
+  opacity: 0.3;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 
-  &::after {
-    content: '';
-    position: absolute;
-    width: 250%; height: 250%;
-    top: -75%; left: -75%;
-    background-image: 
-      linear-gradient(rgba(255, 42, 42, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 42, 42, 0.05) 1px, transparent 1px);
-    background-size: 80px 80px;
-    transform: rotate(15deg);
-  }
+.data-particles {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 42, 42, 0.05) 0%, transparent 80%);
+  pointer-events: none;
+}
+
 
   &::before {
     content: '';

@@ -5,9 +5,12 @@
   <span class="trigger-label">SYS_LINK</span>
 </div>
 
-<div class="terminal-container" [class.open]="isOpen()">
+<div class="terminal-container" 
+     [class.open]="isOpen()"
+     [style.left.px]="terminalPos().x"
+     [style.top.px]="terminalPos().y">
   <div class="terminal-window">
-    <div class="terminal-header">
+    <div class="terminal-header" (mousedown)="onDragStart($event)">
       <div class="title">
         <span class="pulse"></span> NEURAL_INTERFACE v1.0.4
       </div>
