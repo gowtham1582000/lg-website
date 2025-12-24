@@ -16,3 +16,287 @@
     <a href="#">IG</a>
   </div>
 </section>
+
+<section class="studio-section hybrid-blend">
+  <div class="ancient-overlay"></div>
+
+  <div class="container">
+    <div class="row align-items-center">
+      
+      <div class="col-lg-6 mb-5 mb-lg-0">
+        <div class="studio-frame relic-style">
+          <div class="corner-relic top-left"></div>
+          <div class="corner-relic bottom-right"></div>
+          
+          <div class="image-wrapper">
+            <img src="../../assets/images/about-us-bg.jpg" alt="Our Studio" class="studio-img">
+            <div class="scanner-line"></div>
+            <div class="overlay-grid"></div>
+          </div>
+          
+          <div class="status-badge ancient">
+            <span class="dot pulse-gold"></span> ARCHIVE_ACTIVE
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="content-wrapper">
+          <div class="section-tag">ᛖ // ARCHITECTS_OF_REALITY // ᛖ</div>
+          <h2 class="hybrid-title">THE STUDIO</h2>
+          
+          <div class="console-text">
+            <p>
+              <span class="cmd">> ORIGIN_STORY:</span><br>
+              We are not just developers; we are <span class="highlight">Digital Alchemists</span>. 
+              Forged in the fires of competitive play, we blend **ancient storytelling** with **next-gen technical supremacy** to build worlds that breathe.
+            </p>
+            <p>
+              <span class="cmd">> THE_COVEN_OBJECTIVE:</span><br>
+              To etch our code into the stone of gaming history. No pay-to-win. No compromises. 
+              Just pure, unadulterated combat powered by a neural-relic interface.
+            </p>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-box relic-box">
+              <div class="value">05+</div>
+              <div class="label">RELICS_SHIPPED</div>
+            </div>
+            <div class="stat-box relic-box">
+              <div class="value">50+</div>
+              <div class="label">BATTLE_ARCHITECTS</div>
+            </div>
+            <div class="stat-box relic-box">
+              <div class="value">HQ</div>
+              <div class="label">CHENNAI_INDIA</div>
+            </div>
+          </div>
+
+          <button class="btn-hybrid mt-4">INITIATE_CONTACT</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="story-section ancient">
+  <div class="story-frame">
+
+    <!-- LEFT: TEXT + IMAGES -->
+    <div class="story-codex">
+
+      <span class="codex-label">ARCHIVE // WORLD ORIGIN</span>
+      <h2>THE FRACTURED ERA</h2>
+
+      <p>
+        Civilization did not collapse overnight.
+        It eroded silently as data replaced memory.
+      </p>
+
+      <!-- Inline Relic Image -->
+      <div class="relic-image">
+        <img src="../../assets/images/ancient-rune.jpg" alt="Ruined Cyber World">
+        <span class="relic-caption">Recovered World Fragment</span>
+      </div>
+
+      <p>
+        When history became editable, truth vanished.
+        What remained was conflict, rewritten endlessly.
+      </p>
+
+      <p>
+        From this chaos emerged <span class="highlight">THE META</span>,
+        a system built to decide reality through combat.
+      </p>
+
+    </div>
+
+    <!-- RIGHT: IMAGE STACK + TERMINAL -->
+    <div class="story-visuals">
+
+      <div class="artifact-stack">
+        <img src="../../assets/images/Ancient Device.png" alt="Ancient Device">
+        <img src="../../assets/images/Neural Core.png" alt="Neural Core">
+      </div>
+
+      <div class="story-terminal">
+        <div class="terminal-header">
+          <span>SYS.LOG</span>
+          <span class="status">STABLE</span>
+        </div>
+
+        <pre class="terminal-text">
+> WORLD STATE: FRACTURED
+> META STATUS: ACTIVE
+> ENTRY POINT: ARENA
+        </pre>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+
+<section class="morph-container">
+  <div class="side ancient">
+    <div class="content-box left">
+      <span class="tag gold">ᛟ ANCESTRAL</span>
+      <h2>SENTINEL</h2>
+      <p>FORGED IN STONE</p>
+    </div>
+    
+    <div class="hero-wrapper">
+      <div class="hero-placeholder ancient-hero"></div>
+    </div>
+  </div>
+
+  <div class="side tech" [style.width.%]="sliderValue()">
+    <div class="content-box right">
+      <span class="tag cyan">SYS_REBOOT // 0.1</span>
+      <h2>WRAITH</h2>
+      <p>CORE ENHANCED</p>
+    </div>
+
+    <div class="hero-wrapper">
+      <div class="hero-placeholder tech-hero"></div>
+    </div>
+  </div>
+
+  <input type="range" min="0" max="100" [value]="sliderValue()" (input)="updateSlider($event)" class="morph-slider">
+  
+  <div class="rift-divider" [style.left.%]="sliderValue()">
+    <div class="relic-handle">ᚠ</div>
+  </div>
+</section>
+
+<section class="hex-grid-section">
+  <div class="section-header">
+    <div class="cmd-prefix">SYSTEM_SCAN > FEATURES_LOADED</div>
+    <h2>CORE_MODULES</h2>
+  </div>
+
+
+  <div class="hex-container">
+    @for (feature of features; track feature.id) {
+      <div class="hex-wrapper" [class.locked]="feature.status === 'LOCKED'">
+        <div class="hex-content">
+          <div class="icon-layer">
+            <i class="fas" [class]="feature.icon"></i>
+          </div>
+          
+          <div class="info-layer">
+            <div class="feature-id">{{ feature.id }}</div>
+            <h3>{{ feature.title }}</h3>
+            <p>{{ feature.description }}</p>
+            <div class="status-indicator" [class]="feature.status.toLowerCase()">
+              {{ feature.status }}
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</section>
+
+<section class="terminal-section">
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <div class="dots">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+      </div>
+      <div class="title">DEV_LOGS.EXE - STUDIO UPDATE FEED</div>
+    </div>
+
+    <div class="terminal-body">
+      <div class="scanline"></div> <div class="log-entry">
+        <span class="timestamp">[2024-10-24 14:00]</span>
+        <span class="command">>> UPDATE_V1.2 DEPLOYED</span>
+        <p class="log-msg">New map "Neon District" added to rotation. Weapon balance patch applied to Sniper class.</p>
+        <a routerLink="/news/1" class="read-link">[READ_FULL_LOG]</a>
+      </div>
+
+      <div class="log-entry highlight">
+        <span class="timestamp">[2024-10-20 09:30]</span>
+        <span class="command">>> TOURNAMENT_ALERT</span>
+        <p class="log-msg">Winter Championship registrations are now open. Prize pool updated to $50,000.</p>
+        <a routerLink="/news/2" class="read-link">[REGISTER_NOW]</a>
+      </div>
+
+      <div class="log-entry">
+        <span class="timestamp">[2024-10-15 11:45]</span>
+        <span class="command">>> SYSTEM_MAINTENANCE</span>
+        <p class="log-msg">Server optimization complete. Latency reduced by 15% in EU region.</p>
+      </div>
+
+      <div class="cursor-line">
+        <span class="prompt">admin@synthesis:~$</span> <span class="blink">_</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="intel-section">
+  <div class="intel-header">
+    <span class="status">NETWORK_FEED_STATUS: ONLINE</span>
+    <h2>Blog</h2>
+    <div class="scan-line"></div>
+  </div>
+
+  <div class="intel-grid">
+
+    <article class="intel-card">
+      <div class="intel-frame"></div>
+
+      <img src="../../assets/images/blog.jpg" alt="Agent Phoenix">
+
+      <div class="intel-content">
+        <h3>NEW AGENT: PHOENIX</h3>
+        <p class="meta">SCROLL_ID: 027-A • ERA: MODERN</p>
+        <p class="desc">
+          An ancient warrior reborn through synthetic augmentation.
+        </p>
+
+        <button class="intel-btn">READ ARCHIVE</button>
+      </div>
+    </article>
+
+    <article class="intel-card">
+      <div class="intel-frame"></div>
+
+      <img src="../../assets/images/blog.jpg" alt="Championship">
+
+      <div class="intel-content">
+        <h3>GLOBAL CHAMPIONSHIP</h3>
+        <p class="meta">EVENT_TYPE: TOURNAMENT</p>
+        <p class="desc">
+          Where legacy clans clash inside a digital colosseum.
+        </p>
+
+        <button class="intel-btn">READ ARCHIVE</button>
+      </div>
+    </article>
+
+    <article class="intel-card">
+      <div class="intel-frame"></div>
+
+      <img src="../../assets/images/blog.jpg" alt="Devlog">
+
+      <div class="intel-content">
+        <h3>STUDIO DEVLOG 2.0</h3>
+        <p class="meta">FORGE_UPDATE</p>
+        <p class="desc">
+          The architects reveal the evolution of the realm.
+        </p>
+
+        <button class="intel-btn">READ ARCHIVE</button>
+      </div>
+    </article>
+
+  </div>
+</section>
