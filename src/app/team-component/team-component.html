@@ -1,5 +1,6 @@
 
 
+
 <!-- OATH SECTION -->
 <section class="team-oath">
   <h2>The Blood Oath</h2>
@@ -53,40 +54,7 @@
       </p>
     </div>
 
-    <div class="team-content-wrapper" [class.encrypted]="!isBreached()">
-      @if (!isBreached()) {
-        <div class="breach-overlay">
-          <div class="breach-panel">
-            @if (!isBreaching()) {
-              <div class="locked-state">
-                <i class="fas fa-lock"></i>
-                <h2>DATA ENCRYPTED</h2>
-                <p>ACCESS TO PERSONNEL DOSSIERS IS RESTRICTED.</p>
-                <button class="breach-btn" (click)="startBreach()">BREACH SYSTEM</button>
-              </div>
-            } @else {
-              <div class="breach-game">
-                <div class="breach-header">
-                  <span class="scanline"></span>
-                  <h3>SEQUENCE INPUT REQUIRED</h3>
-                  <div class="progress-bar">
-                    <div class="fill" [style.width.%]="breachProgress()"></div>
-                  </div>
-                </div>
-                <div class="rune-grid">
-                  @for (rune of runes; track $index) {
-                    <button class="rune-btn" (click)="selectRune(rune)">{{ rune }}</button>
-                  }
-                </div>
-                <p class="hint">HINT: THE BLOOD ARCHIVES HOLD THE KEY.</p>
-              </div>
-            }
-          </div>
-        </div>
-      }
-
-      <div class="team-grid">
-        <!-- ... existing team cards ... -->
+    <div class="team-grid">
 
       <div class="team-card">
         <div class="rune-glow"></div>

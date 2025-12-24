@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, signal } from '@angular/core';
-import { GlitchDirective } from '../shared/glitch.directive';
 
 interface GameFeature {
   id: string;
@@ -13,7 +12,7 @@ interface GameFeature {
 @Component({
   selector: 'app-home-component',
   standalone: true,
-  imports: [CommonModule, GlitchDirective],
+  imports: [CommonModule],
   templateUrl: './home-component.html',
   styleUrl: './home-component.scss',
 })
