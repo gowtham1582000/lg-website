@@ -31,4 +31,45 @@ export class HomeComponent {
     this.sliderValue.set(parseInt(value, 10));
   }
   dangerMode = computed(() => this.sliderValue() > 80);
+
+  runes = [
+    { id: 1, char: 'ᚠ' }, { id: 2, char: 'ᚢ' }, 
+    { id: 3, char: 'ᚦ' }, { id: 4, char: 'ᚩ' }
+  ];
+  correctSequence = [3, 1, 4, 2]; // The secret order
+  
+  // State
+  userSequence: number[] = [];
+  storyUnlocked = false;
+  isError = false;
+  statusMessage = "WAITING_FOR_INPUT...";
+
+  inputRune(id: number) {
+    if (this.isError || this.storyUnlocked) return;
+
+    this.userSequence.push(id);
+    
+    // Check if the current click matches the sequence
+    const currentIndex = this.userSequence.length - 1;
+    if (this.userSequence[currentIndex] !== this.correctSequence[currentIndex]) {
+      this.handleError();
+      return;
+    }
+
+    // Check for win
+    if (this.userSequence.length === this.correctSequence.length) {
+      this.statusMessage = "DECRYPTION_SUCCESSFUL";
+      setTimeout(() => this.storyUnlocked = true, 1000);
+    }
+  }
+
+  handleError() {
+    this.isError = true;
+    this.statusMessage = "SEQUENCE_ERROR: RESETTING_CORE";
+    setTimeout(() => {
+      this.userSequence = [];
+      this.isError = false;
+      this.statusMessage = "WAITING_FOR_INPUT...";
+    }, 1500);
+  }
 }

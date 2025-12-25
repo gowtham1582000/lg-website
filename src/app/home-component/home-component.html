@@ -140,6 +140,42 @@
   </div>
 </section>
 
+<section class="sequence-lock-section">
+  <div class="container">
+    
+    <div class="lock-screen" *ngIf="!storyUnlocked">
+      <div class="lock-header">
+        <span class="tech-tag">// SECURITY_PROTOCOL: LEVEL_01</span>
+        <h2 class="ancient-font">UNSEAL THE CHRONICLES</h2>
+        <p class="instruction">Align the Ancestral Echoes to decrypt the archives.</p>
+      </div>
+
+      <div class="rune-grid">
+        <button *ngFor="let rune of runes; let i = index" 
+                class="rune-btn" 
+                [class.active]="userSequence.includes(rune.id)"
+                [class.error]="isError"
+                (click)="inputRune(rune.id)">
+          <span class="rune-char">{{ rune.char }}</span>
+          <span class="rune-id">0{{ rune.id }}</span>
+        </button>
+      </div>
+
+      <div class="lock-status">
+        <div class="progress-dots">
+          <div class="dot" *ngFor="let s of [1,2,3,4]" [class.filled]="userSequence.length >= s"></div>
+        </div>
+        <p class="status-text">{{ statusMessage }}</p>
+      </div>
+    </div>
+
+    <div class="revealed-story" *ngIf="storyUnlocked" [@fadeIn]>
+      <h2 class="ancient-font">DECIPHERED: THE SPLICING</h2>
+      <p>The archives are open. Proceed, Breacher...</p>
+    </div>
+
+  </div>
+</section>
 
 
 <section class="morph-container">

@@ -471,29 +471,6 @@ $obsidian-stone: #0d0d12;
         }
 }
 
-
-/* Floating icon styling */
-.floating-icon {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  background: #1a1a1a;
-  color: white;
-  padding: 15px;
-  border-radius: 50%;
-  font-size: 24px;
-  cursor: pointer;
-  display: none;
-  z-index: 1001;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-  transition: transform 0.3s;
-
-  &.show {
-    display: block;
-    transform: scale(1);
-  }
-}
-
 /* Collapsed / floating navbar */
 .navbar.command-line-style.collapsed {
   width: 70px;                // shrink width
