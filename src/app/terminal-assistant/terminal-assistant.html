@@ -1,0 +1,41 @@
+<div class="terminal-trigger" (click)="toggleTerminal()" [class.hidden]="isOpen()">
+  <div class="trigger-icon">
+    <i class="fas fa-terminal"></i>
+  </div>
+  <span class="trigger-label">SYS_LINK</span>
+</div>
+
+<div class="terminal-container" [class.open]="isOpen()">
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <div class="title">
+        <span class="pulse"></span> NEURAL_INTERFACE v1.0.4
+      </div>
+      <div class="controls">
+        <button (click)="toggleTerminal()">_</button>
+        <button (click)="toggleTerminal()">×</button>
+      </div>
+    </div>
+
+    <div class="terminal-body" #scrollContainer>
+      <div class="scanline"></div>
+      
+      @for (line of history(); track $index) {
+        <div class="log-line" [ngClass]="line.type">
+          <pre>{{ line.content }}</pre>
+        </div>
+      }
+
+      <div class="input-line">
+        <span class="prompt">></span>
+        <input 
+          type="text" 
+          [(ngModel)]="command" 
+          (keyup.enter)="handleCommand()"
+          placeholder="ENTER COMMAND..."
+          autofocus
+        >
+      </div>
+    </div>
+  </div>
+</div>

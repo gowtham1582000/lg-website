@@ -1,5 +1,60 @@
+<div class="neural-pulse"></div>
+<div class="background-grid"></div>
+<div class="data-particles"></div>
 <app-header-component></app-header-component>
 
+<!-- GATE INTRO -->
+ @if(showGate()){
+    <div class="gate-intro" #gate>
+    <div class="gate gate-left"></div>
+    <div class="gate gate-right"></div>
+
+    <div class="gate-lock">
+        <div class="lock-hex">
+        <svg viewBox="0 0 100 100" class="lock-svg">
+            <!-- HEX FRAME -->
+            <polygon
+            points="25,5 75,5 95,50 75,95 25,95 5,50"
+            fill="none"
+            stroke="#ff2a2a"
+            stroke-width="3"
+            />
+
+            <!-- INNER RING -->
+            <circle
+            cx="50"
+            cy="50"
+            r="22"
+            stroke="#ff2a2a"
+            stroke-width="2"
+            fill="none"
+            opacity="0.7"
+            />
+
+            <!-- LOCK BODY -->
+            <rect x="40" y="48" width="20" height="18" rx="3" fill="#ff2a2a" />
+
+            <!-- LOCK SHACKLE -->
+            <path
+            d="M43 48 v-6 a7 7 0 0 1 14 0 v6"
+            fill="none"
+            stroke="#ff2a2a"
+            stroke-width="3"
+            stroke-linecap="round"
+            />
+
+            <!-- KEYHOLE -->
+            <circle cx="50" cy="56" r="2" fill="#000" />
+        </svg>
+        </div>
+        <p class="boot-text">ACCESS VERIFIED</p>
+    </div>
+    </div>
+ }
 <div class="main-content-wrapper">
-  <router-outlet></router-outlet>
-</div>
+    <router-outlet></router-outlet>
+  </div>
+  
+  <app-terminal-assistant></app-terminal-assistant>
+  
+  <app-footer-component></app-footer-component>
