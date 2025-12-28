@@ -1,0 +1,204 @@
+.split-reveal-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: #050505;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .background-texture {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+    background-size: 40px 40px;
+    opacity: 0.3;
+  }
+}
+
+  .cards-stack {
+    position: absolute;
+    width: 450px;
+    height: 600px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none; // Allow clicks through to content when spread
+
+    .card {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: #111;
+      transform-origin: center center;
+      pointer-events: auto;
+
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(0, 0, 0, 0.8));
+    }
+
+    &:hover img {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.content-reveal {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  max-width: 800px;
+  opacity: 0;
+  transform: translateY(30px);
+
+  .content-inner {
+    padding: 40px;
+
+    .tag {
+      font-family: 'Courier New', Courier, monospace;
+      color: #00f2ff;
+      letter-spacing: 4px;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+
+    .title {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 900;
+      line-height: 0.9;
+      color: #fff;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+
+      .highlight {
+        -webkit-text-stroke: 1px #fff;
+        color: transparent;
+      }
+    }
+
+    .description {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.6;
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-inline: auto;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      margin-bottom: 40px;
+
+      .stat-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .val {
+          font-size: 2rem;
+          font-weight: 700;
+          color: #fff;
+        }
+
+        .lbl {
+          font-size: 0.7rem;
+          color: #00f2ff;
+          letter-spacing: 2px;
+          margin-top: 5px;
+        }
+      }
+    }
+
+    .explore-btn {
+      background: transparent;
+      border: 1px solid #fff;
+      color: #fff;
+      padding: 15px 40px;
+      font-size: 0.9rem;
+      letter-spacing: 3px;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.3s ease;
+      overflow: hidden;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        z-index: -1;
+        transition: left 0.3s ease;
+      }
+
+      &:hover {
+        color: #000;
+        &::before {
+          left: 0;
+        }
+      }
+    }
+  }
+}
+
+.scroll-status {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+
+  .line {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, #00f2ff, transparent);
+    animation: pulseLine 2s infinite;
+  }
+
+  span {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 4px;
+    font-family: 'Courier New', Courier, monospace;
+  }
+}
+
+@keyframes pulseLine {
+  0%, 100% { height: 60px; opacity: 0.3; }
+  50% { height: 80px; opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .cards-stack {
+    width: 300px;
+    height: 400px;
+  }
+
+  .content-reveal .content-inner .stats {
+    gap: 20px;
+  }
+}

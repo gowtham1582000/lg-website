@@ -1,0 +1,49 @@
+<section class="top-services-wrapper" #scrollContainer>
+  <div class="header-overlay">
+    <div class="header-content">
+      <span class="service-tag">// CORE_EXPERTISE</span>
+      <h2 class="section-title">TOP 5 SERVICES</h2>
+    </div>
+  </div>
+
+  <div class="horizontal-scroll-content" #scrollContent>
+    @for (service of services; track service.id) {
+      <div class="service-card">
+        <div class="card-bg">
+          <div class="overlay-mesh"></div>
+        </div>
+        
+        <div class="service-content">
+          <div class="service-number">{{ service.id }}</div>
+          
+          <div class="service-info">
+            <h3 class="service-title">{{ service.title }}</h3>
+            <p class="service-desc">{{ service.description }}</p>
+            
+            <div class="tag-list">
+              @for (tag of service.tags; track tag) {
+                <span class="tag">{{ tag }}</span>
+              }
+            </div>
+
+            <button class="explore-btn">
+              <span class="btn-text">EXPLORE_SERVICE</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="service-visual">
+          <div class="visual-frame">
+            <div class="frame-corner tl"></div>
+            <div class="frame-corner br"></div>
+            <div class="glitch-img">
+              <!-- Placeholder for images -->
+              <div class="placeholder-img" [style.background-image]="'url(' + service.image + ')'"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</section>
