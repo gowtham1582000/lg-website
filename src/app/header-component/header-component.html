@@ -1,29 +1,30 @@
-<nav [class.collapsed]="isNavbarCollapsed" class="navbar command-line-style">
-    
-    <div class="nav-actions">
-        <a routerLink="/contact" class="contact-link command-style-link">
-            <i class="fas fa-headset"></i> <span class="label-text">GET IN TOUCH</span>
-        </a>
-    </div>
-
-      <button class="hamburger-btn" (click)="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-
-    <div class="logo-frame">
-        <div class="hexagon">
-            <img src="../../assets/images/game-logo.png" alt="LS Logo">
+<nav class="navbar command-line-style" [class.nav-hidden]="isHidden">
+    <div class="logo-area">
+        <div class="logo-frame">
+            <div class="hexagon">
+                <img src="../../assets/images/game-logo.png" alt="LS Logo">
+            </div>
         </div>
     </div>
-    <div class="nav-spacer"></div>
-    
-    <ul class="nav-links bracketed-links">
-        <li><a routerLink="/" class="active">HOME</a></li>
-        <li><a routerLink="/tournaments">About Us</a></li>
-        <li><a routerLink="/team">Team</a></li>
-    </ul>
+
+    <div class="nav-right-group">
+        <ul class="nav-links bracketed-links">
+            <li><a routerLink="/" class="active">HOME</a></li>
+            <li><a routerLink="/about">ABOUT US</a></li>
+            <li><a routerLink="/team">TEAM</a></li>
+        </ul>
+
+        <div class="nav-actions">
+            <a routerLink="/contact" class="contact-link command-style-link">
+                <i class="fas fa-headset"></i> 
+                <span class="label-text">GET IN TOUCH</span>
+            </a>
+        </div>
+
+        <button class="hamburger-btn" (click)="toggleMenu()">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
 </nav>
 
 <div class="mobile-menu-panel" [class.open]="isMenuOpen">
@@ -35,7 +36,7 @@
     
     <ul class="mobile-nav-links">
         <li><a routerLink="/" routerLinkActive="active" (click)="toggleMenu()">HOME</a></li>
-        <li><a routerLink="/tournaments" routerLinkActive="active" (click)="toggleMenu()">ABOUT US</a></li>
+        <li><a routerLink="/about" routerLinkActive="active" (click)="toggleMenu()">ABOUT US</a></li>
         <li><a routerLink="/team" routerLinkActive="active" (click)="toggleMenu()">TEAM</a></li>
         <li class="contact-item">
             <a routerLink="/contact" routerLinkActive="active" class="contact-link command-style-link" (click)="toggleMenu()">

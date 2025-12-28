@@ -10,7 +10,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class HeaderComponent {
   isMenuOpen = false;
-  isNavbarCollapsed = false;   // new scroll state
+  isHidden = false;   // new scroll state
   lastScrollTop = 0;
 
   toggleMenu() {
@@ -18,7 +18,7 @@ export class HeaderComponent {
   }
 
   toggleNavbar() {
-    this.isNavbarCollapsed = !this.isNavbarCollapsed;
+    this.isHidden = !this.isHidden;
   }
 
   
@@ -29,10 +29,10 @@ export class HeaderComponent {
 
     if (scrollTop > this.lastScrollTop && scrollTop > 100) {
       // scrolling down
-      this.isNavbarCollapsed = true;
+      this.isHidden = true;
     } else if (scrollTop < this.lastScrollTop) {
       // optional: show navbar on scroll up
-      this.isNavbarCollapsed = false;
+      this.isHidden = false;
     }
 
     this.lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
