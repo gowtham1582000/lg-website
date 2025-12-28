@@ -1,5 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, signal } from '@angular/core';
+import { VideoScrollExpandComponent } from '../shared/video-scroll-expand/video-scroll-expand.component';
+import { TopServicesComponent } from '../shared/top-services/top-services.component';
+import { SplitServiceRevealComponent } from '../shared/split-service-reveal/split-service-reveal.component';
 
 interface GameFeature {
   id: string;
@@ -12,7 +15,7 @@ interface GameFeature {
 @Component({
   selector: 'app-home-component',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, VideoScrollExpandComponent, TopServicesComponent, SplitServiceRevealComponent],
   templateUrl: './home-component.html',
   styleUrl: './home-component.scss',
 })
