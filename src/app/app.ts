@@ -14,33 +14,86 @@ export class App implements OnInit,AfterViewInit {
   protected readonly title = signal('lg-website');
   showGate = signal<boolean>(true);
 
-  ngOnInit() {
+   ngOnInit() {
+    this.startLoadingSequence();
+  }
 
+    private startLoadingSequence() {
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += Math.floor(Math.random() * 5) + 2;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(interval);
+          this.completeLoading();
+        }
+        
+        this.updateLoaderUI(progress);
+      }, 100);
+    }
+
+    private updateLoaderUI(progress: number) {
+      const fill = document.querySelector('.fill') as HTMLElement;
+      const percent = document.querySelector('.progress-percent') as HTMLElement;
+
+      if (fill) fill.style.width = `${progress}%`;
+      if (percent) percent.innerText = `${progress}%`;
+    }
+
+  private completeLoading() {
     setTimeout(() => {
       document.querySelector('.gate-intro')?.classList.add('open');
-    }, 800);
-
-    setTimeout(() => {
-      this.showGate.set(false);
-      document.body.classList.remove('lock-scroll');
-      //document.querySelector('.gate-intro')?.classList.add('close');
-    }, 2800);
+      setTimeout(() => {
+        this.showGate.set(false);
+        document.body.classList.remove('lock-scroll');
+      }, 1000);
+    }, 500);
   }
 
     ngAfterViewInit() {
-    const pulse = document.querySelector('.neural-pulse') as HTMLElement;
+    const cursor = document.querySelector('.custom-cursor') as HTMLElement;
+    const core = document.querySelector('.cursor-core') as HTMLElement;
+    const hud = document.querySelector('.cursor-hud') as HTMLElement;
+    const glow = document.querySelector('.cursor-glow') as HTMLElement;
     const grid = document.querySelector('.background-grid') as HTMLElement;
     const particlesContainer = document.querySelector('.data-particles') as HTMLElement;
 
     let mouseX = 0;
     let mouseY = 0;
-    let currentX = 0;
-    let currentY = 0;
+    let lastX = 0;
+    let lastY = 0;
+    let cursorX = 0;
+    let cursorY = 0;
+    let glowX = 0;
+    let glowY = 0;
+    let velocity = 0;
+    let angle = 0;
 
     document.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
     });
+
+    // Add hover listeners
+    const addHoverListeners = () => {
+      const interactiveElements = document.querySelectorAll('a, button, [role="button"], .interactive');
+      interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          cursor?.classList.add('hover');
+          glow?.classList.add('hover');
+          hud?.classList.add('hover');
+        });
+        el.addEventListener('mouseleave', () => {
+          cursor?.classList.remove('hover');
+          glow?.classList.remove('hover');
+          hud?.classList.remove('hover');
+        });
+      });
+    };
+
+    // Re-run hover listeners periodically or on route change if needed
+    addHoverListeners();
+    setInterval(addHoverListeners, 2000);
 
     // Generate background particles
     const createParticle = () => {
@@ -52,34 +105,69 @@ export class App implements OnInit,AfterViewInit {
       p.style.left = `${Math.random() * 100}vw`;
       p.style.animationDuration = `${Math.random() * 3 + 4}s`;
       p.style.opacity = `${Math.random() * 0.3}`;
-      particlesContainer.appendChild(p);
+      particlesContainer?.appendChild(p);
       setTimeout(() => p.remove(), 7000);
     };
 
     setInterval(createParticle, 300);
 
     const animate = () => {
-      // Smooth follow (LERP)
-      currentX += (mouseX - currentX) * 0.08;
-      currentY += (mouseY - currentY) * 0.08;
+      // Velocity calculation
+      const dx = mouseX - lastX;
+      const dy = mouseY - lastY;
+      const instantVelocity = Math.sqrt(dx * dx + dy * dy);
+      
+      // Smoothing velocity
+      velocity += (instantVelocity - velocity) * 0.1;
+      
+      // Angle for rotation
+      if (instantVelocity > 0) {
+        angle = Math.atan2(dy, dx) * 180 / Math.PI;
+      }
 
-      pulse.style.left = `${currentX}px`;
-      pulse.style.top = `${currentY}px`;
+      lastX = mouseX;
+      lastY = mouseY;
 
-      // Create trail effect
-      if (Math.abs(mouseX - currentX) > 10 || Math.abs(mouseY - currentY) > 10) {
-        const trail = document.createElement('div');
-        trail.className = 'pulse-trail';
-        trail.style.left = `${currentX}px`;
-        trail.style.top = `${currentY}px`;
-        document.body.appendChild(trail);
-        setTimeout(() => trail.remove(), 500);
+      // Faster LERP for core cursor
+      cursorX += (mouseX - cursorX) * 0.2;
+      cursorY += (mouseY - cursorY) * 0.2;
+
+      // Slower, smoother LERP for aura glow
+      glowX += (mouseX - glowX) * 0.1;
+      glowY += (mouseY - glowY) * 0.1;
+
+      if (cursor) {
+        // Apply velocity-based stretching to core
+        const stretch = 1 + Math.min(velocity / 100, 1.5);
+        const squash = 1 / stretch;
+        
+        cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%) rotate(${angle}deg)`;
+        
+        if (core) {
+          core.style.transform = `scale(${stretch}, ${squash})`;
+        }
+
+        if (hud) {
+          const hudScale = 1 + (velocity / 200);
+          const hudRot = Date.now() / 10;
+          hud.style.transform = `scale(${hudScale}) rotate(${-angle}deg)`; // Counter-rotate to stay upright-ish
+          const ring = hud.querySelector('.hud-ring') as HTMLElement;
+          if (ring) {
+            ring.style.transform = `rotate(${hudRot}deg)`;
+          }
+        }
+      }
+
+      if (glow) {
+        glow.style.transform = `translate3d(${glowX}px, ${glowY}px, 0) translate(-50%, -50%)`;
       }
 
       // Parallax Grid
       const moveX = (mouseX / window.innerWidth - 0.5) * 20;
       const moveY = (mouseY / window.innerHeight - 0.5) * 20;
-      grid.style.transform = `translate(${moveX}px, ${moveY}px)`;
+      if (grid) {
+        grid.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
+      }
 
       requestAnimationFrame(animate);
     };

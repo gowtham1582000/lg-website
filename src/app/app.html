@@ -1,59 +1,34 @@
-<div class="neural-pulse"></div>
+<div class="custom-cursor">
+    <div class="cursor-core"></div>
+    <div class="cursor-hud">
+        <div class="hud-ring"></div>
+        <div class="hud-segments">
+            <span></span><span></span><span></span><span></span>
+        </div>
+    </div>
+</div>
+<div class="cursor-glow"></div>
 <div class="background-grid"></div>
 <div class="data-particles"></div>
 <app-header-component></app-header-component>
 
-<!-- GATE INTRO -->
+ <!-- GATE INTRO -->
  @if(showGate()){
-    <div class="gate-intro" #gate>
-    <div class="gate gate-left"></div>
-    <div class="gate gate-right"></div>
-
-        <div class="gate-lock">
-            <div class="ancient-seal">
-                <!-- INNER ROTATING RUNES -->
-                <div class="rune-ring ring-inner">
-                    <span class="rune">ᚱ</span>
-                    <span class="rune">ᚦ</span>
-                    <span class="rune">ᚠ</span>
-                    <span class="rune">ᚢ</span>
-                </div>
-                
-                <!-- CENTRAL ICON -->
-                <div class="seal-center">
-                    <div class="neural-core"></div>
-                    <svg viewBox="0 0 100 100" class="ancient-svg">
-                        <!-- ANCIENT HEX -->
-                        <polygon points="50,3 93,25 93,75 50,97 7,75 7,25" fill="none" stroke="url(#goldGradient)" stroke-width="2" />
-                        <!-- NEURAL OVERLAY -->
-                        <circle cx="50" cy="50" r="30" fill="none" stroke="#ff2a2a" stroke-width="0.5" stroke-dasharray="2 2" />
-                        
-                        <defs>
-                            <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#d4af37;stop-opacity:1" />
-                                <stop offset="50%" style="stop-color:#f9e076;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#b8860b;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                    </svg>
-                    <div class="core-eye"></div>
-                </div>
-
-                <!-- OUTER ORBITING IDEAS -->
-                <div class="idea-orbit">
-                    <div class="idea-node" style="--d: 0s"><span>ANCIENT LOGIC</span></div>
-                    <div class="idea-node" style="--d: -2s"><span>NEURAL MANA</span></div>
-                    <div class="idea-node" style="--d: -4s"><span>PRIMAL DATA</span></div>
-                    <div class="idea-node" style="--d: -6s"><span>ETHER COMPUTE</span></div>
-                </div>
-            </div>
-            
-            <div class="status-panel">
-                <p class="boot-text">INITIALIZING PRIMAL NEURAL INTERFACE...</p>
-                <div class="progress-bar"><div class="fill"></div></div>
-            </div>
-        </div>
-    </div>
+     <div class="gate-intro" #gate>
+         <div class="loader-content">
+             <div class="logo-container">
+                 <img src="assets/images/game-logo.png" alt="Orchid Logo" class="loader-logo">
+                 <div class="logo-glow"></div>
+             </div>
+             
+             <div class="loader-status">
+                 <div class="progress-bar">
+                     <div class="fill"></div>
+                 </div>
+                 <div class="progress-percent">0%</div>
+             </div>
+         </div>
+     </div>
  }
 <div class="main-content-wrapper">
     <router-outlet></router-outlet>

@@ -1,9 +1,19 @@
-.top-services-wrapper {
+.top-services-wrapper.ancient-style {
   position: relative;
   width: 100%;
   overflow: hidden;
-  background: #0a0a0a;
-  color: #fff;
+  background: #0d0d0d; // Deep charcoal base
+  color: #e0d5c0; // Aged parchment color
+  font-family: 'Cinzel', serif, 'Times New Roman', Times, serif; // Classical serif
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.6) 100%);
+    pointer-events: none;
+    z-index: 5;
+  }
 }
 
 .header-overlay {
@@ -15,27 +25,29 @@
 
   .service-tag {
     display: block;
-    font-family: 'Space Mono', monospace;
-    color: #ff0055;
+    font-family: 'Space Mono', monospace; // Keeping brand mono for sub-tags
+    color: #c5a059; // Antique gold
     font-size: 0.8rem;
-    letter-spacing: 2px;
+    letter-spacing: 4px;
     margin-bottom: 0.5rem;
+    opacity: 0.8;
   }
 
   .section-title {
     font-size: clamp(3rem, 8vw, 6rem);
-    font-weight: 900;
+    font-weight: 700;
     line-height: 0.9;
     margin: 0;
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
-    color: transparent;
+    color: #d4af37;
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
     text-transform: uppercase;
+    letter-spacing: -2px;
   }
 }
 
 .horizontal-scroll-content {
   display: flex;
-  width: 500%; // 5 services
+  width: 500%;
   height: 100vh;
   will-change: transform;
 }
@@ -53,80 +65,137 @@
   .card-bg {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 20% 50%, rgba(255, 0, 85, 0.05) 0%, transparent 50%);
     z-index: -1;
 
-    .overlay-mesh {
+    .parchment-texture {
       position: absolute;
       inset: 0;
-      background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-      background-size: 40px 40px;
-      opacity: 0.3;
+      background: #0d0d0d;
+      opacity: 0.4;
+      background-image: 
+        radial-gradient(circle at 50% 50%, rgba(197, 160, 89, 0.05) 0%, transparent 70%),
+        url('https://www.transparenttextures.com/patterns/p6.png'); // Subtle paper texture
+    }
+
+    .overlay-vignette {
+      position: absolute;
+      inset: 0;
+      box-shadow: inset 0 0 200px rgba(0,0,0,0.9);
     }
   }
 }
 
 .service-content {
   flex: 1;
-  max-width: 500px;
+  max-width: 550px;
   z-index: 2;
+  position: relative;
 
-  .service-number {
-    font-family: 'Space Mono', monospace;
-    font-size: 8rem;
-    font-weight: 900;
+  .service-number-ancient {
+    font-size: 12rem;
+    font-weight: 400;
     line-height: 1;
-    color: rgba(255, 255, 255, 0.05);
-    margin-bottom: -2rem;
+    color: rgba(197, 160, 89, 0.07);
+    margin-bottom: -4rem;
+    margin-left: -2rem;
+    font-family: 'Cinzel', serif;
   }
 
   .service-info {
-    .service-title {
-      font-size: 3.5rem;
-      font-weight: 800;
-      margin-bottom: 1.5rem;
-      color: #fff;
-      text-transform: uppercase;
+    position: relative;
+    padding: 2rem 0;
+
+    .ornate-separator {
+      width: 100px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #c5a059, transparent);
+      margin: 1rem 0;
+      position: relative;
+
+      &::after {
+        content: '❖';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        color: #c5a059;
+        font-size: 0.8rem;
+        background: #0d0d0d;
+        padding: 0 5px;
+      }
     }
 
-    .service-desc {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      color: #aaa;
-      margin-bottom: 2rem;
+    .service-title-ancient {
+      font-size: 4rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: #f3e5ab; // Saffron/Light gold
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .service-desc-ancient {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: #b0a48e;
+      margin-bottom: 2.5rem;
+      font-style: italic;
     }
 
     .tag-list {
       display: flex;
+      flex-wrap: wrap;
       gap: 1rem;
       margin-bottom: 3rem;
 
-      .tag {
+      .tag-ancient {
         font-family: 'Space Mono', monospace;
         font-size: 0.7rem;
-        padding: 0.4rem 1rem;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        color: #ff0055;
-        border-radius: 20px;
+        padding: 0.4rem 1.2rem;
+        background: rgba(197, 160, 89, 0.1);
+        border: 1px solid rgba(197, 160, 89, 0.3);
+        color: #d4af37;
+        text-transform: uppercase;
+        letter-spacing: 1px;
       }
     }
 
-    .explore-btn {
+    .explore-btn-ancient {
       background: transparent;
-      border: 1px solid #ff0055;
-      padding: 1rem 2rem;
-      color: #fff;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.9rem;
+      border: 1px solid #c5a059;
+      padding: 1.2rem 2.5rem;
+      color: #f3e5ab;
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 1rem;
-      transition: all 0.3s ease;
+      gap: 1.5rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: #c5a059;
+        transform: translateX(-100%);
+        transition: transform 0.4s ease;
+        z-index: -1;
+      }
 
       &:hover {
-        background: #ff0055;
-        box-shadow: 0 0 20px rgba(255, 0, 85, 0.4);
+        color: #0d0d0d;
+        letter-spacing: 2px;
+        
+        &::before {
+          transform: translateX(0);
+        }
+      }
+
+      .btn-icon {
+        font-size: 1.2rem;
       }
     }
   }
@@ -138,62 +207,70 @@
   justify-content: flex-end;
   z-index: 2;
 
-  .visual-frame {
+  .ancient-frame {
     position: relative;
-    width: 450px;
-    height: 600px;
-    padding: 20px;
+    width: 480px;
+    height: 620px;
+    padding: 15px;
+    background: #0d0d0d;
 
-    .frame-corner {
+    .frame-border {
       position: absolute;
-      width: 40px;
-      height: 40px;
-      border: 2px solid #ff0055;
-      z-index: 5;
-
-      &.tl { top: 0; left: 0; border-right: 0; border-bottom: 0; }
-      &.br { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+      inset: 10px;
+      border: 1px solid rgba(197, 160, 89, 0.4);
+      pointer-events: none;
     }
 
-    .glitch-img {
+    .corner-flourish {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      border: 2px solid #c5a059;
+      z-index: 5;
+
+      &::after {
+        content: '❦';
+        position: absolute;
+        font-size: 1.5rem;
+        color: #c5a059;
+      }
+
+      &.tl { top: 0; left: 0; border-right: 0; border-bottom: 0; &::after { top: -10px; left: -10px; } }
+      &.tr { top: 0; right: 0; border-left: 0; border-bottom: 0; &::after { top: -10px; right: -10px; transform: scaleX(-1); } }
+      &.bl { bottom: 0; left: 0; border-right: 0; border-top: 0; &::after { bottom: -10px; left: -10px; transform: scaleY(-1); } }
+      &.br { bottom: 0; right: 0; border-left: 0; border-top: 0; &::after { bottom: -10px; right: -10px; transform: scale(-1); } }
+    }
+
+    .aged-img {
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background: #1a1a1a;
+      position: relative;
       
       .placeholder-img {
         width: 100%;
         height: 100%;
         background-size: cover;
         background-position: center;
-        filter: grayscale(1) contrast(1.2);
-        transition: all 0.5s ease;
-        opacity: 0.6;
+        filter: sepia(0.5) contrast(1.1) brightness(0.8) grayscale(0.2);
+        transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+      }
+
+      .grain-overlay {
+        position: absolute;
+        inset: 0;
+        background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+        opacity: 0.2;
+        pointer-events: none;
       }
     }
 
     &:hover .placeholder-img {
-      filter: grayscale(0) contrast(1);
-      opacity: 1;
-      transform: scale(1.05);
+      filter: sepia(0) contrast(1) brightness(1) grayscale(0);
+      transform: scale(1.08);
     }
   }
 }
 
-@media (max-width: 1024px) {
-  .service-card {
-    padding: 0 4rem;
-    flex-direction: column;
-    justify-content: center;
-    gap: 4rem;
-  }
 
-  .service-visual .visual-frame {
-    width: 300px;
-    height: 400px;
-  }
 
-  .service-content .service-title {
-    font-size: 2.5rem;
-  }
-}
