@@ -9,46 +9,50 @@
     <div class="gate gate-left"></div>
     <div class="gate gate-right"></div>
 
-    <div class="gate-lock">
-        <div class="lock-hex">
-        <svg viewBox="0 0 100 100" class="lock-svg">
-            <!-- HEX FRAME -->
-            <polygon
-            points="25,5 75,5 95,50 75,95 25,95 5,50"
-            fill="none"
-            stroke="#ff2a2a"
-            stroke-width="3"
-            />
+        <div class="gate-lock">
+            <div class="ancient-seal">
+                <!-- INNER ROTATING RUNES -->
+                <div class="rune-ring ring-inner">
+                    <span class="rune">ᚱ</span>
+                    <span class="rune">ᚦ</span>
+                    <span class="rune">ᚠ</span>
+                    <span class="rune">ᚢ</span>
+                </div>
+                
+                <!-- CENTRAL ICON -->
+                <div class="seal-center">
+                    <div class="neural-core"></div>
+                    <svg viewBox="0 0 100 100" class="ancient-svg">
+                        <!-- ANCIENT HEX -->
+                        <polygon points="50,3 93,25 93,75 50,97 7,75 7,25" fill="none" stroke="url(#goldGradient)" stroke-width="2" />
+                        <!-- NEURAL OVERLAY -->
+                        <circle cx="50" cy="50" r="30" fill="none" stroke="#ff2a2a" stroke-width="0.5" stroke-dasharray="2 2" />
+                        
+                        <defs>
+                            <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#d4af37;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#f9e076;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#b8860b;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <div class="core-eye"></div>
+                </div>
 
-            <!-- INNER RING -->
-            <circle
-            cx="50"
-            cy="50"
-            r="22"
-            stroke="#ff2a2a"
-            stroke-width="2"
-            fill="none"
-            opacity="0.7"
-            />
-
-            <!-- LOCK BODY -->
-            <rect x="40" y="48" width="20" height="18" rx="3" fill="#ff2a2a" />
-
-            <!-- LOCK SHACKLE -->
-            <path
-            d="M43 48 v-6 a7 7 0 0 1 14 0 v6"
-            fill="none"
-            stroke="#ff2a2a"
-            stroke-width="3"
-            stroke-linecap="round"
-            />
-
-            <!-- KEYHOLE -->
-            <circle cx="50" cy="56" r="2" fill="#000" />
-        </svg>
+                <!-- OUTER ORBITING IDEAS -->
+                <div class="idea-orbit">
+                    <div class="idea-node" style="--d: 0s"><span>ANCIENT LOGIC</span></div>
+                    <div class="idea-node" style="--d: -2s"><span>NEURAL MANA</span></div>
+                    <div class="idea-node" style="--d: -4s"><span>PRIMAL DATA</span></div>
+                    <div class="idea-node" style="--d: -6s"><span>ETHER COMPUTE</span></div>
+                </div>
+            </div>
+            
+            <div class="status-panel">
+                <p class="boot-text">INITIALIZING PRIMAL NEURAL INTERFACE...</p>
+                <div class="progress-bar"><div class="fill"></div></div>
+            </div>
         </div>
-        <p class="boot-text">ACCESS VERIFIED</p>
-    </div>
     </div>
  }
 <div class="main-content-wrapper">

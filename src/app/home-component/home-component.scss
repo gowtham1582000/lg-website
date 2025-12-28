@@ -30,7 +30,7 @@ $stone-text: #b8b8b8;
   padding-left: 10%;
   position: relative;
   // Using an Unsplash Gaming Image
-  background: url('../../assets/images/header-12.png') center/cover no-repeat;
+  background: url('../../assets/images/home-page.png') center/cover no-repeat;
   
   // .overlay {
   //   position: absolute;
@@ -594,126 +594,95 @@ $bg: #0a0a0c;
 .morph-container {
   position: relative;
   width: 100%;
-  height: 80vh;
-  background: $bg;
+  height: 100vh; // Use full height for a more cinematic feel
   overflow: hidden;
-  display: flex;
-  align-items: center;
 }
-
 .side {
   position: absolute;
   top: 0;
   height: 100%;
-  overflow: hidden; // This acts as the "mask"
-  
+  overflow: hidden; // This is the 'Window' that reveals the image
+
   &.ancient {
     width: 100%;
+    left: 0;
     z-index: 1;
-    background: radial-gradient(circle at 20%, #1a150a, $bg);
   }
 
   &.tech {
-    width: 50%; // Initial width, changed by Angular sliderValue()
+    // Width is controlled by [style.width.%]="sliderValue()" in HTML
+    right: 0; // Anchoring to the right makes the 'wipe' effect smoother
     z-index: 2;
-    border-right: 2px solid $gold;
-    background: radial-gradient(circle at 80%, #06161a, $bg);
-    box-shadow: 10px 0 50px rgba(0,0,0,0.5);
+    border-left: 3px solid #fff;
+    box-shadow: -10px 0 30px rgba($neon-cyan, 0.5);
   }
 }
 
-/* CHARACTER POSITIONING LOGIC */
-.hero-wrapper {
+.hero-image {
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100vw; // MUST be full viewport width to keep hero centered
+  // This is the CRITICAL part:
+  width: 100vw;   // The image stays exactly 100vw wide regardless of the slider
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 
-.hero-placeholder {
-  width: 300px;
-  height: 500px;
-  filter: drop-shadow(0 0 20px rgba(0,0,0,0.5));
-  
-  &.ancient-hero {
-    background: linear-gradient(to top, $gold, transparent);
-    clip-path: polygon(50% 0%, 100% 20%, 80% 100%, 20% 100%, 0% 20%);
+  &.ancient-img {
+    background-image: url('../../assets/images/game-hero.png');
+    left: 0;
+    height: 160vh;
   }
 
-  &.tech-hero {
-    background: linear-gradient(to top, $cyan, transparent);
-    clip-path: polygon(20% 0%, 80% 0%, 100% 40%, 100% 100%, 0% 100%, 0% 40%);
+  &.tech-img {
+    background-image: url('../../assets/images/game-villian.png');
+    right: 0; // Match the anchor of the .side.tech container
+    height: 195vh;
   }
 }
 
-/* CONTENT BOXES */
-.content-box {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  width: 300px;
-  pointer-events: none;
-
-  h2 { font-size: 4rem; margin: 0; color: white; }
-  .tag { font-family: monospace; letter-spacing: 4px; font-weight: bold; }
-
-  &.left { left: 5%; .tag { color: $gold; } }
-  &.right { 
-    right: 5%; 
-    text-align: right; 
-    width: 100vw; // Anchor to the viewport right
-    padding-right: 5%;
-    .tag { color: $cyan; } 
-  }
-}
-
-/* THE SLIDER (Hidden range input over the screen) */
 .morph-slider {
   position: absolute;
   width: 100%;
   height: 100%;
-  z-index: 100;
-  opacity: 0;
+  z-index: 100; // Must be the HIGHEST value in this section
+  opacity: 0;   // Keep it invisible but clickable
   cursor: ew-resize;
 }
-
 /* THE VISUAL DIVIDER */
 .rift-divider {
   position: absolute;
   top: 0;
-  bottom: 0;
-  width: 2px;
+  height: 100%;
+  width: 4px;
   background: white;
+  box-shadow: 0 0 20px #fff, 0 0 40px $neon-cyan;
   z-index: 50;
   pointer-events: none;
+  transform: translateX(-50%); // Center it on the line
 
   .relic-handle {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    width: 50px;
-    height: 50px;
-    background: $bg;
+    transform: translate(-50%, -50%) rotate(45deg);
+    width: 60px;
+    height: 60px;
+    background: #0d0d12;
     border: 2px solid $gold;
-    color: $cyan;
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-size: 1.5rem;
-    border-radius: 4px;
-    rotate: 45deg;
+    justify-content: center;
     
-    // Un-rotate the text inside
-    &::after { content: 'ᚠ'; rotate: -45deg; }
+    &::after {
+      content: 'ᛟ'; // Ancient Rune
+      rotate: -45deg;
+      color: $gold;
+      font-size: 1.5rem;
+      text-shadow: 0 0 10px $gold;
+    }
   }
 }
-
 
 //Latest New Section
 
