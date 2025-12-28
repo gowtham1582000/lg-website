@@ -42,6 +42,6 @@ export class VideoScrollExpandComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    ScrollTrigger.getAll().forEach((trigger: any) => trigger.kill());
   }
 }

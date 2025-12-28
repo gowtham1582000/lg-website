@@ -1,88 +1,337 @@
 $gold: #d4af37;
-$cyan: #00f3ff;
+$aged-paper: #e0d5c0;
+$ancient-dark: #12100e;
 
-.relic-footer {
-  position: relative;
-  background: #050505; // Fallback
-  padding-top: 100px;
-  overflow: hidden;
+  .ancient-footer {
+    position: relative;
+    background: $ancient-dark;
+    padding: 50px 0 30px;
+    overflow: hidden;
+    color: $aged-paper;
+    font-family: 'Cinzel', serif;
 
-  /* 1. VIDEO LAYER STYLING */
-  .footer-video-wrap {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    opacity: 0.25; // Subtle background presence
-
-    .bg-video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: grayscale(100%) brightness(1.0); // Makes it look ancient
-    }
-
-    .video-overlay {
+    .footer-bg-wrap {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, #050505, transparent 20%, #050505 90%);
+      z-index: 1;
+      background: rgba(0,0,0,0.6); // Dark base layer
+
+      .footer-video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        transform: translate(-50%, -50%);
+        object-fit: cover;
+        opacity: 0.51;
+        filter: grayscale(1) blur(6px) contrast(1.1);
+      }
+
+
+    .parchment-overlay {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://www.transparenttextures.com/patterns/aged-paper.png');
+      opacity: 0.08;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .ancient-vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.9) 100%);
+      z-index: 3;
     }
   }
 
-  /* 2. ENSURING CONTENT SITS ABOVE VIDEO */
+    .ornate-footer-divider {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 0;
+      z-index: 5;
+
+      .diamond-node {
+        color: $gold;
+        font-size: 1rem;
+        margin: 0 10px;
+        text-shadow: 0 0 10px rgba($gold, 0.5);
+      }
+
+
+    .flourish-line {
+      height: 1px;
+      width: 35%;
+      background: linear-gradient(90deg, transparent, $gold, transparent);
+      opacity: 0.6;
+    }
+  }
+
   .footer-content {
     position: relative;
     z-index: 10;
   }
 
-  /* 3. THE MONOLITH LOGO WITH INTERNAL VIDEO */
-  .monolith-logo {
-    position: relative;
-    background: rgba(20, 20, 22, 0.9);
-    border: 2px solid $gold;
-    padding: 40px 20px;
-    text-align: center;
-    clip-path: polygon(10% 0, 90% 0, 100% 15%, 100% 85%, 90% 100%, 10% 100%, 0 85%, 0 15%);
-    overflow: hidden;
+    .ancient-footer-block {
+      .ancient-tag {
+        display: block;
+        color: $gold;
+        font-size: 0.7rem;
+        letter-spacing: 3px;
+        margin-bottom: 8px;
+        opacity: 0.9;
+        text-transform: uppercase;
+        font-weight: 700;
+        text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+      }
 
-    .monolith-video-bg {
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        opacity: 0.3;
-        mix-blend-mode: screen;
+      .ancient-title {
+        color: #fff;
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        letter-spacing: 2px;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.9);
+      }
+
+      .ancient-text {
+        color: rgba($aged-paper, 0.9);
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 15px;
+        font-family: 'EB Garamond', serif;
+        text-shadow: 0 1px 3px rgba(0,0,0,1);
+      }
+
+      &.center-align {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        padding: 20px 0;
       }
     }
 
-    .logo-text {
-        .top { font-family: 'Cinzel', serif; font-size: 2rem; color: #fff; display: block; }
-        .mid { font-family: 'Cinzel', serif; font-size: 1rem; color: $gold; letter-spacing: 4px; display: block; }
-        .bot { font-family: monospace; font-size: 0.7rem; color: $cyan; margin-top: 10px; display: block; }
+
+  .ancient-social-links {
+    display: flex;
+    gap: 15px;
+
+    .relic-link {
+      color: $gold;
+      text-decoration: none;
+      font-size: 1rem;
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba($gold, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.4s ease;
+
+      &:hover {
+        background: rgba($gold, 0.1);
+        border-color: $gold;
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      }
     }
   }
 
-  /* 4. CONTENT STYLING REFINEMENTS */
-  .block-tag { font-family: monospace; color: $cyan; font-size: 0.75rem; margin-bottom: 20px; display: block; }
-  .ancient-font { font-family: 'Cinzel', serif; color: $gold; margin-bottom: 15px; }
-  .console-text { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #aaa; }
+  .scroll-links {
+    list-style: none;
+    padding: 0;
 
-  .relic-links {
-    list-style: none; padding: 0;
-    a { 
-      color: #888; text-decoration: none; font-family: 'Teko', sans-serif; font-size: 1.2rem;
-      transition: 0.3s;
-      &:hover { color: $cyan; padding-left: 8px; }
+    li {
+      margin-bottom: 8px;
+      
+        a {
+          color: rgba($aged-paper, 0.85);
+          text-decoration: none;
+          font-size: 1rem;
+          letter-spacing: 1px;
+          transition: all 0.3s ease;
+          position: relative;
+          text-shadow: 0 1px 3px rgba(0,0,0,1);
+
+
+        &::before {
+          content: '•';
+          position: absolute;
+          left: -15px;
+          color: $gold;
+          opacity: 0;
+          transition: 0.3s;
+        }
+
+        &:hover {
+          color: $gold;
+          padding-left: 5px;
+          
+          &::before {
+            opacity: 1;
+          }
+        }
+      }
     }
   }
 
-  .footer-bottom {
-    margin-top: 50px;
-    padding: 20px 0;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    font-family: monospace; font-size: 0.7rem; color: #555;
-    display: flex; justify-content: space-between;
+  .ancient-contact {
+    .ancient-input-wrap {
+      display: flex;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid rgba($gold, 0.2);
+      padding: 4px;
+      margin-bottom: 10px;
+
+      input {
+        background: transparent;
+        border: none;
+        color: #fff;
+        padding: 8px 12px;
+        width: 100%;
+        font-family: 'EB Garamond', serif;
+        font-size: 0.9rem;
+        outline: none;
+
+        &::placeholder {
+          color: rgba($aged-paper, 0.3);
+          letter-spacing: 1px;
+        }
+      }
+
+      .ancient-send-btn {
+        background: transparent;
+        border: none;
+        color: $gold;
+        font-size: 1rem;
+        padding: 0 10px;
+        cursor: pointer;
+        transition: 0.3s;
+
+        &:hover {
+          transform: scale(1.1);
+          text-shadow: 0 0 10px $gold;
+        }
+      }
+    }
+
+    .ancient-status {
+      font-size: 0.75rem;
+      color: rgba($aged-paper, 0.5);
+      letter-spacing: 1px;
+
+      .active {
+        color: #4caf50;
+        text-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+      }
+    }
+  }
+
+  .monolith-seal {
+    width: 150px;
+    height: 150px;
+    border: 1px solid rgba($gold, 0.2);
+    border-radius: 50%;
+    padding: 8px;
+    position: relative;
+    animation: rotateSeal 20s linear infinite;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border: 1px solid rgba($gold, 0.1);
+      border-radius: 50%;
+    }
+
+    .seal-inner {
+      width: 100%;
+      height: 100%;
+      background: rgba($gold, 0.05);
+      border: 2px solid $gold;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+
+      .seal-center {
+        font-size: 1.2rem;
+        color: $gold;
+      }
+
+      .seal-text-circle {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        font-size: 0.6rem;
+        letter-spacing: 2px;
+        color: $gold;
+
+        span {
+          position: absolute;
+          width: 100%;
+          text-align: center;
+          left: 0;
+        }
+
+        .top-arc { top: 12px; }
+        .bottom-arc { bottom: 12px; transform: rotate(180deg); }
+      }
+    }
+  }
+
+    .ancient-footer-bottom {
+      margin-top: 30px;
+      padding-top: 20px;
+      
+      .footer-bottom-divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba($gold, 0.3), transparent);
+        margin-bottom: 15px;
+      }
+
+
+    .bottom-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.7rem;
+      color: rgba($aged-paper, 0.4);
+      letter-spacing: 1px;
+      font-family: monospace;
+    }
+  }
+}
+
+@keyframes rotateSeal {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 991px) {
+  .ancient-footer-block {
+    text-align: center;
+    margin-bottom: 30px;
+
+    .ancient-social-links {
+      justify-content: center;
+    }
+  }
+
+  .ancient-footer-bottom .bottom-content {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
   }
 }

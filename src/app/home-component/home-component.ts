@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, signal, OnInit, AfterViewInit } from '@angular/core';
 import { VideoScrollExpandComponent } from '../shared/video-scroll-expand/video-scroll-expand.component';
 import { TopServicesComponent } from '../shared/top-services/top-services.component';
 import { SplitServiceRevealComponent } from '../shared/split-service-reveal/split-service-reveal.component';
+import { gsap } from 'gsap';
 
 interface GameFeature {
   id: string;
@@ -19,8 +20,26 @@ interface GameFeature {
   templateUrl: './home-component.html',
   styleUrl: './home-component.scss',
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit, AfterViewInit {
   sliderValue=signal<number>(50);
+  
+  // Slider State
+  currentSlide = 0;
+  totalSlides = 3;
+  isTransitioning = false;
+
+    heroSlides = [
+      {
+        image: '../../assets/images/home-page.png'
+      },
+      {
+        image: '../../assets/images/hero-page-2.jpg'
+      },
+      {
+        image: '../../assets/images/hero-page-3.jpg'
+      }
+    ];
+
   features: GameFeature[] = [
     { id: 'F01', title: 'TACTICAL OPS', icon: 'fa-crosshairs', description: '5v5 competitive defusal mode.', status: 'ONLINE' },
     { id: 'F02', title: 'ARSENAL', icon: 'fa-gun', description: 'Over 50 customizable weapon platforms.', status: 'ONLINE' },
@@ -29,6 +48,93 @@ export class HomeComponent {
     { id: 'F05', title: 'BATTLE PASS', icon: 'fa-ticket', description: 'Season 1: Cyber-Dawn rewards.', status: 'ONLINE' },
     { id: 'F06', title: 'ANTI-CHEAT', icon: 'fa-shield-halved', description: 'Kernel-level protection system.', status: 'MAINTENANCE' }
   ];
+
+  ngOnInit() {
+    // Initialization if needed
+  }
+
+  ngAfterViewInit() {
+    this.initSlider();
+    this.startAutoPlay();
+  }
+
+  initSlider() {
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.nav-dot');
+
+    // Initial animation for the first slide
+    this.animateSlide(0);
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        if (this.currentSlide !== index && !this.isTransitioning) {
+          this.goToSlide(index);
+        }
+      });
+    });
+  }
+
+  goToSlide(index: number) {
+    if (this.isTransitioning) return;
+    this.isTransitioning = true;
+
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.nav-dot');
+    
+    if (!slides.length || !slides[this.currentSlide] || !slides[index]) {
+      this.isTransitioning = false;
+      return;
+    }
+
+    const prevSlide = slides[this.currentSlide];
+    const nextSlide = slides[index];
+
+    // Update dots
+    if (dots[this.currentSlide]) dots[this.currentSlide].classList.remove('active');
+    if (dots[index]) dots[index].classList.add('active');
+
+    // Add transitioning-out class for SCSS animation
+    prevSlide.classList.add('transitioning-out');
+
+    gsap.to(prevSlide, {
+      opacity: 0,
+      scale: 1.1,
+      duration: 0.8,
+      ease: 'power2.inOut',
+      onComplete: () => {
+        prevSlide.classList.remove('active', 'transitioning-out');
+        nextSlide.classList.add('active');
+        this.currentSlide = index;
+        this.animateSlide(index);
+        this.isTransitioning = false;
+      }
+    });
+  }
+
+  animateSlide(index: number) {
+    const slides = document.querySelectorAll('.slide');
+    const activeSlide = slides[index];
+    const bg = activeSlide.querySelector('.slide-bg');
+
+    gsap.set(activeSlide, { opacity: 1 });
+    
+    if (bg) {
+      gsap.fromTo(bg,
+        { scale: 1.3, filter: 'blur(10px) brightness(2)' },
+        { scale: 1.1, filter: 'blur(0px) brightness(1)', duration: 1.5, ease: 'power2.out' }
+      );
+    }
+  }
+
+  startAutoPlay() {
+    setInterval(() => {
+      if (!this.isTransitioning) {
+        const nextIndex = (this.currentSlide + 1) % this.totalSlides;
+        this.goToSlide(nextIndex);
+      }
+    }, 8000);
+  }
+
   updateSlider(event: Event): void {
     const value = (event.target as HTMLInputElement).value;
     this.sliderValue.set(parseInt(value, 10));

@@ -16,7 +16,7 @@ export class SplitServiceRevealComponent implements AfterViewInit, OnDestroy {
   @ViewChild('card2', { static: true }) card2!: ElementRef;
   @ViewChild('content', { static: true }) content!: ElementRef;
 
-  private ctx?: gsap.Context;
+  private ctx?: any;
 
   ngAfterViewInit() {
     gsap.registerPlugin(ScrollTrigger);

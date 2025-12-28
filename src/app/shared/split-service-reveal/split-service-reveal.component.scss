@@ -192,13 +192,4 @@
   50% { height: 80px; opacity: 1; }
 }
 
-@media (max-width: 768px) {
-  .cards-stack {
-    width: 300px;
-    height: 400px;
-  }
 
-  .content-reveal .content-inner .stats {
-    gap: 20px;
-  }
-}

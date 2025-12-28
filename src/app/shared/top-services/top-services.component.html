@@ -1,49 +1,55 @@
-<section class="top-services-wrapper" #scrollContainer>
-  <div class="header-overlay">
-    <div class="header-content">
-      <span class="service-tag">// CORE_EXPERTISE</span>
-      <h2 class="section-title">TOP 5 SERVICES</h2>
+  <section class="top-services-wrapper ancient-style" #scrollContainer>
+    <div class="header-overlay">
+        <div class="header-content">
+          <span class="service-tag">THE WORLD IS ONE FAMILY</span>
+          <h2 class="section-title">THE FIVE ARCHS</h2>
+        </div>
     </div>
-  </div>
 
-  <div class="horizontal-scroll-content" #scrollContent>
-    @for (service of services; track service.id) {
-      <div class="service-card">
-        <div class="card-bg">
-          <div class="overlay-mesh"></div>
-        </div>
-        
-        <div class="service-content">
-          <div class="service-number">{{ service.id }}</div>
+    <div class="horizontal-scroll-content" #scrollContent>
+      @for (service of services; track service.id) {
+        <div class="service-card">
+          <div class="card-bg">
+            <div class="parchment-texture"></div>
+            <div class="overlay-vignette"></div>
+          </div>
           
-          <div class="service-info">
-            <h3 class="service-title">{{ service.title }}</h3>
-            <p class="service-desc">{{ service.description }}</p>
+          <div class="service-content">
+            <div class="service-number-ancient">{{ service.id }}</div>
             
-            <div class="tag-list">
-              @for (tag of service.tags; track tag) {
-                <span class="tag">{{ tag }}</span>
-              }
-            </div>
+            <div class="service-info">
+              <div class="ornate-separator top"></div>
+              <h3 class="service-title-ancient">{{ service.title }}</h3>
+              <p class="service-desc-ancient">{{ service.description }}</p>
+              
+              <div class="tag-list">
+                @for (tag of service.tags; track tag) {
+                  <span class="tag-ancient">{{ tag }}</span>
+                }
+              </div>
 
-            <button class="explore-btn">
-              <span class="btn-text">EXPLORE_SERVICE</span>
-              <span class="btn-arrow">→</span>
-            </button>
-          </div>
-        </div>
-
-        <div class="service-visual">
-          <div class="visual-frame">
-            <div class="frame-corner tl"></div>
-            <div class="frame-corner br"></div>
-            <div class="glitch-img">
-              <!-- Placeholder for images -->
-              <div class="placeholder-img" [style.background-image]="'url(' + service.image + ')'"></div>
+              <button class="explore-btn-ancient">
+                <span class="btn-text">DECRYPT_KNOWLEDGE</span>
+                <span class="btn-icon">📜</span>
+              </button>
+              <div class="ornate-separator bottom"></div>
             </div>
           </div>
+
+          <div class="service-visual">
+            <div class="ancient-frame">
+              <div class="frame-border"></div>
+              <div class="corner-flourish tl"></div>
+              <div class="corner-flourish tr"></div>
+              <div class="corner-flourish bl"></div>
+              <div class="corner-flourish br"></div>
+              <div class="aged-img">
+                <div class="placeholder-img" [style.background-image]="'url(' + service.image + ')'"></div>
+                <div class="grain-overlay"></div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    }
-  </div>
-</section>
+      }
+    </div>
+  </section>

@@ -1,14 +1,21 @@
-<section class="hero">
-  <div class="overlay"></div>
-    <div class="content">
-      <!-- <h2 class="sub-headline">Welcome to the Arena</h2>
-      <h1 class="headline">DOMINATE THE <br> <span class="glitch" data-text="META">META</span></h1>
-      <p>Join the ultimate esports league. Compete, win prizes, and become a legend.</p> -->
-      <!-- <div class="cta-group">
-        <button class="cyber-btn">PLAY NOW</button>
-        <button class="cyber-btn secondary">WATCH STREAM</button>
-      </div> -->
-    </div>
+<section class="hero-slider">
+  <div class="slides-container">
+      <div *ngFor="let slide of heroSlides; let i = index" class="slide" [class.active]="i === 0">
+        <div class="slide-bg" [style.background-image]="'url(' + slide.image + ')'"></div>
+      </div>
+  </div>
+
+  <div class="slider-nav">
+    <div *ngFor="let slide of heroSlides; let i = index" 
+         class="nav-dot" 
+         [class.active]="i === 0" 
+         [attr.data-index]="i"></div>
+  </div>
+
+  <div class="scroll-indicator">
+    <div class="mouse"></div>
+    <span>SCROLL</span>
+  </div>
 </section>
 
 <section class="ancient-intro">
@@ -33,9 +40,10 @@
 
     <!-- TEXT SIDE -->
     <div class="story-panel">
-      <p class="tamil-inscription">
-        𑀘𑀺𑀭𑀸𑀯𑀼 𑀯𑀶𑀭𑀡𑀼𑀕𑀸𑀡𑀺
-      </p>
+        <p class="tamil-inscription">
+          யாதும் ஊரே யாவரும் கேளிர் <br>
+          தீதும் நன்றும் பிறர் தர வாரா
+        </p>
 
       <h2 class="section-title">
         LIMAT STUDIO
@@ -258,7 +266,7 @@
   <!-- TEMPLE & DYNASTY -->
   <div class="aminite-overlay" style="background-image:url(../../assets/images/123.jpg)">
     <div class="aminite-over-area">
-      <div class="overlay-box">
+      <div class="overlay-box ms-0">
         <h2 class="title">Temples of the Three Dynasties</h2>
         <p>
           Sacred strongholds of Chola, Chera, and Pandian empires.
