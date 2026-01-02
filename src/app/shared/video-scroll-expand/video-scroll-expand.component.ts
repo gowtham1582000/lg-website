@@ -29,14 +29,19 @@ export class VideoScrollExpandComponent implements AfterViewInit, OnDestroy {
         {
           width: '100%',
           borderRadius: '0rem',
-          scrollTrigger: {
-            trigger: this.section.nativeElement,
-            start: 'top top',
-            end: '+=50%', // Even tighter scroll distance to minimize the spacer gap
-            scrub: true,
-            pin: true,
-            anticipatePin: 1
-          }
+            scrollTrigger: {
+              trigger: this.section.nativeElement,
+              start: 'top top',
+              end: '+=50%',
+              scrub: true,
+              pin: true,
+              snap: {
+                snapTo: [0, 1],
+                duration: 0.5,
+                delay: 0
+              },
+              anticipatePin: 1
+            }
         }
     );
   }

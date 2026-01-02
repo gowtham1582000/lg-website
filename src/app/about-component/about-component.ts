@@ -1,140 +1,158 @@
-import { Component, OnInit, ElementRef, AfterViewInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
+interface Era {
+  year: string;
+  title: string;
+  description: string;
+  image: string;
+}
 
 @Component({
   selector: 'app-about-component',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgOptimizedImage],
   templateUrl: './about-component.html',
   styleUrl: './about-component.scss'
 })
-export class AboutComponent implements OnInit, AfterViewInit {
-  studioRoadmap = [
-    {
-      phase: 'ERA I',
-      title: 'THE AWAKENING',
-      status: 'AWAKENED',
-      description: 'The convergence of three souls beneath the constellation of the Weaver. The Ancient Covenant was forged, binding timeless wisdom with the tools of the future.',
-      icon: 'fa-eye',
-      techOverlay: 'CORE_SYNC_ESTABLISHED'
-    },
-    {
-      phase: 'ERA II',
-      title: 'RUNIC FOUNDATIONS',
-      status: 'TRANSCRIBING',
-      description: 'Etching the first lines of the Relic Nexus. A bridge between stone and silicon, where procedural alchemy breathes life into forgotten landscapes.',
-      icon: 'fa-feather-pointed',
-      techOverlay: 'ALPHA_BUILD_V1.0'
-    },
-    {
-      phase: 'ERA III',
-      title: 'THE GATHERING',
-      status: 'Q3 2026',
-      description: 'Inviting the seekers to witness the emergence. Opening the Ethereal Hub for the collective consciousness to shape our shared reality.',
-      icon: 'fa-hands-holding-circle',
-      techOverlay: 'COMMUNITY_LINK_PENDING'
-    },
-    {
-      phase: 'ERA IV',
-      title: 'UNIVERSAL ASCENSION',
-      status: '2027',
-      description: 'The final alignment. When the digital echo becomes as real as the stone it mimics, reaching every corner of the known world.',
-      icon: 'fa-mountain-sun',
-      techOverlay: 'GLOBAL_INIT_READY'
-    }
-  ];
+export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
+  mouseX = 0;
+  mouseY = 0;
 
-  neuralPillars = [
+  eras: Era[] = [
     {
-      title: 'PRIMAL WISDOM',
-      description: 'Guided by the echoes of civilizations long lost, we build on foundations that have stood the test of eternity.',
-      icon: 'fa-scroll',
-      color: '#d4af37'
+      year: '300 BCE',
+      title: 'THE CHOLA ASCENDANCE',
+      description: 'The foundation of a maritime empire that would dominate the eastern seas for centuries. Built on stone, wisdom, and unyielding courage.',
+      image: 'assets/images/home-page.png'
     },
     {
-      title: 'ETHEREAL PRECISION',
-      description: 'Though we use the tools of the machine, our aim is to capture the imperfect beauty of nature and history.',
-      icon: 'fa-wand-magic-sparkles',
-      color: '#f5f5dc'
+      year: '1010 CE',
+      title: 'THE LIVING TEMPLES',
+      description: 'Mastery of granite and geometry. Architectural marvels like Brihadeeswarar emerged as beacons of power and spiritual connection.',
+      image: 'assets/images/home-curosel2.png'
     },
     {
-      title: 'COLLECTIVE SOUL',
-      description: 'Every traveler adds a thread to the tapestry. Our path is paved by the footprints of those who walk with us.',
-      icon: 'fa-om',
-      color: '#8b4513'
+      year: '2025 CE',
+      title: 'THE NEURAL LEGACY',
+      description: 'Translating ancient echoes into digital dimensions. We bridge the gap between stone inscriptions and neural interfaces.',
+      image: 'assets/images/home-page.png'
     }
-  ];
-
-  studioImages = [
-    {
-      url: 'assets/images/about-us-bg.jpg',
-      title: 'The Sanctum',
-      description: 'Where parchment meets the screen, and the old gods watch over our servers.'
-    },
-    {
-      url: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1974&auto=format&fit=crop',
-      title: 'Hall of Echoes',
-      description: 'A sanctuary for deep contemplation and the birth of new legends.'
-    },
-    {
-      url: 'assets/images/Neural Core.png',
-      title: 'The Relic Heart',
-      description: 'The central artifact powering our digital landscapes with ancient energy.'
-    },
-    {
-      url: 'https://images.unsplash.com/photo-1533035353720-f1c6a75cd8ab?q=80&w=1974&auto=format&fit=crop',
-      title: 'Obsidian Archive',
-      description: 'Preserving the digital blueprints of our world within stone-cold memory.'
-    }
-  ];
-
-  neuralStats = [
-    { label: 'MYTHS UNCOVERED', value: 1248, suffix: '', current: 0, icon: 'fa-monument' },
-    { label: 'SCROLLS WRITTEN', value: 8.4, suffix: 'M+', current: 0, icon: 'fa-pen-nib' },
-    { label: 'SOULS CONNECTED', value: 52400, suffix: '', current: 0, icon: 'fa-sun' },
-    { label: 'RITUAL STABILITY', value: 99.9, suffix: '%', current: 0, icon: 'fa-ankh' }
   ];
 
   constructor(private el: ElementRef) {}
 
-  ngOnInit(): void {}
-
-  ngAfterViewInit(): void {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          if (entry.target.classList.contains('stats-grid')) {
-            this.animateStats();
-          }
-        }
-      });
-    }, { threshold: 0.2 });
-
-    const items = this.el.nativeElement.querySelectorAll('.timeline-item, .stats-grid');
-    items.forEach((item: Element) => observer.observe(item));
+  ngOnInit(): void {
+    // Center the torch initially
+    this.mouseX = window.innerWidth / 2;
+    this.mouseY = window.innerHeight / 2;
   }
 
-  animateStats() {
-    this.neuralStats.forEach(stat => {
-      const duration = 2000;
-      const steps = 60;
-      const stepValue = stat.value / steps;
-      let currentStep = 0;
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.initAnimations();
+    }, 100);
+  }
 
-      const interval = setInterval(() => {
-        currentStep++;
-        if (stat.value % 1 === 0) {
-          stat.current = Math.floor(stepValue * currentStep);
-        } else {
-          stat.current = Number((stepValue * currentStep).toFixed(1));
-        }
+  ngOnDestroy(): void {
+    ScrollTrigger.getAll().forEach((t: { kill: () => any; }) => t.kill());
+  }
 
-        if (currentStep >= steps) {
-          stat.current = stat.value;
-          clearInterval(interval);
-        }
-      }, duration / steps);
+  onMouseMove(event: MouseEvent): void {
+    // Subtle parallax background movement
+    gsap.to('.stone-texture', {
+      x: (event.clientX - window.innerWidth / 2) * 0.01,
+      y: (event.clientY - window.innerHeight / 2) * 0.01,
+      duration: 1.5,
+      ease: 'power2.out'
     });
+  }
+
+  private initAnimations(): void {
+    const ctx = gsap.context(() => {
+      // 1. HERO REVEAL - Neat and Clean Fade-in
+      const heroTl = gsap.timeline();
+      
+      heroTl.from('.main-title', {
+        y: 40,
+        opacity: 0,
+        duration: 1.2,
+        ease: 'power3.out'
+      })
+      .from('.ancient-script', {
+        opacity: 0,
+        letterSpacing: '3rem',
+        duration: 1.5,
+        ease: 'power2.out'
+      }, '-=0.8')
+      .from('.intro-text', {
+        opacity: 0,
+        y: 20,
+        duration: 1,
+        ease: 'power2.out'
+      }, '-=1')
+      .from('.scroll-instruction', {
+        opacity: 0,
+        y: -20,
+        duration: 1,
+        ease: 'power2.out'
+      }, '-=0.5');
+
+      // 2. TIMELINE REVEAL - Staggered Slide-in
+      gsap.utils.toArray('.era-block').forEach((block: any, i: number) => {
+        const visual = block.querySelector('.era-visual');
+        const content = block.querySelector('.era-content');
+        
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: block,
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+          }
+        });
+
+        tl.from(visual, {
+          x: i % 2 === 0 ? -50 : 50,
+          opacity: 0,
+          duration: 1.2,
+          ease: 'power3.out'
+        })
+        .from(content, {
+          x: i % 2 === 0 ? 50 : -50,
+          opacity: 0,
+          duration: 1,
+          ease: 'power3.out'
+        }, '-=0.8');
+
+        // Subtle image scale on scroll
+        gsap.to(block.querySelector('.era-img'), {
+          scrollTrigger: {
+            trigger: block,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true
+          },
+          scale: 1.05,
+          ease: 'none'
+        });
+      });
+
+      // 3. CTA REVEAL - Smooth Scale and Fade
+      gsap.from('.eternal-seal-section .seal-content', {
+        scrollTrigger: {
+          trigger: '.eternal-seal-section',
+          start: 'top 80%',
+        },
+        y: 50,
+        opacity: 0,
+        duration: 1.5,
+        ease: 'power3.out'
+      });
+
+    }, this.el.nativeElement);
   }
 }

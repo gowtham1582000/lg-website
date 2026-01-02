@@ -23,14 +23,19 @@ export class SplitServiceRevealComponent implements AfterViewInit, OnDestroy {
     
     this.ctx = gsap.context(() => {
       const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: this.section.nativeElement,
-          start: 'top top',
-          end: '+=200%',
-          pin: true,
-          scrub: 1,
-          anticipatePin: 1
-        }
+          scrollTrigger: {
+            trigger: this.section.nativeElement,
+            start: 'top top',
+            end: '+=200%',
+            pin: true,
+            scrub: 0.5,
+            snap: {
+              snapTo: [0, 1],
+              duration: 0.5,
+              delay: 0
+            },
+            anticipatePin: 1
+          }
       });
 
       // Initially stack cards

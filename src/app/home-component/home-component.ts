@@ -3,12 +3,13 @@ import { Component, computed, signal, OnInit, AfterViewInit } from '@angular/cor
 import { VideoScrollExpandComponent } from '../shared/video-scroll-expand/video-scroll-expand.component';
 import { TopServicesComponent } from '../shared/top-services/top-services.component';
 import { SplitServiceRevealComponent } from '../shared/split-service-reveal/split-service-reveal.component';
+import { ThreeDViewerComponent } from '../shared/three-d-viewer/three-d-viewer.component';
 import { gsap } from 'gsap';
 
 interface GameFeature {
   id: string;
   title: string;
-  icon: string; // FontAwesome class
+  icon: string;
   description: string;
   status: 'ONLINE' | 'LOCKED' | 'MAINTENANCE';
 }
@@ -16,14 +17,13 @@ interface GameFeature {
 @Component({
   selector: 'app-home-component',
   standalone: true,
-  imports: [CommonModule, VideoScrollExpandComponent, TopServicesComponent, SplitServiceRevealComponent],
+  imports: [CommonModule, VideoScrollExpandComponent, TopServicesComponent, SplitServiceRevealComponent, ThreeDViewerComponent],
   templateUrl: './home-component.html',
   styleUrl: './home-component.scss',
 })
 export class HomeComponent implements OnInit, AfterViewInit {
   sliderValue=signal<number>(50);
   
-  // Slider State
   currentSlide = 0;
   totalSlides = 3;
   isTransitioning = false;
@@ -50,7 +50,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ];
 
   ngOnInit() {
-    // Initialization if needed
   }
 
   ngAfterViewInit() {
