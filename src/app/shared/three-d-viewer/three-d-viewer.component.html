@@ -1,0 +1,46 @@
+<section class="three-d-viewer-section">
+  <div class="container-fluid">
+    <div class="row align-items-center">
+      <div class="col-lg-5 order-2 order-lg-1">
+        <div class="content-wrapper" data-aos="fade-right">
+          <h2 class="section-title">Experience Our <span class="highlight">3D Character</span></h2>
+          <p class="section-description">
+            Interact with our high-fidelity 3D model. Rotate, zoom, and explore every detail from every angle. 
+            Built with cutting-edge WebGL technology for a seamless immersive experience.
+          </p>
+          <div class="features">
+            <div class="feature-item">
+              <i class="bi bi-arrow-repeat"></i>
+              <span>360° Full Rotation</span>
+            </div>
+            <div class="feature-item">
+              <i class="bi bi-zoom-in"></i>
+              <span>Interactive Zoom</span>
+            </div>
+            <div class="feature-item">
+              <i class="bi bi-lightning-fill"></i>
+              <span>Real-time Rendering</span>
+            </div>
+          </div>
+          <button class="btn btn-primary custom-btn mt-4">Learn More</button>
+        </div>
+      </div>
+      <div class="col-lg-7 order-1 order-lg-2">
+        <div class="viewer-wrapper" data-aos="zoom-in">
+          <div #rendererContainer class="renderer-container">
+            <!-- Three.js Canvas will be injected here -->
+            <div class="controls-hint">
+              <span><i class="bi bi-hand-index-thumb"></i> Drag to Rotate</span>
+              <span><i class="bi bi-mouse"></i> Scroll to Zoom</span>
+            </div>
+          </div>
+          <div class="viewer-decorations">
+            <div class="circle-one"></div>
+            <div class="circle-two"></div>
+            <div class="grid-overlay"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,132 +1,52 @@
-  <div class="about-container">
+<div class="about-container" (mousemove)="onMouseMove($event)">
+  <!-- SHARED BACKGROUND ELEMENTS -->
+  <div class="background-layers">
     <div class="stone-texture"></div>
-    <div class="ethereal-dust"></div>
-    
-      <section class="hero-section">
-        <div class="ancient-seal">
-          <span class="seal-inner">ᛟ</span>
-        </div>
-        <h1>THE ANCIENT COVENANT</h1>
-        <p class="subtitle">Architecting the Digital Beyond through Timeless Wisdom</p>
-        <div class="scroll-indicator">
-          <div class="line"></div>
-          <span class="glyph">▼</span>
-        </div>
-      </section>
-
-      <section class="neural-pillars">
-        <div class="section-header">
-          <span class="ornament">❦</span>
-          <h2>The Primal Archways</h2>
-        </div>
-        <div class="pillars-grid">
-          <div *ngFor="let pillar of neuralPillars" class="pillar-card" [style.--pillar-color]="pillar.color">
-            <div class="pillar-icon">
-              <i class="fa-solid {{ pillar.icon }}"></i>
-            </div>
-            <h3>{{ pillar.title }}</h3>
-            <p>{{ pillar.description }}</p>
-            <div class="pillar-glow"></div>
-            <div class="corner-rune">ᚱ</div>
-          </div>
-        </div>
-      </section>
-
-      <div class="roadmap-header">
-        <span class="ornament">❧</span>
-        <h2>The Great Prophecy</h2>
-        <p>A chronicle of our digital evolution</p>
-      </div>
-
-      <div class="timeline">
-        <div *ngFor="let item of studioRoadmap; let i = index" 
-             class="timeline-item" 
-             [ngClass]="i % 2 === 0 ? 'left' : 'right'">
-          <div class="connection-node">
-            <div class="rune-node">ᛉ</div>
-            <div class="pulse-ring"></div>
-          </div>
-          
-          <div class="milestone-card">
-            <div class="card-texture"></div>
-            <div class="card-corner top-left"></div>
-            <div class="card-corner bottom-right"></div>
-            
-            <div class="tech-overlay-text">{{ item.techOverlay }}</div>
-            
-            <div class="card-header">
-              <div class="icon-orb">
-                <i class="fa-solid {{ item.icon }}"></i>
-              </div>
-              <div class="era-info">
-                <div class="era-tag">{{ item.phase }}</div>
-                <div class="date">{{ item.title }}</div>
-              </div>
-            </div>
-            
-            <p>{{ item.description }}</p>
-            
-            <div class="card-footer">
-              <span class="status-bit">{{ item.status }}</span>
-              <div class="mana-bar">
-                <div class="fill"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-    <section class="philosophy">
-      <div class="philosophy-content">
-        <div class="emblem">🜁</div>
-        <h2>THE ETERNAL PROTOCOL</h2>
-        <p>"In the echoes of the past, we found the blueprints for tomorrow. Our philosophy is simple: Build with the endurance of stone and the precision of the machine."</p>
-        <div class="ancient-divider">
-          <div class="line"></div>
-          <div class="diamond"></div>
-          <div class="line"></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="neural-statistics">
-      <div class="stats-grid">
-        <div *ngFor="let stat of neuralStats" class="stat-card">
-          <div class="stat-icon">
-            <i class="fa-solid {{ stat.icon }}"></i>
-          </div>
-          <div class="stat-content">
-            <div class="stat-value">
-              <span class="counter">{{ stat.current }}</span><span class="suffix">{{ stat.suffix }}</span>
-            </div>
-            <div class="stat-label">{{ stat.label }}</div>
-          </div>
-          <div class="ethereal-mist"></div>
-          <div class="border-rune top">ᚦ</div>
-          <div class="border-rune bottom">ᚹ</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="studio-gallery">
-      <div class="gallery-header">
-        <span class="ornament">✥</span>
-        <h2>The Sanctum</h2>
-        <p>A glimpse into our sanctuary of creation</p>
-      </div>
-      
-      <div class="gallery-grid">
-        <div *ngFor="let image of studioImages" class="gallery-item">
-          <div class="image-wrapper">
-            <img [src]="image.url" [alt]="image.title">
-            <div class="image-overlay">
-              <h3>{{ image.title }}</h3>
-              <p>{{ image.description }}</p>
-              <div class="overlay-rune">ᛞ</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <div class="atmospheric-smoke"></div>
   </div>
+
+  <!-- SECTION 1: THE WHISPERING WALLS (TORCHLIGHT REVEAL) -->
+    <section class="whispering-walls-section">
+      <div class="wall-content">
+        <div class="etched-layers">
+          <h2 class="ancient-script">HISTORY RECLAIMED</h2>
+          <h1 class="main-title">A LEGACY IN STONE</h1>
+          <p class="intro-text">Timeless Craftsmanship. Modern Vision.</p>
+        </div>
+      </div>
+      <div class="scroll-instruction">
+        <span class="scroll-line"></span>
+        <span class="text">DISCOVER MORE</span>
+      </div>
+    </section>
+
+    <!-- SECTION 2: THE SHIFTING SANDS (VERTICAL DISSOLVE TIMELINE) -->
+    <section class="shifting-sands-section">
+      <div class="sands-container">
+        <div class="era-block" *ngFor="let era of eras; let i = index" [attr.data-index]="i">
+          <div class="era-visual">
+            <img [ngSrc]="era.image" [alt]="era.title" class="era-img" fill [priority]="i === 0" decoding="async">
+          </div>
+          <div class="era-content">
+            <div class="era-meta">
+              <span class="era-year">{{era.year}}</span>
+            </div>
+            <h2 class="era-title">{{era.title}}</h2>
+            <p class="era-desc">{{era.description}}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: THE ETERNAL SEAL (LOCKING MECHANISM CTA) -->
+    <section class="eternal-seal-section">
+      <div class="seal-content">
+        <h2 class="unlock-text">CONNECT WITH HERITAGE</h2>
+        <div class="cta-wrapper">
+          <button class="ancient-btn">
+            <span class="btn-text">GET IN TOUCH</span>
+          </button>
+        </div>
+      </div>
+    </section>
+</div>

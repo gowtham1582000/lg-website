@@ -1,55 +1,70 @@
-  <section class="top-services-wrapper ancient-style" #scrollContainer>
-    <div class="header-overlay">
-        <div class="header-content">
-          <span class="service-tag">THE WORLD IS ONE FAMILY</span>
-          <h2 class="section-title">THE FIVE ARCHS</h2>
-        </div>
-    </div>
+<section class="carousel-section" #carouselContainer 
+        (mouseenter)="pauseAutoRotate()" 
+        (mouseleave)="resumeAutoRotate()">
+  
+  <div class="carousel-header">
+    <span class="service-tag">THE WORLD IS ONE FAMILY</span>
+    <h2 class="section-title">THE FIVE ARCHS</h2>
+  </div>
 
-    <div class="horizontal-scroll-content" #scrollContent>
-      @for (service of services; track service.id) {
-        <div class="service-card">
-          <div class="card-bg">
-            <div class="parchment-texture"></div>
-            <div class="overlay-vignette"></div>
-          </div>
-          
-          <div class="service-content">
-            <div class="service-number-ancient">{{ service.id }}</div>
+  <div class="carousel-stage">
+    <div class="carousel-track">
+      @for (service of services; track service.id; let i = $index) {
+        <div class="carousel-card" [class.active]="i === currentIndex">
+          <div class="card-inner">
+            <div class="card-image">
+              <img [src]="service.image" [alt]="service.title">
+              <div class="image-overlay"></div>
+            </div>
             
-            <div class="service-info">
-              <div class="ornate-separator top"></div>
-              <h3 class="service-title-ancient">{{ service.title }}</h3>
-              <p class="service-desc-ancient">{{ service.description }}</p>
+            <div class="card-content">
+              <div class="service-number">{{ service.id }}</div>
+              <h3 class="service-title">{{ service.title }}</h3>
+              <p class="service-desc">{{ service.description }}</p>
               
               <div class="tag-list">
                 @for (tag of service.tags; track tag) {
-                  <span class="tag-ancient">{{ tag }}</span>
+                  <span class="tag">{{ tag }}</span>
                 }
               </div>
 
-              <button class="explore-btn-ancient">
-                <span class="btn-text">DECRYPT_KNOWLEDGE</span>
-                <span class="btn-icon">📜</span>
+              <button class="explore-btn">
+                <span>EXPLORE</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
               </button>
-              <div class="ornate-separator bottom"></div>
-            </div>
-          </div>
-
-          <div class="service-visual">
-            <div class="ancient-frame">
-              <div class="frame-border"></div>
-              <div class="corner-flourish tl"></div>
-              <div class="corner-flourish tr"></div>
-              <div class="corner-flourish bl"></div>
-              <div class="corner-flourish br"></div>
-              <div class="aged-img">
-                <div class="placeholder-img" [style.background-image]="'url(' + service.image + ')'"></div>
-                <div class="grain-overlay"></div>
-              </div>
             </div>
           </div>
         </div>
       }
     </div>
-  </section>
+  </div>
+
+  <div class="carousel-controls">
+    <button class="nav-btn prev" (click)="rotate(-1)">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+    </button>
+
+    <div class="carousel-dots">
+      @for (service of services; track service.id; let i = $index) {
+        <button class="dot" [class.active]="i === currentIndex" (click)="goToSlide(i)">
+          <span class="dot-inner"></span>
+        </button>
+      }
+    </div>
+
+    <button class="nav-btn next" (click)="rotate(1)">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="active-service-info" *ngIf="services[currentIndex]">
+    <div class="info-number">{{ services[currentIndex].id }}</div>
+    <div class="info-title">{{ services[currentIndex].title }}</div>
+  </div>
+</section>
