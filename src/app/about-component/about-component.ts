@@ -59,7 +59,7 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    ScrollTrigger.getAll().forEach((t: { kill: () => any; }) => t.kill());
+    ScrollTrigger.getAll().forEach(t => t.kill());
   }
 
   onMouseMove(event: MouseEvent): void {
