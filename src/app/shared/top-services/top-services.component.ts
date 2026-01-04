@@ -15,39 +15,39 @@ export class TopServicesComponent implements AfterViewInit, OnDestroy {
   services = [
     {
       id: 'I',
-      title: 'GAME DEVELOPMENT',
-      description: 'Forging immersive digital realms with cutting-edge mechanics and narrative depth.',
+      title: 'GAME ART & VISUAL DEVELOPMENT',
+      description: 'We craft immersive worlds through concept art, environments, and visuals that define the soul of the game.',
       image: 'assets/images/service-1.jpg',
       tags: ['PC', 'CONSOLE', 'MOBILE']
     },
     {
       id: 'II',
-      title: 'AR/VR SOLUTIONS',
-      description: 'Bridging the gap between reality and imagination through spatial computing.',
+      title: 'ANIMATION & TECHNICAL ART',
+      description: 'We bring characters and systems to life with fluid animation and optimized technical artistry.',
       image: 'assets/images/service-2.jpg',
-      tags: ['OCULUS', 'VIVE', 'ARCORE']
+      tags: ['REALTIME', 'CINEMATIC', 'GAMEPLAY']
     },
     {
       id: 'III',
-      title: 'ART & ANIMATION',
-      description: 'Breathe life into characters and worlds with world-class visual alchemy.',
+      title: 'GAME DESIGN AND DEVELOPMENT',
+      description: 'We design and build gameplay experiences where mechanics, story, and player choice merge seamlessly.',
       image: 'assets/images/service-3.jpg',
-      tags: ['3D', 'VFX', 'CONCEPT ART']
+      tags: ['UNITY', 'UNREAL', 'CUSTOM ENGINE']
     },
     {
       id: 'IV',
-      title: 'METAVERSE',
-      description: 'Architecting the future of social interaction and digital ownership.',
+      title: 'WEB & DIGITAL PLATFORM DEVELOPMENT',
+      description: 'We design and develop modern, responsive websites that deliver performance, clarity, and seamless user experience.',
       image: 'assets/images/service-4.jpg',
-      tags: ['BLOCKCHAIN', 'WEB3', 'SPATIAL']
+      tags: ['ANGULAR', 'GIT', 'UI/UX']
     },
-    {
-      id: 'V',
-      title: 'GAMIFICATION',
-      description: 'Transforming experiences through game-driven engagement and logic.',
-      image: 'assets/images/service-5.jpg',
-      tags: ['EDTECH', 'RETAIL', 'TRAINING']
-    }
+    // {
+    //   id: 'V',
+    //   title: 'GAMIFICATION',
+    //   description: 'Transforming experiences through game-driven engagement and logic.',
+    //   image: 'assets/images/service-5.jpg',
+    //   tags: ['EDTECH', 'RETAIL', 'TRAINING']
+    // }
   ];
 
   currentIndex = 0;
