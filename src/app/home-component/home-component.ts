@@ -30,13 +30,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     heroSlides = [
       {
-        image: '../../assets/images/home-page.png'
+        image: '../../assets/images/Slider-One.png'
       },
       {
-        image: '../../assets/images/hero-page-2.jpg'
+        image: '../../assets/images/Slider-2.png'
       },
       {
-        image: '../../assets/images/hero-page-3.jpg'
+        image: '../../assets/images/Slider-3.png'
       }
     ];
 
@@ -55,6 +55,35 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.initSlider();
     this.startAutoPlay();
+    this.initMouseParallax();
+  }
+
+  initMouseParallax() {
+    const slider = document.querySelector('.hero-slider');
+    if (!slider) return;
+
+    slider.addEventListener('mousemove', (e: any) => {
+      if (this.isTransitioning) return;
+      
+      const { clientX, clientY } = e;
+      const { innerWidth, innerHeight } = window;
+      
+      const xPos = (clientX / innerWidth) - 0.5;
+      const yPos = (clientY / innerHeight) - 0.5;
+      
+      const activeBg = document.querySelector('.slide.active .slide-bg');
+      if (activeBg) {
+        gsap.to(activeBg, {
+          duration: 1.5,
+          x: xPos * 100,
+          y: yPos * 100,
+          rotationY: xPos * 10,
+          rotationX: -yPos * 10,
+          ease: 'power2.out',
+          overwrite: 'auto'
+        });
+      }
+    });
   }
 
   initSlider() {
@@ -62,6 +91,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
     const dots = document.querySelectorAll('.nav-dot');
 
     // Initial animation for the first slide
+    gsap.set(slides, { opacity: 0, visibility: 'hidden', zIndex: 1 });
+    if (slides[0]) {
+      slides[0].classList.add('active');
+      gsap.set(slides[0], { opacity: 1, visibility: 'visible', zIndex: 2 });
+      const bg = slides[0].querySelector('.slide-bg');
+      if (bg) gsap.set(bg, { scale: 1, z: 0 });
+    }
     this.animateSlide(0);
 
     dots.forEach((dot, index) => {
@@ -73,7 +109,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     });
   }
 
-  goToSlide(index: number) {
+ goToSlide(index: number) {
     if (this.isTransitioning) return;
     this.isTransitioning = true;
 
@@ -92,37 +128,59 @@ export class HomeComponent implements OnInit, AfterViewInit {
     if (dots[this.currentSlide]) dots[this.currentSlide].classList.remove('active');
     if (dots[index]) dots[index].classList.add('active');
 
-    // Add transitioning-out class for SCSS animation
-    prevSlide.classList.add('transitioning-out');
+    // 3D Transition
+    const direction = index > this.currentSlide ? 1 : -1;
 
+    // Outgoing slide animation
     gsap.to(prevSlide, {
       opacity: 0,
-      scale: 1.1,
-      duration: 0.8,
-      ease: 'power2.inOut',
+      z: -3000,
+      rotationY: direction * 360,
+      rotationX: direction * 45,
+      scale: 0.2,
+      duration: 2.5,
+      ease: 'expo.inOut',
       onComplete: () => {
         prevSlide.classList.remove('active', 'transitioning-out');
-        nextSlide.classList.add('active');
+        gsap.set(prevSlide, { visibility: 'hidden', z: 0, rotationY: 0, rotationX: 0, scale: 1 });
+      }
+    });
+
+    // Incoming slide setup
+    nextSlide.classList.add('active');
+    const nextBg = nextSlide.querySelector('.slide-bg');
+    if (nextBg) {
+      gsap.set(nextBg, { scale: 1, z: 0 });
+    }
+
+    gsap.set(nextSlide, { 
+      opacity: 0, 
+      visibility: 'visible', 
+      z: 3000, 
+      rotationY: direction * -360,
+      rotationX: direction * -45,
+      scale: 0.2,
+      zIndex: 2 
+    });
+
+    // Incoming slide animation
+    gsap.to(nextSlide, {
+      opacity: 1,
+      z: 0,
+      rotationY: 0,
+      rotationX: 0,
+      scale: 1,
+      duration: 2.5,
+      ease: 'expo.inOut',
+      onComplete: () => {
         this.currentSlide = index;
         this.animateSlide(index);
         this.isTransitioning = false;
       }
     });
   }
-
   animateSlide(index: number) {
-    const slides = document.querySelectorAll('.slide');
-    const activeSlide = slides[index];
-    const bg = activeSlide.querySelector('.slide-bg');
-
-    gsap.set(activeSlide, { opacity: 1 });
-    
-    if (bg) {
-      gsap.fromTo(bg,
-        { scale: 1.3, filter: 'blur(10px) brightness(2)' },
-        { scale: 1.1, filter: 'blur(0px) brightness(1)', duration: 1.5, ease: 'power2.out' }
-      );
-    }
+   
   }
 
   startAutoPlay() {

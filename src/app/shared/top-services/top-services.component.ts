@@ -17,28 +17,28 @@ export class TopServicesComponent implements AfterViewInit, OnDestroy {
       id: 'I',
       title: 'GAME ART & VISUAL DEVELOPMENT',
       description: 'We craft immersive worlds through concept art, environments, and visuals that define the soul of the game.',
-      image: 'assets/images/service-1.jpg',
+      image: 'assets/images/game-art-service.png',
       tags: ['PC', 'CONSOLE', 'MOBILE']
     },
     {
       id: 'II',
       title: 'ANIMATION & TECHNICAL ART',
       description: 'We bring characters and systems to life with fluid animation and optimized technical artistry.',
-      image: 'assets/images/service-2.jpg',
+      image: 'assets/images/ANIMATION-service.png',
       tags: ['REALTIME', 'CINEMATIC', 'GAMEPLAY']
     },
     {
       id: 'III',
       title: 'GAME DESIGN AND DEVELOPMENT',
       description: 'We design and build gameplay experiences where mechanics, story, and player choice merge seamlessly.',
-      image: 'assets/images/service-3.jpg',
+      image: 'assets/images/Game-Design-service.png',
       tags: ['UNITY', 'UNREAL', 'CUSTOM ENGINE']
     },
     {
       id: 'IV',
       title: 'WEB & DIGITAL PLATFORM DEVELOPMENT',
       description: 'We design and develop modern, responsive websites that deliver performance, clarity, and seamless user experience.',
-      image: 'assets/images/service-4.jpg',
+      image: 'assets/images/website-service.png',
       tags: ['ANGULAR', 'GIT', 'UI/UX']
     },
     // {
@@ -134,7 +134,7 @@ export class TopServicesComponent implements AfterViewInit, OnDestroy {
   startAutoRotate() {
     this.autoRotateInterval = setInterval(() => {
       this.rotate(1);
-    }, 5000);
+    }, 3000);
   }
 
   pauseAutoRotate() {

@@ -69,7 +69,27 @@
   transform: translateY(30px);
 
   .content-inner {
-    padding: 40px;
+    padding: 60px;
+    background-image: url('../../../assets/images/contac-bg2.png');
+    background-size: cover;
+    background-position: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 0;
+    }
+
+    & > * {
+      position: relative;
+      z-index: 1;
+    }
 
     .tag {
       font-family: 'Courier New', Courier, monospace;

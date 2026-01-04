@@ -1,16 +1,17 @@
-<section class="hero-slider">
-  <div class="slides-container">
-      <div *ngFor="let slide of heroSlides; let i = index" class="slide" [class.active]="i === 0">
-        <div class="slide-bg" [style.background-image]="'url(' + slide.image + ')'"></div>
-      </div>
-  </div>
+  <section class="hero-slider">
+    <div class="slides-container">
+        <div *ngFor="let slide of heroSlides; let i = index" class="slide" [class.active]="i === currentSlide">
+          <div class="slide-bg" [style.background-image]="'url(' + slide.image + ')'"></div>
+        </div>
+    </div>
 
-  <div class="slider-nav">
-    <div *ngFor="let slide of heroSlides; let i = index" 
-         class="nav-dot" 
-         [class.active]="i === 0" 
-         [attr.data-index]="i"></div>
-  </div>
+    <div class="slider-nav">
+      <div *ngFor="let slide of heroSlides; let i = index" 
+           class="nav-dot" 
+           [class.active]="i === currentSlide" 
+           [attr.data-index]="i"></div>
+    </div>
+
 
   <div class="scroll-indicator">
     <div class="mouse"></div>
@@ -34,7 +35,7 @@
 
     <!-- IMAGE SIDE -->
     <div class="visual-panel">
-      <img src="../../assets/images/home-curosel2.png" alt="Ancient Warrior">
+      <img src="../../assets/images/Studio-secion.png" alt="Ancient Warrior">
     </div>
 
     <!-- TEXT SIDE -->
@@ -89,7 +90,7 @@
 
 <section>				
   <!-- HERO REALM -->
-  <div class="aminite-overlay parallax" style="background-image:url(../../assets/images/animation-home-1.jpeg)">
+  <div class="aminite-overlay parallax" style="background-image:url(../../assets/images/animation-1.png)">
     <div class="aminite-over-area">
       <div class="overlay-box">
         <h2 class="title">Where Myth and Reality Intertwine</h2>
@@ -101,7 +102,7 @@
   </div>
 
   <!-- TEMPLE & DYNASTY -->
-  <div class="aminite-overlay" style="background-image:url(../../assets/images/123.jpg)">
+  <div class="aminite-overlay" style="background-image:url(../../assets/images/animation-2.png)">
     <div class="aminite-over-area">
       <div class="overlay-box ms-0">
         <h2 class="title">A Civilization Reimagined</h2>
@@ -115,7 +116,7 @@
   </div>
 
   <!-- WARRIOR COMBAT -->
-  <div class="aminite-overlay" style="background-image:url(../../assets/images/forgotten-realms-heroes-of-faerun-player-guide-review-hero.webp)">
+  <div class="aminite-overlay" style="background-image:url(../../assets/images/animation-3.png)">
     <div class="aminite-over-area">
       <div class="overlay-box">
         <h2 class="title">A Living, Breathing World</h2>
