@@ -148,13 +148,8 @@ export class App implements OnInit,AfterViewInit {
         }
 
         if (hud) {
-          const hudScale = 1 + (velocity / 200);
-          const hudRot = Date.now() / 10;
-          hud.style.transform = `scale(${hudScale}) rotate(${-angle}deg)`; // Counter-rotate to stay upright-ish
-          const ring = hud.querySelector('.hud-ring') as HTMLElement;
-          if (ring) {
-            ring.style.transform = `rotate(${hudRot}deg)`;
-          }
+          const hudScale = 1 + (velocity / 400);
+          hud.style.transform = `scale(${hudScale})`; 
         }
       }
 
