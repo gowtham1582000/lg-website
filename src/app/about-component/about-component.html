@@ -1,52 +1,249 @@
 <div class="about-container" (mousemove)="onMouseMove($event)">
-  <!-- SHARED BACKGROUND ELEMENTS -->
+  <!-- CINEMATIC BACKGROUND SYSTEM -->
   <div class="background-layers">
     <div class="stone-texture"></div>
-    <div class="atmospheric-smoke"></div>
+    <div class="atmospheric-fog"></div>
+    <div class="particle-field"></div>
   </div>
 
-  <!-- SECTION 1: THE WHISPERING WALLS (TORCHLIGHT REVEAL) -->
-    <section class="whispering-walls-section">
-      <div class="wall-content">
-        <div class="etched-layers">
-          <h2 class="ancient-script">HISTORY RECLAIMED</h2>
-          <h1 class="main-title">A LEGACY IN STONE</h1>
-          <p class="intro-text">Timeless Craftsmanship. Modern Vision.</p>
+  <!-- SECTION 1: HERO - CINEMATIC OPENING -->
+  <section class="hero-section">
+    <div class="hero-depth-layers">
+      <div class="depth-layer layer-far"></div>
+      <div class="depth-layer layer-mid"></div>
+      <div class="depth-layer layer-near"></div>
+    </div>
+    
+    <div class="hero-content">
+      <div class="hero-text-block">
+        <span class="hero-label">EDIIIE STUDIO</span>
+        <h1 class="hero-title">
+          <span class="title-line">WHERE ANCIENT</span>
+          <span class="title-line">MEETS INFINITE</span>
+        </h1>
+        <p class="hero-subtitle">Crafting legendary experiences at the intersection of heritage and innovation</p>
+      </div>
+      
+      <div class="hero-scroll-cue">
+        <div class="scroll-line"></div>
+        <span class="scroll-text">SCROLL TO DISCOVER</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: MANIFESTO - BOLD STATEMENT -->
+  <section class="manifesto-section">
+    <div class="manifesto-container">
+      <div class="manifesto-content">
+        <span class="section-marker">01</span>
+        <h2 class="manifesto-title">WE BUILD WORLDS</h2>
+        <div class="manifesto-body">
+          <p class="manifesto-lead">
+            At EDIIIE, we don't just create games—we <span class="highlight">resurrect civilizations</span>, 
+            breathe life into forgotten legends, and craft experiences that echo through time.
+          </p>
+          <p class="manifesto-text">
+            Our studio sits at the convergence of ancient Tamil heritage and cutting-edge technology, 
+            channeling millennia of storytelling wisdom into next-generation interactive experiences.
+          </p>
         </div>
       </div>
-      <div class="scroll-instruction">
-        <span class="scroll-line"></span>
-        <span class="text">DISCOVER MORE</span>
+      <div class="manifesto-visual">
+        <div class="visual-frame">
+          <img src="assets/images/Studio-secion.png" alt="EDIIIE Studio Vision" class="manifesto-image">
+          <div class="frame-corner corner-tl"></div>
+          <div class="frame-corner corner-tr"></div>
+          <div class="frame-corner corner-bl"></div>
+          <div class="frame-corner corner-br"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: PILLARS - CORE VALUES -->
+  <section class="pillars-section">
+    <div class="pillars-header">
+      <span class="section-marker">02</span>
+      <h2 class="pillars-title">THE THREE PILLARS</h2>
+      <p class="pillars-subtitle">Foundations upon which legends are built</p>
+    </div>
+    
+    <div class="pillars-grid">
+      <article class="pillar-card" *ngFor="let pillar of pillars; let i = index">
+        <div class="card-inner">
+          <div class="pillar-number">0{{i + 1}}</div>
+          <div class="pillar-glyph" [innerHTML]="pillar.glyph"></div>
+          <h3 class="pillar-name">{{pillar.name}}</h3>
+          <p class="pillar-desc">{{pillar.description}}</p>
+          <div class="pillar-line"></div>
+        </div>
+        <div class="card-glow"></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- SECTION 4: SHOWCASE - CINEMATIC VISUAL -->
+    <section class="showcase-section">
+      <div class="showcase-container">
+        <!-- EXPLODED VIEWPORT -->
+        <div class="showcase-viewport">
+          <!-- PARALLAX LAYERS -->
+          <div class="showcase-layers">
+            <div class="layer layer-bg">
+              <img src="assets/images/hero and demond god face off.png" alt="Epic Battle Scene" class="layer-image">
+            </div>
+            <div class="layer layer-mg">
+              <div class="depth-filter"></div>
+            </div>
+            
+            <!-- PORTAL CORE -->
+            <div class="portal-core">
+              <div class="core-atmosphere"></div>
+              <div class="core-rings">
+                <div class="ring r1"></div>
+                <div class="ring r2"></div>
+                <div class="ring r3"></div>
+              </div>
+              <div class="floating-artifact">
+                <div class="artifact-glow"></div>
+                <img src="assets/images/Ancient Device.png" alt="Ancient Artifact" class="artifact-image">
+              </div>
+              
+              <!-- DYNAMIC CONNECTORS -->
+              <svg class="connectors" viewBox="0 0 100 100">
+                <line x1="50" y1="50" x2="10" y2="10" class="connector-line"></line>
+                <line x1="50" y1="50" x2="90" y2="10" class="connector-line"></line>
+                <line x1="50" y1="50" x2="10" y2="90" class="connector-line"></line>
+                <line x1="50" y1="50" x2="90" y2="90" class="connector-line"></line>
+              </svg>
+            </div>
+            
+            <div class="layer layer-fg">
+              <div class="glitch-overlay"></div>
+            </div>
+          </div>
+
+          <!-- ADVANCED HUD -->
+          <div class="hud-system">
+            <div class="hud-node node-tl">
+              <div class="node-marker"></div>
+              <div class="node-content">
+                <span class="node-label">ENGINE STATUS</span>
+                <span class="node-value">STABLE // 144FPS</span>
+              </div>
+            </div>
+            <div class="hud-node node-tr">
+              <div class="node-marker"></div>
+              <div class="node-content">
+                <span class="node-label">NEURAL SYNC</span>
+                <span class="node-value">98.4%</span>
+              </div>
+            </div>
+            <div class="hud-node node-bl">
+              <div class="node-marker"></div>
+              <div class="node-content">
+                <span class="node-label">COORDINATES</span>
+                <span class="node-value">12.9231° N, 80.1863° E</span>
+              </div>
+            </div>
+            <div class="hud-node node-br">
+              <div class="node-marker"></div>
+              <div class="node-content">
+                <span class="node-label">ARTIFACT ID</span>
+                <span class="node-value">ED-X-001</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="scan-grid"></div>
+        </div>
+        
+        <div class="showcase-info">
+          <div class="info-tag">EXPERIMENTAL DIVISION</div>
+          <h2 class="showcase-title">ANCIENT FUTURES</h2>
+          <div class="info-line"></div>
+          <p class="showcase-desc">
+            We are merging the tactile weight of history with the weightless potential 
+            of the digital void. Every pixel is an act of digital archaeology.
+          </p>
+          <div class="info-stats">
+            <div class="stat">
+              <span class="stat-num">4M+</span>
+              <span class="stat-label">POLYGONS</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">NANITE</span>
+              <span class="stat-label">VIRTUALIZED</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- SECTION 2: THE SHIFTING SANDS (VERTICAL DISSOLVE TIMELINE) -->
-    <section class="shifting-sands-section">
-      <div class="sands-container">
-        <div class="era-block" *ngFor="let era of eras; let i = index" [attr.data-index]="i">
+  <!-- SECTION 5: FOCUS AREAS -->
+  <section class="focus-section">
+    <div class="focus-header">
+      <span class="section-marker">03</span>
+      <h2 class="focus-title">STRATEGIC FOCUS</h2>
+    </div>
+    
+    <div class="focus-grid">
+      <div class="focus-item" *ngFor="let item of focusItems; let i = index">
+        <div class="focus-index">0{{i + 1}}</div>
+        <div class="focus-content">
+          <span class="focus-icon">{{item.icon}}</span>
+          <h3 class="focus-name">{{item.title}}</h3>
+          <p class="focus-desc">{{item.description}}</p>
+        </div>
+        <div class="focus-hover-line"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: TIMELINE - EVOLUTION -->
+  <section class="timeline-section">
+    <div class="timeline-header">
+      <span class="section-marker">04</span>
+      <h2 class="timeline-title">THE CHRONICLE</h2>
+      <p class="timeline-subtitle">From ancient stone to digital realms</p>
+    </div>
+    
+    <div class="timeline-track">
+      <div class="timeline-line"></div>
+      
+      <div class="era-block" *ngFor="let era of eras; let i = index" [attr.data-index]="i">
+        <div class="era-marker">
+          <span class="era-year">{{era.year}}</span>
+        </div>
+        <div class="era-card">
           <div class="era-visual">
-            <img [ngSrc]="era.image" [alt]="era.title" class="era-img" fill [priority]="i === 0" decoding="async">
+            <img [ngSrc]="era.image" [alt]="era.title" class="era-img" fill [priority]="i === 0">
           </div>
           <div class="era-content">
-            <div class="era-meta">
-              <span class="era-year">{{era.year}}</span>
-            </div>
-            <h2 class="era-title">{{era.title}}</h2>
+            <h3 class="era-title">{{era.title}}</h3>
             <p class="era-desc">{{era.description}}</p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- SECTION 3: THE ETERNAL SEAL (LOCKING MECHANISM CTA) -->
-    <section class="eternal-seal-section">
-      <div class="seal-content">
-        <h2 class="unlock-text">CONNECT WITH HERITAGE</h2>
-        <div class="cta-wrapper">
-          <button class="ancient-btn">
-            <span class="btn-text">GET IN TOUCH</span>
-          </button>
-        </div>
+  <!-- SECTION 7: CTA - CALL TO ACTION -->
+  <section class="cta-section">
+    <div class="cta-container">
+      <div class="cta-content">
+        <h2 class="cta-title">JOIN THE LEGACY</h2>
+        <p class="cta-text">Ready to shape worlds and craft legends?</p>
+        <a routerLink="/contact" class="cta-button">
+          <span class="btn-text">GET IN TOUCH</span>
+          <span class="btn-arrow">→</span>
+        </a>
       </div>
-    </section>
+      <div class="cta-runes">
+        <span class="rune">ᛟ</span>
+        <span class="rune">ᚹ</span>
+        <span class="rune">ᛞ</span>
+      </div>
+    </div>
+  </section>
 </div>

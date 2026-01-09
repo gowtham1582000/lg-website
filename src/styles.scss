@@ -80,14 +80,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .main-content-wrapper {
-    // Add margin equal to the height of the fixed navbar (80px)
-    margin-top: 20px; 
+    // Remove margin to allow content to start from the top
+    margin-top: 0; 
 }
 
 // Or, if you apply it directly to the Hero component:
 app-hero {
     display: block; // Ensure it takes up space
-    padding-top: 80px; // Push the hero content down
+    padding-top: 0; // Push the hero content down
 }
 
 .neural-pulse {

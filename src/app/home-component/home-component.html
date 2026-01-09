@@ -1,17 +1,33 @@
-  <section class="hero-slider">
-    <div class="slides-container">
-        <div *ngFor="let slide of heroSlides; let i = index" class="slide" [class.active]="i === currentSlide">
-          <div class="slide-bg" [style.background-image]="'url(' + slide.image + ')'"></div>
-        </div>
-    </div>
-
-    <div class="slider-nav">
+ <section class="hero-slider">
+  <div class="slider-container">
+    <div class="slider-wrapper">
       <div *ngFor="let slide of heroSlides; let i = index" 
-           class="nav-dot" 
-           [class.active]="i === currentSlide" 
-           [attr.data-index]="i"></div>
+           class="slide-item" 
+           [class.active]="i === currentSlide"
+           [class.prev]="i === currentSlide - 1 || (currentSlide === 0 && i === heroSlides.length - 1)"
+           [class.next]="i === currentSlide + 1 || (currentSlide === heroSlides.length - 1 && i === 0)"
+           [style.background-image]="'url(' + slide.image + ')'">
+        <div class="slide-overlay"></div>
+      </div>
     </div>
+    
+    <!-- Navigation Arrows -->
+    <button class="slider-arrow slider-arrow-prev" (click)="goToSlide((currentSlide - 1 + heroSlides.length) % heroSlides.length)">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <button class="slider-arrow slider-arrow-next" (click)="goToSlide((currentSlide + 1) % heroSlides.length)">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
 
+  <div class="slider-nav">
+    <div *ngFor="let slide of heroSlides; let i = index" 
+         class="nav-dot" 
+         [class.active]="i === currentSlide" 
+         (click)="goToSlide(i)">
+      <div class="dot-fill"></div>
+    </div>
+  </div>
 
   <div class="scroll-indicator">
     <div class="mouse"></div>

@@ -30,13 +30,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     heroSlides = [
       {
-        image: '../../assets/images/Slider-One.png'
+        image: '/assets/images/final-attempt.png'
       },
       {
-        image: '../../assets/images/Slider-2.png'
+        image: '/assets/images/Slider-2.png'
       },
       {
-        image: '../../assets/images/Slider-3.png'
+        image: '/assets/images/Slider-3.png'
       }
     ];
 
@@ -53,131 +53,74 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.initSlider();
-    this.startAutoPlay();
-    this.initMouseParallax();
+   setTimeout(() => {
+      this.initCarousel();
+      this.startAutoPlay();
+    }, 100);
   }
 
-  initMouseParallax() {
-    const slider = document.querySelector('.hero-slider');
-    if (!slider) return;
+  initCarousel() {
+    // Initialize slides with fade animation
+    const items = document.querySelectorAll('.slide-item');
+    if (items.length === 0) return;
 
-    slider.addEventListener('mousemove', (e: any) => {
-      if (this.isTransitioning) return;
-      
-      const { clientX, clientY } = e;
-      const { innerWidth, innerHeight } = window;
-      
-      const xPos = (clientX / innerWidth) - 0.5;
-      const yPos = (clientY / innerHeight) - 0.5;
-      
-      const activeBg = document.querySelector('.slide.active .slide-bg');
-      if (activeBg) {
-        gsap.to(activeBg, {
-          duration: 1.5,
-          x: xPos * 100,
-          y: yPos * 100,
-          rotationY: xPos * 10,
-          rotationX: -yPos * 10,
-          ease: 'power2.out',
-          overwrite: 'auto'
+    // Set initial state - first slide should be visible
+    items.forEach((item, i) => {
+      if (i === this.currentSlide) {
+        gsap.set(item, {
+          opacity: 1,
+          scale: 1,
+          zIndex: 10
+        });
+      } else {
+        gsap.set(item, {
+          opacity: 0,
+          scale: 0.95,
+          zIndex: 1
         });
       }
     });
   }
 
-  initSlider() {
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.nav-dot');
-
-    // Initial animation for the first slide
-    gsap.set(slides, { opacity: 0, visibility: 'hidden', zIndex: 1 });
-    if (slides[0]) {
-      slides[0].classList.add('active');
-      gsap.set(slides[0], { opacity: 1, visibility: 'visible', zIndex: 2 });
-      const bg = slides[0].querySelector('.slide-bg');
-      if (bg) gsap.set(bg, { scale: 1, z: 0 });
-    }
-    this.animateSlide(0);
-
-    dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => {
-        if (this.currentSlide !== index && !this.isTransitioning) {
-          this.goToSlide(index);
-        }
-      });
-    });
-  }
-
- goToSlide(index: number) {
-    if (this.isTransitioning) return;
+  goToSlide(index: number) {
+    if (this.isTransitioning || index === this.currentSlide) return;
     this.isTransitioning = true;
 
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.nav-dot');
-    
-    if (!slides.length || !slides[this.currentSlide] || !slides[index]) {
+    const currentItem = document.querySelector(`.slide-item:nth-child(${this.currentSlide + 1})`);
+    const nextItem = document.querySelector(`.slide-item:nth-child(${index + 1})`);
+
+    if (currentItem && nextItem) {
+      // Animate current slide out
+      gsap.to(currentItem, {
+        opacity: 0,
+        scale: 0.95,
+        zIndex: 1,
+        duration: 0.8,
+        ease: 'power2.inOut'
+      });
+
+      // Animate next slide in
+      gsap.fromTo(nextItem, 
+        {
+          opacity: 0,
+          scale: 1.05,
+          zIndex: 10
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          ease: 'power2.inOut',
+          onComplete: () => {
+            this.currentSlide = index;
+            this.isTransitioning = false;
+          }
+        }
+      );
+    } else {
+      this.currentSlide = index;
       this.isTransitioning = false;
-      return;
     }
-
-    const prevSlide = slides[this.currentSlide];
-    const nextSlide = slides[index];
-
-    // Update dots
-    if (dots[this.currentSlide]) dots[this.currentSlide].classList.remove('active');
-    if (dots[index]) dots[index].classList.add('active');
-
-    // 3D Transition
-    const direction = index > this.currentSlide ? 1 : -1;
-
-    // Outgoing slide animation
-    gsap.to(prevSlide, {
-      opacity: 0,
-      z: -3000,
-      rotationY: direction * 360,
-      rotationX: direction * 45,
-      scale: 0.2,
-      duration: 2.5,
-      ease: 'expo.inOut',
-      onComplete: () => {
-        prevSlide.classList.remove('active', 'transitioning-out');
-        gsap.set(prevSlide, { visibility: 'hidden', z: 0, rotationY: 0, rotationX: 0, scale: 1 });
-      }
-    });
-
-    // Incoming slide setup
-    nextSlide.classList.add('active');
-    const nextBg = nextSlide.querySelector('.slide-bg');
-    if (nextBg) {
-      gsap.set(nextBg, { scale: 1, z: 0 });
-    }
-
-    gsap.set(nextSlide, { 
-      opacity: 0, 
-      visibility: 'visible', 
-      z: 3000, 
-      rotationY: direction * -360,
-      rotationX: direction * -45,
-      scale: 0.2,
-      zIndex: 2 
-    });
-
-    // Incoming slide animation
-    gsap.to(nextSlide, {
-      opacity: 1,
-      z: 0,
-      rotationY: 0,
-      rotationX: 0,
-      scale: 1,
-      duration: 2.5,
-      ease: 'expo.inOut',
-      onComplete: () => {
-        this.currentSlide = index;
-        this.animateSlide(index);
-        this.isTransitioning = false;
-      }
-    });
   }
   animateSlide(index: number) {
    

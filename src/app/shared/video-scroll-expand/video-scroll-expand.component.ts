@@ -18,6 +18,25 @@ export class VideoScrollExpandComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     this.initAnimation();
+    const video = this.videoRef.nativeElement;
+
+  video.muted = true;
+
+  const playPromise = video.play();
+
+  if (playPromise !== undefined) {
+    playPromise.catch(() => {
+      // Fallback: play after user interaction
+      const resume = () => {
+        video.play();
+        window.removeEventListener('touchstart', resume);
+        window.removeEventListener('click', resume);
+      };
+
+      window.addEventListener('touchstart', resume, { once: true });
+      window.addEventListener('click', resume, { once: true });
+    });
+  }
   }
 
   private initAnimation() {
@@ -49,4 +68,7 @@ export class VideoScrollExpandComponent implements AfterViewInit, OnDestroy {
   ngOnDestroy() {
     ScrollTrigger.getAll().forEach((trigger: any) => trigger.kill());
   }
+
+  @ViewChild('bgVideo') videoRef!: ElementRef<HTMLVideoElement>;
+
 }
