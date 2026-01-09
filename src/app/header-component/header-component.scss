@@ -20,30 +20,77 @@ $obsidian-stone: #0d0d12;
 /* ================= NAVBAR ================= */
 .navbar.command-line-style {
   position: fixed;
-  top: 15px;
-  left: 15px;
-  width: calc(100% - 30px);
-  height: 85px;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 40px);
+  max-width: 1400px;
+  height: 75px;
   z-index: 1000;
   display: flex;
   align-items: center;
-  justify-content: space-between; // Standard split layout
+  justify-content: space-between;
   padding: 0 30px;
-  background-color: #00000054;
-  border: 1px solid rgba(82, 81, 81, 0.5);
-  border-radius: 8px;
+  background: rgba(13, 13, 18, 0.3);
+  backdrop-filter: blur(15px) saturate(150%);
+  -webkit-backdrop-filter: blur(15px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2),
+              0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  
+  &.scrolled {
+    top: 10px;
+    height: 65px;
+    background: rgba(13, 13, 18, 0.5);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+    border-color: rgba(255, 255, 255, 0.12);
+  }
   
   .nav-links,
   .nav-actions,
   .hamburger-btn,
   .logo-frame {
-    transition: all 0.4s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
+  
   /* FADE HIDE CLASS */
   &.nav-hidden {
-    transform: translateY(-110%); // Slides up out of view
-    opacity: 0;                   // Fades out
-    pointer-events: none;         // Prevents clicking hidden links
+    transform: translateX(-50%) translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  /* Scroll Progress Indicator */
+  .scroll-progress {
+    position: absolute;
+    bottom: -1px;
+    left: 20px;
+    height: 2px;
+    background: linear-gradient(90deg, $ancient-gold, $tech-cyan);
+    transition: width 0.1s ease-out;
+    z-index: 1001;
+    box-shadow: 0 0 10px rgba($tech-cyan, 0.5);
+    border-radius: 0 0 20px 20px;
+    max-width: calc(100% - 40px);
+    transform-origin: left;
+  }
+  
+  @media (max-width: 768px) {
+    top: 10px;
+    width: calc(100% - 20px);
+    height: 60px;
+    padding: 0 20px;
+    border-radius: 15px;
+    
+    &.scrolled {
+      top: 5px;
+      height: 55px;
+    }
   }
 }
 
@@ -81,30 +128,82 @@ $obsidian-stone: #0d0d12;
 .bracketed-links {
   list-style: none;
   display: flex;
-  gap: 12px;
+  gap: 8px;
   font-family: 'Teko', sans-serif;
 
+  li {
+    position: relative;
+  }
+
   a {
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.85);
     text-decoration: none;
     font-family: 'Teko', sans-serif;
     font-size: 1.1rem;
     position: relative;
-    padding: 0 10px;
-    color: $z-white;
+    padding: 8px 16px;
     text-transform: uppercase;
+    display: block;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 
-    &::before { content: '['; color: $ancient-gold; margin-right: 5px; opacity: 0; transition: 0.3s; }
-    &::after { content: ']'; color: $tech-cyan; margin-left: 5px; opacity: 0; transition: 0.3s; }
+    .nav-text {
+      position: relative;
+      z-index: 2;
+      display: block;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-    &:hover, &.active {
+    .nav-underline {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, $ancient-gold, $tech-cyan);
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 0 10px rgba($tech-cyan, 0.5);
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba($tech-cyan, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    &:hover {
       color: #fff;
-      &::before, &::after { opacity: 1; }
+      transform: translateY(-2px);
+      text-shadow: 0 2px 15px rgba(255, 255, 255, 0.3),
+                   0 0 20px rgba($tech-cyan, 0.4);
+      
+      .nav-text {
+        transform: translateY(-2px);
+      }
+      
+      .nav-underline {
+        width: 100%;
+      }
+      
+      &::before {
+        left: 100%;
+      }
     }
     
     &.active {
-      text-shadow: 0 0 8px $tech-cyan;
-      color: rgb(254, 241, 241);
+      color: #fff;
+      text-shadow: 0 0 12px rgba($tech-cyan, 0.8),
+                   0 2px 15px rgba(255, 255, 255, 0.3);
+      
+      .nav-underline {
+        width: 100%;
+      }
     }
   }
 }
@@ -112,29 +211,48 @@ $obsidian-stone: #0d0d12;
 /* ================= HAMBURGER ================= */
 .hamburger-btn {
   display: none;
-  width: 28px;
-  height: 22px;
+  width: 32px;
+  height: 24px;
   z-index: 20;
   margin-left: 20px;
   background: none;
   border: none;
   cursor: pointer;
   position: relative;
+  padding: 0;
 
   span {
     position: absolute;
     width: 100%;
-    height: 2px;
+    height: 3px;
     background: $z-accent-red;
-    transition: all 0.3s;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 2px;
+    left: 0;
   }
 
   span:nth-child(1) { top: 0; }
-  span:nth-child(2) { top: 10px; }
+  span:nth-child(2) { top: 50%; transform: translateY(-50%); }
   span:nth-child(3) { bottom: 0; }
 
   &:hover span {
-    animation: glitchShift 0.4s infinite;
+    background: $tech-cyan;
+    box-shadow: 0 0 8px rgba($tech-cyan, 0.6);
+  }
+
+  &.active {
+    span:nth-child(1) {
+      top: 50%;
+      transform: translateY(-50%) rotate(45deg);
+    }
+    span:nth-child(2) {
+      opacity: 0;
+      transform: translateY(-50%) scale(0);
+    }
+    span:nth-child(3) {
+      bottom: 50%;
+      transform: translateY(50%) rotate(-45deg);
+    }
   }
 }
 
@@ -267,49 +385,47 @@ $obsidian-stone: #0d0d12;
 .contact-link {
     display: flex;
     align-items: center;
-    gap: 8px; /* Space between icon and text */
+    gap: 8px;
     
-    // Command Line Link Base Styling
     text-decoration: none;
     text-transform: uppercase;
-    font-family: 'Cinzel', serif; // Ancient font   
+    font-family: 'Cinzel', serif;
     font-size: 0.8rem;
-    color: $ancient-gold;
+    color: rgba(212, 175, 55, 0.9);
     letter-spacing: 2px;
     transition: all 0.3s ease;
-    //transition: color 0.3s, text-shadow 0.3s;
     cursor: pointer;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 
     .contact-link {
-        font-size: 1rem; /* Smaller text on mobile */
+        font-size: 1rem;
         gap: 5px;
         
         .fas {
             font-size: 1.2rem;
         }
 
-        /* Optionally hide the text label to save space on very small screens */
         .label-text {
             display: none; 
         }
     }
     
-    // Headphone Icon Styling
     .fas {
         font-size: 1.4rem;
-        color: $z-accent-red; /* Use Neon Blue for the icon */
+        color: rgba(248, 18, 18, 0.9);
         transition: color 0.3s;
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
     }
     i { color: $tech-cyan; }
 
-    // Hover Effect: Neon Blue Glow
     &:hover {
-        color: $z-accent-blue;
-        text-shadow: 0 0 5px rgba($z-accent-blue, 0.5);
+        color: #fff;
+        text-shadow: 0 0 15px rgba(212, 175, 55, 0.8),
+                     0 2px 15px rgba(255, 255, 255, 0.3);
         
         .fas {
-          color:#fff; /* Icon color change on hover */
-          text-shadow: 0 0 10px $ancient-gold;        
+          color: #fff;
+          filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.8));
         }
     }
 }
@@ -320,30 +436,40 @@ $obsidian-stone: #0d0d12;
   align-items: center;
 
   .logo-frame {
-    position: relative; // Removed absolute centering
+    position: relative;
     transform: none;
     left: 0;
-    width: 100px; // Slightly smaller for side-alignment
+    width: 100px;
     height: 70px;
-    clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%); // Adjusted shape for left side
+    clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 }
 
 
-.hexagon { // Renamed or repurposed as the logo container
+.hexagon {
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-bottom: 5px; // Push logo up slightly to center in the trapezoid
-  background: radial-gradient(circle, rgba($ancient-gold, 0.1) 0%, transparent 70%);
+  padding-bottom: 5px;
+  background: radial-gradient(circle, rgba($ancient-gold, 0.15) 0%, transparent 70%);
   img {
     max-width: 70%;
     height: auto;
-    // High-contrast filters to make the red splatters POP
-    filter: drop-shadow(0 0 5px);
-    //transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: drop-shadow(0 2px 15px rgba(0, 0, 0, 0.6))
+            drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
+    transition: filter 0.3s ease;
+  }
+  
+  &:hover img {
+    filter: drop-shadow(0 2px 20px rgba(0, 0, 0, 0.8))
+            drop-shadow(0 0 15px rgba(212, 175, 55, 0.5));
   }
 }
 
@@ -360,9 +486,12 @@ $obsidian-stone: #0d0d12;
     .navbar.command-line-style {
         height: 60px;
         padding: 0 15px;
+        justify-content: space-between;
         
-        // Ensure the layout uses flexbox space-between
-        justify-content: space-between; 
+        .scroll-progress {
+            left: 15px;
+            max-width: calc(100% - 30px);
+        }
         
         // Hide desktop links
         .bracketed-links {
@@ -371,40 +500,34 @@ $obsidian-stone: #0d0d12;
 
         // 1. HAMBURGER BUTTON (NEW LEFT POSITION)
         .hamburger-btn {
-            display: flex; // Ensure it's visible
-            order: 1; // 💡 Set to 1 to be the leftmost element
+            display: flex;
+            order: 1;
         }
 
         // 2. LOGO FRAME (CENTER POSITION)
         .logo-frame {
-            position: static; // Crucial: removes absolute positioning from desktop
+            position: static;
             transform: none;
-            height: 57px;
-            order: 2; // Centers it in the flow
+            height: 50px;
+            order: 2;
         }
 
         // 3. CONTACT LINK / NAV ACTIONS (RIGHT POSITION)
         .nav-spacer {
             display: block;
-            order: 3; // Right side
-            
-            /* Since the contact link should only show the icon on mobile, 
-               ensure your .contact-link mobile styles hide the text label. */
+            order: 3;
         }
-    }
-  // 3. CONTACT LINK / NAV ACTIONS (RIGHT POSITION)
+        
         .nav-actions {
             display: none;
-            order: 3; // Right side
-            
-            /* Since the contact link should only show the icon on mobile, 
-               ensure your .contact-link mobile styles hide the text label. */
+            order: 3;
         }
 
-        .hexagon { // Renamed or repurposed as the logo container
+        .hexagon {
           img {
-            height: 65px !important;
+            height: 50px !important;
           }
         }
+    }
 }
 

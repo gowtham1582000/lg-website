@@ -1,4 +1,5 @@
-<nav class="navbar command-line-style" [class.nav-hidden]="isHidden">
+<nav class="navbar command-line-style" [class.nav-hidden]="isHidden" [class.scrolled]="scrollY > 50">
+    <div class="scroll-progress" [style.width.%]="scrollProgress"></div>
     <div class="logo-area">
         <div class="logo-frame">
             <div class="hexagon">
@@ -9,9 +10,18 @@
 
     <div class="nav-right-group">
         <ul class="nav-links bracketed-links">
-            <li><a routerLink="/" class="active">HOME</a></li>
-            <li><a routerLink="/about">ABOUT US</a></li>
-            <li><a routerLink="/team">TEAM</a></li>
+            <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <span class="nav-text">HOME</span>
+                <span class="nav-underline"></span>
+            </a></li>
+            <li><a routerLink="/about" routerLinkActive="active">
+                <span class="nav-text">ABOUT US</span>
+                <span class="nav-underline"></span>
+            </a></li>
+            <li><a routerLink="/team" routerLinkActive="active">
+                <span class="nav-text">TEAM</span>
+                <span class="nav-underline"></span>
+            </a></li>
         </ul>
 
         <div class="nav-actions">
@@ -21,7 +31,7 @@
             </a>
         </div>
 
-        <button class="hamburger-btn" (click)="toggleMenu()">
+        <button class="hamburger-btn" [class.active]="isMenuOpen" (click)="toggleMenu()">
             <span></span><span></span><span></span>
         </button>
     </div>

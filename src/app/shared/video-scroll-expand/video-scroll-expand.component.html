@@ -2,14 +2,16 @@
   <div class="sticky-wrapper">
     <div #videoContainer class="video-container">
       <video
-        autoplay
+        #bgVideo
         muted
         loop
         playsinline
+        preload="auto"
         class="expanding-video"
       >
-        <source src="assets/videos/footer-video.mp4" type="video/mp4" />
+        <source src="../../../assets/videos/middle-section.mp4" type="video/mp4" />
       </video>
+
       <div class="overlay-text">
         <h2>IMMERSIVE EXPERIENCES</h2>
         <p>Creating the future of digital interaction</p>
