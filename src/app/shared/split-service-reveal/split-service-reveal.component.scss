@@ -67,7 +67,10 @@
   max-width: 800px;
   opacity: 0;
   transform: translateY(30px);
-
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   .content-inner {
     padding: 60px;
     background-image: url('../../../assets/images/contac-bg2.png');

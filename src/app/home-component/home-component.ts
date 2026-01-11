@@ -4,6 +4,7 @@ import { VideoScrollExpandComponent } from '../shared/video-scroll-expand/video-
 import { TopServicesComponent } from '../shared/top-services/top-services.component';
 import { SplitServiceRevealComponent } from '../shared/split-service-reveal/split-service-reveal.component';
 import { ThreeDViewerComponent } from '../shared/three-d-viewer/three-d-viewer.component';
+import { VideoSliderComponent } from '../shared/video-slider/video-slider';
 import { gsap } from 'gsap';
 
 interface GameFeature {
@@ -17,7 +18,7 @@ interface GameFeature {
 @Component({
   selector: 'app-home-component',
   standalone: true,
-  imports: [CommonModule, VideoScrollExpandComponent, TopServicesComponent, SplitServiceRevealComponent, ThreeDViewerComponent],
+  imports: [CommonModule, VideoScrollExpandComponent, TopServicesComponent, SplitServiceRevealComponent, ThreeDViewerComponent, VideoSliderComponent],
   templateUrl: './home-component.html',
   styleUrl: './home-component.scss',
 })

@@ -52,7 +52,8 @@ export class SplitServiceRevealComponent implements AfterViewInit, OnDestroy {
         x: '-120%', // Use percentage for better responsiveness
         rotation: -12,
         scale: 0.85,
-        ease: 'power2.inOut'
+        ease: 'power2.inOut',
+        force3D: true
       }, 0)
       .to(this.card2.nativeElement, {
         x: '120%', // Use percentage for better responsiveness
