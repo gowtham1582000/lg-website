@@ -30,24 +30,24 @@ interface Pillar {
 export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
   focusItems = [
     {
-      title: 'ANCIENT WISDOM',
-      description: 'Deciphering the blueprints of forgotten civilizations to inform modern design.',
-      icon: '🏛️'
+      title: 'Original IP Creation',
+      description: 'We create unique, self-owned game worlds and stories that stand apart in the global gaming landscape.',
+      icon: '𑁧'
     },
     {
-      title: 'NEURAL BRIDGING',
-      description: 'Directly connecting biological consciousness with digital heritage archives.',
-      icon: '🧠'
+      title: 'Cultural Depth with Modern Technology',
+      description: 'We blend ancient cultural heritage with cutting-edge technology to craft meaningful and immersive experiences.',
+      icon: '𑁨'
     },
     {
-      title: 'PROCEDURAL ARCHAEOLOGY',
-      description: 'Using AI to reconstruct entire worlds from a single stone fragment.',
-      icon: '🤖'
+      title: 'World-Class Production Quality',
+      description: 'We deliver AAA-level visuals, sound, and gameplay polished to meet international standards.',
+      icon: '𑁩'
     },
     {
-      title: 'ETERNAL ARCHIVING',
-      description: 'Securing humanity\'s legacy in immutable digital stone for eons to come.',
-      icon: '💎'
+      title: 'Long-Lasting Game Universes',
+      description: 'We build expansive universes designed to grow, evolve, and engage players for years.',
+      icon: '𑁪'
     }
   ];
 
@@ -71,21 +71,27 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
 
   eras: Era[] = [
     {
-      year: '300 BCE',
-      title: 'THE CHOLA ASCENDANCE',
-      description: 'The foundation of a maritime empire that would dominate the eastern seas for centuries. Built on stone, wisdom, and unyielding courage.',
+      year: '2026 Q1',
+      title: '✦ Creative technology solutions for interactive media',
+      description: 'We develop innovative technology-driven solutions that power engaging and interactive digital experiences.',
       image: 'assets/images/home-page.png'
     },
     {
-      year: '1010 CE',
-      title: 'THE LIVING TEMPLES',
-      description: 'Mastery of granite and geometry. Architectural marvels like Brihadeeswarar emerged as beacons of power and spiritual connection.',
+      year: '2026 Q2',
+      title: '◉ AR / VR experiences and immersive storytelling',
+      description: 'We create immersive AR and VR experiences that place users at the center of powerful, interactive narratives.',
       image: 'assets/images/home-curosel2.png'
     },
     {
-      year: '2025 CE',
-      title: 'THE NEURAL LEGACY',
-      description: 'Translating ancient echoes into digital dimensions. We bridge the gap between stone inscriptions and neural interfaces.',
+      year: '2026 Q3',
+      title: '⬢ Real-time 3D, animation, and virtual production',
+      description: 'We leverage real-time 3D pipelines to deliver high-quality animation and virtual production efficiently.',
+      image: 'assets/images/home-page.png'
+    },
+    {
+      year: '2026 Q4',
+      title: '⚙︎ High-end game art, VFX, and technical services for global clients',
+      description: 'We provide world-class game art, visual effects, and technical services tailored for international studios and brands.',
       image: 'assets/images/home-page.png'
     }
   ];

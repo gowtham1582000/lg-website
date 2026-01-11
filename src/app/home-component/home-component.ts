@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     heroSlides = [
       {
-        image: '/assets/images/final-attempt.png'
+        Image: '/assets/images/final-attempt.png'
       },
       {
         image: '/assets/images/Slider-2.png'
