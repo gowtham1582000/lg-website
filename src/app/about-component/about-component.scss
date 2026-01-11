@@ -130,7 +130,7 @@ $text-muted: rgba(224, 213, 192, 0.5);
 
   .hero-label {
     display: block;
-    font-size: 0.85rem;
+    font-size: 1.85rem;
     letter-spacing: 1rem;
     color: $gold;
     margin-bottom: 2rem;
@@ -144,11 +144,11 @@ $text-muted: rgba(224, 213, 192, 0.5);
   }
 
   .hero-title {
-    margin-bottom: 2rem;
+    margin-bottom: 5rem;
 
     .title-line {
       display: block;
-      font-size: clamp(2.5rem, 8vw, 7rem);
+      font-size: clamp(1.5rem, 5vw, 5rem);
       font-weight: 900;
       letter-spacing: 0.3rem;
       color: $text-primary;
@@ -174,7 +174,7 @@ $text-muted: rgba(224, 213, 192, 0.5);
     letter-spacing: 0.15rem;
     max-width: 600px;
     margin: 0 auto;
-    line-height: 1.6;
+    line-height: 1.3;
 
     @media (max-width: 768px) {
       font-size: 0.95rem;
@@ -271,14 +271,14 @@ $text-muted: rgba(224, 213, 192, 0.5);
     }
 
     .manifesto-lead {
-      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      font-size: 1.05rem;
       line-height: 1.7;
       color: $text-secondary;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
 
       .highlight {
         color: $gold;
-        font-weight: 700;
+        font-weight: 900;
       }
     }
 
