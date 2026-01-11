@@ -1,4 +1,4 @@
- <section class="hero-slider">
+ <!-- <section class="hero-slider">
   <div class="slider-container">
     <div class="slider-wrapper">
       <div *ngFor="let slide of heroSlides; let i = index" 
@@ -10,9 +10,7 @@
         <div class="slide-overlay"></div>
       </div>
     </div>
-    
-    <!-- Navigation Arrows -->
-    <button class="slider-arrow slider-arrow-prev" (click)="goToSlide((currentSlide - 1 + heroSlides.length) % heroSlides.length)">
+      <button class="slider-arrow slider-arrow-prev" (click)="goToSlide((currentSlide - 1 + heroSlides.length) % heroSlides.length)">
       <i class="fas fa-chevron-left"></i>
     </button>
     <button class="slider-arrow slider-arrow-next" (click)="goToSlide((currentSlide + 1) % heroSlides.length)">
@@ -33,7 +31,9 @@
     <div class="mouse"></div>
     <span>SCROLL</span>
   </div>
-</section>
+</section> -->
+
+<app-video-slider></app-video-slider>
 
 <section class="ancient-intro">
 
@@ -147,4 +147,3 @@
 <app-three-d-viewer></app-three-d-viewer>
 
 <app-top-services></app-top-services>
-

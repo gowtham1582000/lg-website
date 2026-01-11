@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, ViewChild, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { gsap } from 'gsap';
 
@@ -12,6 +12,14 @@ import { gsap } from 'gsap';
 export class TopServicesComponent implements AfterViewInit, OnDestroy {
   @ViewChild('carouselContainer') carouselContainer!: ElementRef;
 
+  private radius = 400;
+  private angleStep = 0; // Will be calculated based on length
+
+  @HostListener('window:resize')
+  onResize() {
+    this.calculateDimensions();
+    this.updateCarouselPositions();
+  }
   services = [
     {
       id: 'I',
@@ -53,14 +61,32 @@ export class TopServicesComponent implements AfterViewInit, OnDestroy {
   currentIndex = 0;
   isAnimating = false;
   private autoRotateInterval: any;
-  private radius = 400;
-  private angleStep = 360 / 5;
 
   ngAfterViewInit() {
+    this.angleStep = 360 / this.services.length; // Dynamic step
+    this.calculateDimensions();
     setTimeout(() => {
       this.initCarousel();
       this.startAutoRotate();
     }, 100);
+  }
+
+  private calculateDimensions() {
+    const width = window.innerWidth;
+    if (width < 768) {
+      this.radius = width * 0.7; // Smaller radius for mobile
+    } else if (width < 1200) {
+      this.radius = 300;
+    } else {
+      this.radius = 450; // Larger for wide screens
+    }
+  }
+
+  private updateCarouselPositions() {
+    const cards = document.querySelectorAll('.carousel-card');
+    cards.forEach((card, i) => {
+      this.positionCard(card as HTMLElement, i);
+    });
   }
 
   ngOnDestroy() {
@@ -77,28 +103,31 @@ export class TopServicesComponent implements AfterViewInit, OnDestroy {
   }
 
   positionCard(card: HTMLElement, index: number) {
-    const angle = (index - this.currentIndex) * this.angleStep;
-    const radian = (angle * Math.PI) / 180;
-    
-    const x = Math.sin(radian) * this.radius;
-    const z = Math.cos(radian) * this.radius - this.radius;
-    const rotateY = angle;
-    
-    const scale = z < -this.radius ? 0.6 : 0.6 + (0.4 * (z + this.radius) / this.radius);
-    const opacity = z < -this.radius * 0.5 ? 0.3 : 0.3 + (0.7 * (z + this.radius) / this.radius);
-    const zIndex = Math.round((z + this.radius) / 10);
+      const angle = (index - this.currentIndex) * this.angleStep;
+      const radian = (angle * Math.PI) / 180;
+      
+      // Dynamic Z-space for clarity
+      const x = Math.sin(radian) * this.radius;
+      const z = Math.cos(radian) * this.radius - this.radius;
+      
+      // Scale logic: make sure the active card is much larger (1.2) than background cards
+      const isActive = index === this.currentIndex;
+      const scale = isActive ? 1.1 : Math.max(0.5, 0.6 + (z / 1000));
+      const opacity = isActive ? 1 : Math.max(0.2, 1 + (z / 500));
+      
+      gsap.to(card, {
+        x: x,
+        z: z,
+        rotateY: angle * -0.5, // Subtle counter-rotation for readability
+        scale: scale,
+        opacity: opacity,
+        zIndex: Math.round(z + 1000),
+        duration: 0.8,
+        perspective: 1500,
+        ease: 'power3.out'
+      });
+    } 
 
-    gsap.to(card, {
-      x: x,
-      z: z,
-      rotateY: rotateY,
-      scale: scale,
-      opacity: opacity,
-      zIndex: zIndex,
-      duration: 0.8,
-      ease: 'power2.out'
-    });
-  }
 
   rotate(direction: number) {
     if (this.isAnimating) return;

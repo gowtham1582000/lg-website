@@ -460,8 +460,8 @@ $obsidian-stone: #0d0d12;
   padding-bottom: 5px;
   background: radial-gradient(circle, rgba($ancient-gold, 0.15) 0%, transparent 70%);
   img {
-    max-width: 70%;
-    height: auto;
+    max-width: 133%;
+    height: 95px;
     filter: drop-shadow(0 2px 15px rgba(0, 0, 0, 0.6))
             drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
     transition: filter 0.3s ease;
@@ -525,7 +525,7 @@ $obsidian-stone: #0d0d12;
 
         .hexagon {
           img {
-            height: 50px !important;
+            height: 70px !important;
           }
         }
     }

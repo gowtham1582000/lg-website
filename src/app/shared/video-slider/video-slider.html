@@ -1,0 +1,46 @@
+<section class="video-slider-section">
+  <app-ancient-particles class="background-particles"></app-ancient-particles>
+  
+  <div class="slider-container">
+    <div class="slide" *ngFor="let slide of slides; let i = index" [class.active]="i === activeSlide">
+      
+      <div class="content-left">
+        <div class="text-wrapper">
+          <h2 class="slide-title">{{ slide.title }}</h2>
+          <p class="slide-description">{{ slide.description }}</p>
+          
+          <div class="features-list">
+            <div class="feature-item" *ngFor="let feature of slide.features">
+              <span class="dot"></span>
+              <span class="text">{{ feature }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="slider-controls">
+          <div class="nav-group">
+            <button class="nav-btn prev" (click)="prevSlide()">←</button>
+            <button class="nav-btn next" (click)="nextSlide()">→</button>
+          </div>
+          <div class="indicators">
+            <span *ngFor="let s of slides; let idx = index" 
+                  class="indicator" 
+                  [class.active]="idx === activeSlide"
+                  (click)="activeSlide = idx; resetVideo()"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="video-right">
+        <div class="video-wrapper">
+          <video #mainVideo [src]="slide.videoSrc" loop playsinline muted preload="auto" class="transparent-video"></video>
+          
+          <button class="mute-btn" (click)="toggleMute($event)">
+            <span class="btn-text">{{ isMuted ? 'UNMUTE' : 'MUTE' }}</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

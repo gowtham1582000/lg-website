@@ -14,20 +14,28 @@ $ancient-dark: #12100e;
       position: absolute;
       inset: 0;
       z-index: 1;
-      background: rgba(0,0,0,0.6); // Dark base layer
+      background: rgba(0,0,0,0.4);
 
       .footer-video {
         position: absolute;
         top: 50%;
         left: 50%;
-        min-width: 100%;
-        min-height: 100%;
+        min-width: 101%; // Prevent thin white lines at edges
+        min-height: 101%;
         width: auto;
         height: auto;
         transform: translate(-50%, -50%);
         object-fit: cover;
-        opacity: 0.51;
-        filter: grayscale(1) blur(2px) contrast(1.1);
+        
+        /* --- CLARITY IMPROVEMENTS --- */
+        opacity: 0.85;                // Increased from 0.51 for more visibility
+        filter: 
+          grayscale(0.3)             // Bring back some color (0.3 instead of 1)
+          contrast(1.4)              // Higher contrast makes details "pop"
+          brightness(0.9);           // Keep it slightly dark for text readability
+          
+        /* Remove blur entirely to ensure sharpness */
+        transition: opacity 1s ease; // Smooth fade-in
       }
 
 
@@ -245,7 +253,8 @@ $ancient-dark: #12100e;
     padding: 8px;
     position: relative;
     animation: rotateSeal 20s linear infinite;
-
+    box-shadow: 0 0 20px rgba($gold, 0.1); 
+    border: 1.5px solid rgba($gold, 0.4);
     &::before {
       content: '';
       position: absolute;
@@ -257,17 +266,18 @@ $ancient-dark: #12100e;
     .seal-inner {
       width: 100%;
       height: 100%;
-      background: rgba($gold, 0.05);
+      background: rgba($gold, 0.08);
       border: 2px solid $gold;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
-
+      box-shadow: inset 0 0 15px rgba($gold, 0.2), 0 0 15px rgba($gold, 0.3);
       .seal-center {
         font-size: 1.2rem;
         color: $gold;
+        text-shadow: 0 0 10px $gold; // Makes the center symbol crisp
       }
 
       .seal-text-circle {
