@@ -31,7 +31,6 @@ $text-muted: rgba(224, 213, 192, 0.5);
 
 .char-space { display: inline-block; width: 0.25em; }
 
-// BACKGROUND SYSTEM
 .background-layers {
   position: fixed;
   inset: 0;
@@ -70,7 +69,6 @@ $text-muted: rgba(224, 213, 192, 0.5);
   100% { background-position: 100% 100%, 0% 0%, 150% 150%; }
 }
 
-// SECTION MARKER
 .section-marker {
   display: block;
   font-size: 0.75rem;
@@ -81,7 +79,6 @@ $text-muted: rgba(224, 213, 192, 0.5);
   font-family: 'JetBrains Mono', monospace;
 }
 
-// HERO SECTION
 .hero-section {
   min-height: 100vh;
   display: flex;
@@ -227,7 +224,6 @@ $text-muted: rgba(224, 213, 192, 0.5);
   50% { opacity: 1; transform: scaleY(1.2); }
 }
 
-// MANIFESTO SECTION
 .manifesto-section {
   min-height: 100vh;
   padding: 15vh 5%;
@@ -335,7 +331,6 @@ $text-muted: rgba(224, 213, 192, 0.5);
   }
 }
 
-// PILLARS SECTION
 .pillars-section {
   padding: 15vh 5%;
   position: relative;
@@ -475,7 +470,6 @@ $text-muted: rgba(224, 213, 192, 0.5);
   }
 }
 
-// SHOWCASE SECTION - EXPLODED VIEWPORT DESIGN
 .showcase-section {
   padding: 15vh 0;
   position: relative;
@@ -832,7 +826,6 @@ $text-muted: rgba(224, 213, 192, 0.5);
   50% { opacity: 0.5; transform: scale(1.5); }
 }
 
-// FOCUS SECTION
 .focus-section {
   padding: 15vh 5%;
   position: relative;
@@ -956,7 +949,6 @@ $text-muted: rgba(224, 213, 192, 0.5);
   }
 }
 
-// TIMELINE SECTION
 .timeline-section {
   padding: 15vh 5%;
   position: relative;
@@ -1120,7 +1112,6 @@ $text-muted: rgba(224, 213, 192, 0.5);
   }
 }
 
-// CTA SECTION
 .cta-section {
   min-height: 60vh;
   display: flex;

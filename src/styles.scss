@@ -1,4 +1,3 @@
-// New Mixin for Zentry-style interactive glow
 @mixin neon-hover($color) {
     transition: all 0.2s ease-in-out;
     &:hover {
@@ -7,16 +6,14 @@
     }
 }
 
-// Ensure these variables are available (based on previous response)
 $z-black: #050505;
 $z-white: #ffffff;
 $z-accent-blue: #00f3ff;
 $z-accent-red: #ff003c; 
-// ... rest of your global styles
 
 :root {
-  --primary: #ff003c; /* Neon Red */
-  --secondary: #00f3ff; /* Cyber Blue */
+  --primary: #ff003c;
+  --secondary: #00f3ff;
   --bg-dark: #050505;
   --bg-panel: #121212;
   --text-main: #ffffff;
@@ -48,7 +45,6 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 2px;
 }
 
-/* Custom Scrollbar for gamers */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -60,7 +56,6 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 4px;
 }
 
-/* Utility for Angled Buttons */
 .cyber-btn {
   background: transparent;
   color: var(--text-main);
@@ -80,14 +75,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .main-content-wrapper {
-    // Remove margin to allow content to start from the top
     margin-top: 0; 
 }
 
-// Or, if you apply it directly to the Hero component:
 app-hero {
-    display: block; // Ensure it takes up space
-    padding-top: 0; // Push the hero content down
+    display: block;
+    padding-top: 0;
 }
 
 .neural-pulse {
@@ -118,7 +111,6 @@ app-hero {
   animation: pulse 1.8s infinite ease-in-out;
 }
 
-/* Soft breathing effect */
 @keyframes pulse {
   0% {
     transform: translate(-50%, -50%) scale(1);
@@ -134,7 +126,6 @@ app-hero {
   }
 }
 
-/* Disable on touch devices */
 @media (max-width: 768px) {
   .neural-pulse {
     display: none;
@@ -158,7 +149,6 @@ button:hover ~ .neural-pulse {
     filter 1s ease;
 }
 
-/* When awakened */
 .awaken-section.awake {
   opacity: 1;
   transform: translateY(0) scale(1);

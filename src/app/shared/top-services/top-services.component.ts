@@ -32,7 +32,7 @@ export class TopServicesComponent implements AfterViewInit, OnDestroy {
       id: 'II',
       title: 'ANIMATION & TECHNICAL ART',
       description: 'We bring characters and systems to life with fluid animation and optimized technical artistry.',
-      image: 'assets/images/ANIMATION-service.png',
+      image: 'assets/images/animation-&-echnical-services.png',
       tags: ['REALTIME', 'CINEMATIC', 'GAMEPLAY']
     },
     {
@@ -42,21 +42,15 @@ export class TopServicesComponent implements AfterViewInit, OnDestroy {
       image: 'assets/images/Game-Design-service.png',
       tags: ['UNITY', 'UNREAL', 'CUSTOM ENGINE']
     },
-    {
-      id: 'IV',
-      title: 'WEB & DIGITAL PLATFORM DEVELOPMENT',
-      description: 'We design and develop modern, responsive websites that deliver performance, clarity, and seamless user experience.',
-      image: 'assets/images/website-service.png',
-      tags: ['ANGULAR', 'GIT', 'UI/UX']
-    },
-    // {
-    //   id: 'V',
-    //   title: 'GAMIFICATION',
-    //   description: 'Transforming experiences through game-driven engagement and logic.',
-    //   image: 'assets/images/service-5.jpg',
-    //   tags: ['EDTECH', 'RETAIL', 'TRAINING']
-    // }
-  ];
+      {
+        id: 'IV',
+        title: 'WEB & DIGITAL PLATFORM DEVELOPMENT',
+        description: 'We design and develop modern, responsive websites that deliver performance, clarity, and seamless user experience.',
+        image: 'assets/images/website-service.png',
+        tags: ['ANGULAR', 'GIT', 'UI/UX']
+      }
+    ];
+
 
   currentIndex = 0;
   isAnimating = false;
