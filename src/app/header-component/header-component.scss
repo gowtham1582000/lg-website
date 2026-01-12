@@ -101,23 +101,6 @@ $obsidian-stone: #0d0d12;
 }
 
 /* ================= LEFT ACTION ================= */
-.glitch-btn {
-  background: $z-black;
-  color: $z-accent-red;
-  border: 2px solid $z-accent-red;
-  padding: 8px 18px;
-  font-family: 'Teko', sans-serif;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: all 0.25s;
-
-  &:hover {
-    background: $z-accent-red;
-    color: $z-black;
-    box-shadow: 0 0 10px rgba($z-accent-red, 0.8);
-  }
-}
-
 .nav-right-group {
   display: flex;
   align-items: center;
@@ -254,13 +237,6 @@ $obsidian-stone: #0d0d12;
       transform: translateY(50%) rotate(-45deg);
     }
   }
-}
-
-@keyframes glitchShift {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-2px); }
-  50% { transform: translateX(2px); }
-  100% { transform: translateX(0); }
 }
 
 /* ================= MOBILE PANEL (LEFT SLIDE) ================= */

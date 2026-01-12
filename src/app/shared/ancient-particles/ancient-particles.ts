@@ -128,17 +128,13 @@ export class AncientParticlesComponent implements OnInit, AfterViewInit, OnDestr
       this.ctx!.rotate(p.rotation);
       this.ctx!.globalAlpha = p.opacity;
       
-      // Draw glow
-      this.ctx!.shadowBlur = 10;
-      this.ctx!.shadowColor = '#e2b34c'; // Golden glow
       this.ctx!.fillStyle = '#e2b34c';
-      
-      this.ctx!.font = `${p.fontSize}px 'Avenir'`; // Fallback to sans-serif
+      this.ctx!.font = `${p.fontSize}px 'Avenir'`;
       this.ctx!.fillText(p.char, 0, 0);
       
       // Draw small particle dots too
       this.ctx!.beginPath();
-      this.ctx!.arc(5, 5, p.size / 2, 0, Math.PI * 2);
+      this.ctx!.arc(2, 2, p.size / 2, 0, Math.PI * 2);
       this.ctx!.fill();
       
       this.ctx!.restore();

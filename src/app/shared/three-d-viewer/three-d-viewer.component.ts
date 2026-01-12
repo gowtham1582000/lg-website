@@ -45,9 +45,9 @@ export class ThreeDViewerComponent implements OnInit, AfterViewInit, OnDestroy {
     this.camera.position.set(0, 1.5, 4);
 
     // Renderer
-    this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    this.renderer = new THREE.WebGLRenderer({ antialias: window.innerWidth > 768, alpha: true, powerPreference: 'high-performance' });
     this.renderer.setSize(width, height);
-    this.renderer.setPixelRatio(window.devicePixelRatio);
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     this.renderer.shadowMap.enabled = true;
     container.appendChild(this.renderer.domElement);
 

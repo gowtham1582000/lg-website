@@ -1,38 +1,3 @@
- <!-- <section class="hero-slider">
-  <div class="slider-container">
-    <div class="slider-wrapper">
-      <div *ngFor="let slide of heroSlides; let i = index" 
-           class="slide-item" 
-           [class.active]="i === currentSlide"
-           [class.prev]="i === currentSlide - 1 || (currentSlide === 0 && i === heroSlides.length - 1)"
-           [class.next]="i === currentSlide + 1 || (currentSlide === heroSlides.length - 1 && i === 0)"
-           [style.background-image]="'url(' + slide.image + ')'">
-        <div class="slide-overlay"></div>
-      </div>
-    </div>
-      <button class="slider-arrow slider-arrow-prev" (click)="goToSlide((currentSlide - 1 + heroSlides.length) % heroSlides.length)">
-      <i class="fas fa-chevron-left"></i>
-    </button>
-    <button class="slider-arrow slider-arrow-next" (click)="goToSlide((currentSlide + 1) % heroSlides.length)">
-      <i class="fas fa-chevron-right"></i>
-    </button>
-  </div>
-
-  <div class="slider-nav">
-    <div *ngFor="let slide of heroSlides; let i = index" 
-         class="nav-dot" 
-         [class.active]="i === currentSlide" 
-         (click)="goToSlide(i)">
-      <div class="dot-fill"></div>
-    </div>
-  </div>
-
-  <div class="scroll-indicator">
-    <div class="mouse"></div>
-    <span>SCROLL</span>
-  </div>
-</section> -->
-
 <app-video-slider></app-video-slider>
 
 <section class="ancient-intro">
@@ -106,7 +71,7 @@
 
 <section>				
   <!-- HERO REALM -->
-  <div class="aminite-overlay parallax" style="background-image:url(../../assets/images/total\ areas.png)">
+  <div class="aminite-overlay parallax" style="background-image:url(../../assets/images/final-attempt.png)">
     <div class="aminite-over-area">
       <div class="overlay-box">
         <h2 class="title">Where Myth and Reality Intertwine</h2>
