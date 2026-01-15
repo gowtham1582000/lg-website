@@ -82,100 +82,91 @@
     </div>
   </section> -->
 
-  <!-- SECTION 4: SHOWCASE - CINEMATIC VISUAL -->
-    <section class="showcase-section">
-      <div class="showcase-container">
-        <!-- EXPLODED VIEWPORT -->
-        <div class="showcase-viewport">
-          <!-- PARALLAX LAYERS -->
-          <div class="showcase-layers">
-            <div class="layer layer-bg">
-              <img src="../../assets/images/final-attempt.png" alt="Epic Battle Scene" class="layer-image">
-            </div>
-            <div class="layer layer-mg">
-              <div class="depth-filter"></div>
-            </div>
-            
-            <!-- PORTAL CORE -->
-            <div class="portal-core">
-              <div class="core-atmosphere"></div>
-              <div class="core-rings">
-                <div class="ring r1"></div>
-                <div class="ring r2"></div>
-                <div class="ring r3"></div>
-              </div>
-              <div class="floating-artifact">
-                <div class="artifact-glow"></div>
-                <!-- <img src="assets/images/Ancient Device.png" alt="Ancient Artifact" class="artifact-image"> -->
-              </div>
-              
-              <!-- DYNAMIC CONNECTORS -->
-              <svg class="connectors" viewBox="0 0 100 100">
-                <line x1="50" y1="50" x2="10" y2="10" class="connector-line"></line>
-                <line x1="50" y1="50" x2="90" y2="10" class="connector-line"></line>
-                <line x1="50" y1="50" x2="10" y2="90" class="connector-line"></line>
-                <line x1="50" y1="50" x2="90" y2="90" class="connector-line"></line>
-              </svg>
-            </div>
-            
-            <div class="layer layer-fg">
-              <div class="glitch-overlay"></div>
-            </div>
-          </div>
+  <!-- SECTION 4: SHOWCASE - LIVING WORLDS INTERACTIVE -->
+    <section class="showcase-section" #showcaseSection>
+      <div class="showcase-header">
+        <span class="showcase-tag">CINEMATIC REVEAL STYLE</span>
+        <h2 class="showcase-main-title">LIVING WORLDS</h2>
+        <p class="showcase-subtitle">Explore the layers of our dynamic universe</p>
+      </div>
 
-          <!-- ADVANCED HUD -->
-          <div class="hud-system">
-            <div class="hud-node node-tl">
-              <div class="node-marker"></div>
-              <div class="node-content">
-                <span class="node-label">ENGINE STATUS</span>
-                <span class="node-value">STABLE // 144FPS</span>
+<div class="showcase-gallery">
+          <div class="gallery-item" *ngFor="let world of livingWorlds; let i = index"
+               [class.active]="activeWorld === i"
+               (mouseenter)="activateWorld(i)"
+               (mouseleave)="deactivateWorld()">
+            
+            <!-- Outer Data Stream Frame -->
+            <div class="data-stream-frame" [class.active]="activeWorld === i">
+              <div class="stream-side top">
+                <div class="stream-track">
+                  <span class="stream-text">{{world.sacredText}}</span>
+                  <span class="stream-text">{{world.sacredText}}</span>
+                </div>
+              </div>
+              <div class="stream-side right">
+                <div class="stream-track">
+                  <span class="stream-text">{{world.sacredText}}</span>
+                  <span class="stream-text">{{world.sacredText}}</span>
+                </div>
+              </div>
+              <div class="stream-side bottom">
+                <div class="stream-track">
+                  <span class="stream-text">{{world.sacredText}}</span>
+                  <span class="stream-text">{{world.sacredText}}</span>
+                </div>
+              </div>
+              <div class="stream-side left">
+                <div class="stream-track">
+                  <span class="stream-text">{{world.sacredText}}</span>
+                  <span class="stream-text">{{world.sacredText}}</span>
+                </div>
+              </div>
+              <div class="frame-corner tl"></div>
+              <div class="frame-corner tr"></div>
+              <div class="frame-corner bl"></div>
+              <div class="frame-corner br"></div>
+            </div>
+
+            <!-- Square Image Container -->
+            <div class="image-container">
+              <div class="image-frame">
+                <img [src]="world.image" [alt]="world.title" class="world-image">
+                <div class="image-overlay"></div>
               </div>
             </div>
-            <div class="hud-node node-tr">
-              <div class="node-marker"></div>
-              <div class="node-content">
-                <span class="node-label">NEURAL SYNC</span>
-                <span class="node-value">98.4%</span>
-              </div>
-            </div>
-            <div class="hud-node node-bl">
-              <div class="node-marker"></div>
-              <div class="node-content">
-                <span class="node-label">COORDINATES</span>
-                <span class="node-value">12.9231° N, 80.1863° E</span>
-              </div>
-            </div>
-            <div class="hud-node node-br">
-              <div class="node-marker"></div>
-              <div class="node-content">
-                <span class="node-label">ARTIFACT ID</span>
-                <span class="node-value">ED-X-001</span>
-              </div>
+
+            <!-- Title -->
+            <div class="world-info">
+              <h3 class="world-title">{{world.title}}</h3>
+              <p class="world-subtitle">{{world.subtitle}}</p>
+              <p class="world-content">{{world.content}}</p>
             </div>
           </div>
-          
-          <div class="scan-grid"></div>
         </div>
-        
-        <div class="showcase-info">
-          <div class="info-tag">CINEMATIC REVEAL STYLE</div>
-          <h2 class="showcase-title">LIVING WORLDS</h2>
-          <div class="info-line"></div>
-          <p class="showcase-desc">
-           Characters follow routines, form relationships, and respond to change. Cities evolve. Conflicts shift. The environment remembers what has happened before — creating a sense of permanence and consequence rarely seen in role-playing experiences.
-          </p>
-          <div class="info-stats">
-            <div class="stat">
-              <span class="stat-num">This is not a story that is told</span>
-              <span class="stat-num">It is a world that reveals itself!</span>
-            </div>
-            <!-- <div class="stat">
-              <span class="stat-num">NANITE</span>
-              <span class="stat-label">VIRTUALIZED</span>
-            </div> -->
-          </div>
+
+      <!-- Bottom Info Bar -->
+      <div class="showcase-info-bar">
+        <div class="info-item">
+          <span class="info-label">WORLD STATE</span>
+          <span class="info-value">DYNAMIC</span>
         </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+          <span class="info-label">NPC BEHAVIOR</span>
+          <span class="info-value">AUTONOMOUS</span>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+          <span class="info-label">CONSEQUENCE</span>
+          <span class="info-value">PERMANENT</span>
+        </div>
+      </div>
+
+      <div class="showcase-quote">
+        <span class="quote-mark">"</span>
+        <p class="quote-text">This is not a story that is told — It is a world that reveals itself!</p>
+        <span class="quote-mark">"</span>
       </div>
     </section>
 
