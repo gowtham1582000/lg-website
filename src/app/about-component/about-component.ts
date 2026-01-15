@@ -28,6 +28,32 @@ interface Pillar {
   styleUrl: './about-component.scss'
 })
 export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
+  activeWorld: number = -1;
+
+  livingWorlds: Array<{title: string; subtitle: string; image: string; sacredText: string; content: string}> = [
+    {
+      title: 'Dynamic NPCs',
+      subtitle: 'Autonomous Beings',
+      image: '../../assets/images/about-us-1.png',
+      sacredText: 'ஓம் நமசிவாய • அறம் செய்ய விரும்பு • வாழ்க வளமுடன் • யாதும் ஊரே யாவரும் கேளிர் • தமிழ் வாழ்க • ',
+      content: 'Characters follow routines, form relationships, and respond to world changes autonomously. Every NPC has their own story.'
+    },
+    {
+      title: 'Evolving Cities',
+      subtitle: 'Living Architecture',
+      image: '../../assets/images/about-us-2.png',
+      sacredText: 'கல்வி கரையில • கற்பவர் நாள்சில • அன்பே சிவம் • உழைப்பே உயர்வு • தமிழே உயிர் • ',
+      content: 'Cities grow, decay, and transform based on player actions and world events. Witness living architecture evolve.'
+    },
+    {
+      title: 'Persistent Memory',
+      subtitle: 'Eternal Consequences',
+      image: '../../assets/images/about-us-3.png',
+      sacredText: 'வெல்க தமிழ் • நன்றி மறவேல் • ஊக்கமே உயர்வு • அறிவே ஆற்றல் • கடமை ஆற்று • ',
+      content: 'The world remembers every action you take. Your choices create permanent consequences that shape the narrative.'  
+    }
+  ];
+
   focusItems = [
     {
       title: 'Original IP Creation',
@@ -74,25 +100,25 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
       year: '2026 Q1',
       title: '✦ Creative technology solutions for interactive media',
       description: 'We develop innovative technology-driven solutions that power engaging and interactive digital experiences.',
-      image: 'assets/images/Creative technology solutions for interactive media.png'
+      image: 'assets/images/about-creative.png'
     },
     {
       year: '2026 Q2',
       title: '◉ AR / VR experiences and immersive storytelling',
       description: 'We create immersive AR and VR experiences that place users at the center of powerful, interactive narratives.',
-      image: 'assets/images/AR and VR experiences and immersive storytelling.png'
+      image: 'assets/images/home-curosel2.png'
     },
     {
       year: '2026 Q3',
       title: '⬢ Real-time 3D, animation, and virtual production',
       description: 'We leverage real-time 3D pipelines to deliver high-quality animation and virtual production efficiently.',
-      image: 'assets/images/Real-time 3D, animation, and virtual production.png'
+      image: 'assets/images/home-page.png'
     },
     {
       year: '2026 Q4',
       title: '⚙︎ High-end game art, VFX, and technical services for global clients',
       description: 'We provide world-class game art, visual effects, and technical services tailored for international studios and brands.',
-      image: 'assets/images/High-end game art, VFX, and technical services for global clients.png'
+      image: 'assets/images/home-page.png'
     }
   ];
 
@@ -143,23 +169,28 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
       duration: 1.8,
       ease: 'power2.out'
     });
+  }
 
-    // Showcase Viewport Tilt
-    const viewport = this.el.nativeElement.querySelector('.showcase-viewport');
-    if (viewport) {
-      const rect = viewport.getBoundingClientRect();
-      if (event.clientY > rect.top - 200 && event.clientY < rect.bottom + 200) {
-        const x = (event.clientX - rect.left) / rect.width - 0.5;
-        const y = (event.clientY - rect.top) / rect.height - 0.5;
-        
-        gsap.to('.showcase-layers', {
-          rotationY: x * 15,
-          rotationX: -y * 15,
-          duration: 1,
-          ease: 'power2.out'
-        });
-      }
-    }
+  activateWorld(index: number): void {
+    this.activeWorld = index;
+    
+    gsap.to(`.gallery-item:nth-child(${index + 1}) .world-image`, {
+      scale: 1.08,
+      filter: 'brightness(1.15) saturate(1.2)',
+      duration: 0.5,
+      ease: 'power2.out'
+    });
+  }
+
+  deactivateWorld(): void {
+    gsap.to('.world-image', {
+      scale: 1,
+      filter: 'brightness(0.85) saturate(0.9)',
+      duration: 0.4,
+      ease: 'power2.out'
+    });
+
+    this.activeWorld = -1;
   }
 
   private initAnimations(): void {
@@ -346,98 +377,54 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
     const section = this.el.nativeElement.querySelector('.showcase-section');
     if (!section) return;
 
-    // Viewport Reveal
-    gsap.from('.showcase-viewport', {
+    gsap.from('.showcase-header', {
       scrollTrigger: {
         trigger: section,
-        start: 'top 70%',
+        start: 'top 80%',
+        toggleActions: 'play none none none'
+      },
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      ease: 'power3.out'
+    });
+
+    gsap.from('.gallery-item', {
+      scrollTrigger: {
+        trigger: '.showcase-gallery',
+        start: 'top 75%',
+        toggleActions: 'play none none none'
+      },
+      opacity: 0,
+      y: 80,
+      scale: 0.9,
+      stagger: 0.2,
+      duration: 1.2,
+      ease: 'power3.out'
+    });
+
+    gsap.from('.showcase-info-bar', {
+      scrollTrigger: {
+        trigger: '.showcase-info-bar',
+        start: 'top 90%',
+        toggleActions: 'play none none none'
+      },
+      opacity: 0,
+      y: 30,
+      duration: 0.8,
+      ease: 'power2.out'
+    });
+
+    gsap.from('.showcase-quote', {
+      scrollTrigger: {
+        trigger: '.showcase-quote',
+        start: 'top 90%',
         toggleActions: 'play none none none'
       },
       opacity: 0,
       scale: 0.9,
-      filter: 'blur(30px)',
-      duration: 1.8,
-      ease: 'power4.out'
-    });
-
-    // Portal Core Reveal
-    gsap.from('.portal-core', {
-      scrollTrigger: {
-        trigger: section,
-        start: 'top 60%',
-        toggleActions: 'play none none none'
-      },
-      opacity: 0,
-      scale: 0.5,
-      z: -500,
-      duration: 2,
-      ease: 'expo.out',
-      delay: 0.5
-    });
-
-    // Artifact Floating (Inside Core)
-    gsap.to('.floating-artifact', {
-      y: -20,
-      rotation: 5,
-      duration: 3,
-      repeat: -1,
-      yoyo: true,
-      ease: 'sine.inOut'
-    });
-
-    // HUD Node Reveal
-    gsap.from('.hud-node', {
-      scrollTrigger: {
-        trigger: section,
-        start: 'top 50%',
-        toggleActions: 'play none none none'
-      },
-      opacity: 0,
-      scale: 0,
-      filter: 'blur(10px)',
       duration: 1,
-      stagger: 0.15,
-      ease: 'back.out(2)',
-      delay: 1
-    });
-
-    // Information Reveal
-    const infoTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: '.showcase-info',
-        start: 'top 85%',
-        toggleActions: 'play none none none'
-      }
-    });
-
-    infoTl
-      .from('.info-tag', { opacity: 0, x: -20, duration: 0.8 })
-      .from('.showcase-title', { opacity: 0, y: 30, duration: 1, ease: 'power3.out' }, '-=0.4')
-      .from('.info-line', { scaleX: 0, transformOrigin: 'left center', duration: 0.8 }, '-=0.6')
-      .from('.showcase-desc', { opacity: 0, y: 20, duration: 0.8 }, '-=0.4')
-      .from('.stat', { opacity: 0, y: 20, stagger: 0.1, duration: 0.8 }, '-=0.4');
-
-    // Layer Parallax on Scroll
-    gsap.to('.layer-bg', {
-      scrollTrigger: {
-        trigger: section,
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: true
-      },
-      y: 100,
-      ease: 'none'
-    });
-
-    gsap.to('.portal-core', {
-      scrollTrigger: {
-        trigger: section,
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: true
-      },
-      y: -50,
-      ease: 'none'
+      ease: 'power3.out'
     });
   }
 
