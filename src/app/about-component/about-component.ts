@@ -74,25 +74,25 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
       year: '2026 Q1',
       title: '✦ Creative technology solutions for interactive media',
       description: 'We develop innovative technology-driven solutions that power engaging and interactive digital experiences.',
-      image: 'assets/images/about-creative.png'
+      image: 'assets/images/Creative technology solutions for interactive media.png'
     },
     {
       year: '2026 Q2',
       title: '◉ AR / VR experiences and immersive storytelling',
       description: 'We create immersive AR and VR experiences that place users at the center of powerful, interactive narratives.',
-      image: 'assets/images/home-curosel2.png'
+      image: 'assets/images/AR and VR experiences and immersive storytelling.png'
     },
     {
       year: '2026 Q3',
       title: '⬢ Real-time 3D, animation, and virtual production',
       description: 'We leverage real-time 3D pipelines to deliver high-quality animation and virtual production efficiently.',
-      image: 'assets/images/home-page.png'
+      image: 'assets/images/Real-time 3D, animation, and virtual production.png'
     },
     {
       year: '2026 Q4',
       title: '⚙︎ High-end game art, VFX, and technical services for global clients',
       description: 'We provide world-class game art, visual effects, and technical services tailored for international studios and brands.',
-      image: 'assets/images/home-page.png'
+      image: 'assets/images/High-end game art, VFX, and technical services for global clients.png'
     }
   ];
 
