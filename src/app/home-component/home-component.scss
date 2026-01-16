@@ -95,11 +95,7 @@ $bg: #0a0a0c;
   margin-bottom: 40px;
 
   @media (max-width: 768px) {
-    font-size: 0.8rem;
-    letter-spacing: 3px;
-
-    display: block !important;
-    margin-bottom: 40px !important;
+    margin-bottom: 30px !important;
   }
 }
 
@@ -272,19 +268,36 @@ $bg: #0a0a0c;
 
 .inscription-line {
   position: relative;
-  display: inline-block;
+  display: grid;
+  grid-template-areas: "stack";
+  place-items: center;
   font-size: 1.4rem;
   letter-spacing: 6px;
   color: #ffb347;
   cursor: default;
   line-height: 1.4;
+  text-align: center;
+  margin: 0 auto 40px;
+  width: fit-content;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    letter-spacing: 2px;
+    width: 100%;
+    margin-bottom: 30px;
+  }
 }
 
 .inscription-line span {
-  position: absolute;
-  inset: 0;
+  grid-area: stack;
   white-space: nowrap;
   transition: opacity 0.6s ease;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    white-space: normal;
+    padding: 0 10px;
+  }
 }
 
 .inscription-line .ancient {

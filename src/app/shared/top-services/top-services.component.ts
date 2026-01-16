@@ -55,6 +55,8 @@ export class TopServicesComponent implements AfterViewInit, OnDestroy {
   currentIndex = 0;
   isAnimating = false;
   private autoRotateInterval: any;
+  private touchStartX: number = 0;
+  private touchEndX: number = 0;
 
   ngAfterViewInit() {
     this.angleStep = 360 / this.services.length; // Dynamic step
@@ -63,6 +65,28 @@ export class TopServicesComponent implements AfterViewInit, OnDestroy {
       this.initCarousel();
       this.startAutoRotate();
     }, 100);
+  }
+
+  @HostListener('touchstart', ['$event'])
+  onTouchStart(event: TouchEvent) {
+    this.touchStartX = event.touches[0].clientX;
+    this.pauseAutoRotate();
+  }
+
+  @HostListener('touchend', ['$event'])
+  onTouchEnd(event: TouchEvent) {
+    this.touchEndX = event.changedTouches[0].clientX;
+    this.handleSwipe();
+    this.resumeAutoRotate();
+  }
+
+  private handleSwipe() {
+    const swipeThreshold = 50;
+    if (this.touchStartX - this.touchEndX > swipeThreshold) {
+      this.rotate(1);
+    } else if (this.touchEndX - this.touchStartX > swipeThreshold) {
+      this.rotate(-1);
+    }
   }
 
   private calculateDimensions() {
@@ -157,7 +181,7 @@ export class TopServicesComponent implements AfterViewInit, OnDestroy {
   startAutoRotate() {
     this.autoRotateInterval = setInterval(() => {
       this.rotate(1);
-    }, 3000);
+    }, 4000);
   }
 
   pauseAutoRotate() {
