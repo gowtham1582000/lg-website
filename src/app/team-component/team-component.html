@@ -60,92 +60,48 @@
     </div>
   </section>
 
-  <section class="team-grid-section">
-    <div class="floating-particles">
-      <span *ngFor="let p of particles" 
-            class="particle"
-            [style.--x]="p.x + '%'"
-            [style.--y]="p.y + '%'"
-            [style.--duration]="p.duration + 's'"
-            [style.--delay]="p.delay + 's'"
-            [style.--size]="p.size + 'px'"></span>
-    </div>
+ <section class="team-slider-section">
+  <div class="slider-container">
+    <button class="slider-nav prev" (click)="slidePrev()" [disabled]="currentSlide === 0">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
 
-    <div class="team-grid">
-      <div 
-        class="team-card" 
-        *ngFor="let member of filteredMembers; let i = index"
-        #cardRef
-        [attr.data-index]="i"
-        [style.--delay]="i * 0.1 + 's'"
-        [class.is-hovered]="hoveredMember?.id === member.id"
-        (mouseenter)="onCardHover(member, $event)"
-        (mouseleave)="onCardLeave($event)"
-        (mousemove)="onCardMove($event)">
-        
-        <div class="card-inner" [style.transform]="getCardTransform(member.id)">
-          <div class="card-shimmer"></div>
-          <div class="card-border-glow"></div>
-          
-          <div class="card-image-wrap">
-            <div class="image-frame">
+    <div class="slider-viewport" #sliderViewport style="touch-action: pan-y;">
+      <div class="slider-track" [style.transform]="'translateX(' + sliderOffset + 'px)'">
+        <div class="team-card" *ngFor="let member of filteredMembers; let i = index"
+             (mouseenter)="hoveredMember = member" 
+             (mouseleave)="hoveredMember = null">
+          <div class="card-inner">
+            <div class="card-image-wrap">
               <img [src]="member.image" [alt]="member.name" class="member-image">
-              <div class="image-overlay"></div>
-              <div class="image-glitch" [style.background-image]="'url(' + member.image + ')'"></div>
             </div>
-            <div class="corner-accent top-left"><span></span></div>
-            <div class="corner-accent top-right"><span></span></div>
-            <div class="corner-accent bottom-left"><span></span></div>
-            <div class="corner-accent bottom-right"><span></span></div>
-            
-            <div class="scan-line"></div>
-            </div>
-          
-          <div class="card-content">
-            <div class="content-reveal">
-              <div class="member-index">
-                <span class="index-bracket">[</span>
-                <span class="index-num">{{ (i + 1).toString().padStart(2, '0') }}</span>
-                <span class="index-bracket">]</span>
-              </div>
-              <h3 class="member-name">
-                <span class="name-text">{{ member.name }}</span>
-                <span class="name-underline"></span>
-              </h3>
-              <span class="member-role">
-                <span class="role-icon">◆</span>
-                {{ member.role }}
-              </span>
+            <div class="card-content">
+              <span class="member-index">{{ (i + 1).toString().padStart(2, '0') }}</span>
+              <h3 class="member-name">{{ member.name }}</h3>
+              <p class="member-role">◆ {{ member.role }}</p>
               <p class="member-bio">{{ member.bio }}</p>
-              
-              <div class="member-socials">
-                <a *ngIf="member.linkedin" [href]="member.linkedin" target="_blank" class="social-link" (mouseenter)="onSocialHover($event)">
-                  <span class="social-bg"></span>
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                  </svg>
-                </a>
-                <a *ngIf="member.twitter" [href]="member.twitter" target="_blank" class="social-link" (mouseenter)="onSocialHover($event)">
-                  <span class="social-bg"></span>
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                  </svg>
-                </a>
-              </div>
             </div>
           </div>
         </div>
-        
-        <div class="card-glow"></div>
-        <div class="card-reflection"></div>
       </div>
     </div>
 
-    <div class="grid-lines">
-      <div class="h-line" *ngFor="let l of [1,2,3]"></div>
-      <div class="v-line" *ngFor="let l of [1,2,3,4,5]"></div>
+    <button class="slider-nav next" (click)="slideNext()" [disabled]="currentSlide >= maxSlide">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+  </div>
+
+  <div class="slider-progress-container">
+    <div class="slider-dots">
+      <button *ngFor="let dot of [].constructor(totalDots); let idx = index" 
+              class="dot" [class.active]="idx === currentSlide" (click)="goToSlide(idx)">
+      </button>
     </div>
-  </section>
+    <div class="progress-bar-wrap">
+      <div class="progress-line" [style.width]="progressWidth + '%'"></div>
+    </div>
+  </div>
+</section>
 
   <section class="team-cta">
     <div class="cta-container">
@@ -154,7 +110,7 @@
         <h2 class="cta-title">Ready to Shape the Future?</h2>
         <p class="cta-text">We're always looking for exceptional talent to join our team.</p>
         <a routerLink="/contact" class="cta-button">
-          <span class="btn-text">GET IN TOUCH</span>
+          <span class="btn-text">JOIN US</span>
           <span class="btn-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -164,13 +120,10 @@
       </div>
       
 <div class="cta-decoration">
-          <div class="deco-circle">
-            <span class="deco-text">LS</span>
-          </div>
-          <div class="deco-lines">
-            <span></span><span></span><span></span>
-          </div>
+        <div class="deco-circle">
+          <span class="deco-text">LS</span>
         </div>
+      </div>
     </div>
   </section>
 </div>

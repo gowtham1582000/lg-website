@@ -42,12 +42,6 @@
   </div>
 
   <div class="carousel-controls">
-    <button class="nav-btn prev" (click)="rotate(-1)">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M19 12H5M12 19l-7-7 7-7"/>
-      </svg>
-    </button>
-
     <div class="carousel-dots">
       @for (service of services; track service.id; let i = $index) {
         <button class="dot" [class.active]="i === currentIndex" (click)="goToSlide(i)">
@@ -55,12 +49,6 @@
         </button>
       }
     </div>
-
-    <button class="nav-btn next" (click)="rotate(1)">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M5 12h14M12 5l7 7-7 7"/>
-      </svg>
-    </button>
   </div>
 
   <div class="active-service-info" *ngIf="services[currentIndex]">

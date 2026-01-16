@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChildren, QueryList, AfterViewInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AncientParticlesComponent } from '../ancient-particles/ancient-particles';
 
@@ -14,6 +14,9 @@ export class VideoSliderComponent implements OnInit, AfterViewInit {
   
   isMuted: boolean = true;
   activeSlide: number = 0;
+  private touchStartX: number = 0;
+  private touchEndX: number = 0;
+  private isSwiping: boolean = false;
 
   slides = [
     {
@@ -30,22 +33,66 @@ export class VideoSliderComponent implements OnInit, AfterViewInit {
     }
   ];
 
+  constructor() {}
+
   ngOnInit() {}
 
   ngAfterViewInit() {
-    this.updateVideoState();
+    setTimeout(() => {
+      this.updateVideoState();
+    }, 100);
   }
 
-  private updateVideoState() {
-    const activeVideo = this.videoElements?.toArray()[this.activeSlide];
-    if (activeVideo) {
-      activeVideo.nativeElement.muted = this.isMuted;
-      activeVideo.nativeElement.play().catch(err => console.log('Auto-play blocked or error:', err));
+  @HostListener('touchstart', ['$event'])
+  onTouchStart(event: TouchEvent) {
+    this.touchStartX = event.touches[0].clientX;
+    this.isSwiping = true;
+  }
+
+  @HostListener('touchmove', ['$event'])
+  onTouchMove(event: TouchEvent) {
+    if (!this.isSwiping) return;
+    this.touchEndX = event.touches[0].clientX;
+  }
+
+  @HostListener('touchend', ['$event'])
+  onTouchEnd(event: TouchEvent) {
+    if (!this.isSwiping) return;
+    this.touchEndX = event.changedTouches[0].clientX;
+    this.handleSwipe();
+    this.isSwiping = false;
+  }
+
+  private handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = this.touchStartX - this.touchEndX;
+    
+    if (Math.abs(diff) > swipeThreshold) {
+      if (diff > 0) {
+        this.goToNext();
+      } else {
+        this.goToPrev();
+      }
     }
   }
 
+  private updateVideoState() {
+    this.videoElements?.forEach((video, index) => {
+      const el = video.nativeElement;
+      el.muted = this.isMuted;
+      if (index === this.activeSlide) {
+        el.currentTime = 0;
+        el.play().catch(err => console.log('Auto-play blocked:', err));
+      } else {
+        el.pause();
+        el.currentTime = 0;
+      }
+    });
+  }
+
   toggleMute(event: Event) {
-    event.stopPropagation(); // Prevents click from bubbling up
+    event.stopPropagation();
+    event.preventDefault();
     this.isMuted = !this.isMuted;
     const activeVideo = this.videoElements?.toArray()[this.activeSlide];
     if (activeVideo) {
@@ -53,19 +100,19 @@ export class VideoSliderComponent implements OnInit, AfterViewInit {
     }
   }
 
-  nextSlide() {
+  goToNext() {
     this.activeSlide = (this.activeSlide + 1) % this.slides.length;
-    this.resetVideo();
+    this.updateVideoState();
   }
 
-  prevSlide() {
+  goToPrev() {
     this.activeSlide = (this.activeSlide - 1 + this.slides.length) % this.slides.length;
-    this.resetVideo();
+    this.updateVideoState();
   }
 
-  resetVideo() {
-    setTimeout(() => {
-      this.updateVideoState();
-    }, 0);
+  goToSlide(index: number) {
+    if (index === this.activeSlide) return;
+    this.activeSlide = index;
+    this.updateVideoState();
   }
 }
