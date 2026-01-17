@@ -23,7 +23,7 @@ export class VideoSliderComponent implements OnInit, AfterViewInit {
       title: 'DIVINE ARCHITECTURE',
       description: 'Uncover engineering marvels of the ancient architects. Every pillar tells a thousand-year story.',
       features: ['Sacred Geometry', 'Hidden Truths'],
-      videoSrc: 'assets/videos/footer.mp4'
+      videoSrc: 'assets/videos/Cinematic_Warrior_Walks_Through_Ruins.mp4'
     },
     {
       title: 'FORGOTTEN REALM',
