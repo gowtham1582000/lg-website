@@ -35,13 +35,19 @@ export class TeamComponent implements AfterViewInit, OnDestroy {
   private observer: any;
 
   teamMembers: TeamMember[] = [
-    { id: 1, name: 'GOWTHAM RAJA', role: 'FOUNDER', category: 'leadership', image: 'https://i.pravatar.cc/400?u=2', bio: 'Creative visionary and founder.' },
-    { id: 2, name: 'ARJUN MEHTA', role: 'TECH DIRECTOR', category: 'engineering', image: 'https://i.pravatar.cc/400?u=2', bio: 'Technical lead.' },
-    { id: 3, name: 'RHEA SHARMA', role: 'ART DIRECTOR', category: 'creative', image: 'https://i.pravatar.cc/400?u=3', bio: 'Visual designer.' },
-    { id: 4, name: 'VIKRAM SINGH', role: 'LEAD DESIGNER', category: 'creative', image: 'https://i.pravatar.cc/400?u=4', bio: 'Mechanics expert.' },
-    { id: 5, name: 'PRIYA NAIR', role: 'NARRATIVE', category: 'creative', image: 'https://i.pravatar.cc/400?u=5', bio: 'Story writer.' },
-    { id: 6, name: 'KARTHIK IYER', role: 'ENGINEER', category: 'engineering', image: 'https://i.pravatar.cc/400?u=1', bio: 'Backend lead.' },
-    { id: 7, name: 'ANANYA REDDY', role: 'MANAGER', category: 'leadership', image: 'https://i.pravatar.cc/400?u=7', bio: 'Studio manager.' }
+    { id: 1, name: 'SREE RISHI', role: 'Founder & Head o f the Game Department', category: 'leadership', image: 'https://i.pravatar.cc/400?u=2', bio: '' },
+    { id: 2, name: 'KISHORE KUMAR', role: 'Founder & Creative Director', category: 'leadership', image: 'https://i.pravatar.cc/400?u=2', bio: '' },
+    { id: 3, name: 'MADHAVAN', role: 'CFX Artist', category: 'Game Art & Visual Development Team', image: 'https://i.pravatar.cc/400?u=3', bio: '' },
+    { id: 4, name: 'KAMESH', role: 'Game Environment Artist', category: 'Game Art & Visual Development Team', image: 'https://i.pravatar.cc/400?u=4', bio: '' },
+    { id: 5, name: 'ANUJ', role: 'Game Environment Artist', category: 'Game Art & Visual Development Team', image: 'https://i.pravatar.cc/400?u=5', bio: '' },
+    { id: 6, name: 'PRATHIBAN', role: 'Character & Prop Artist', category: 'Game Art & Visual Development Team', image: 'https://i.pravatar.cc/400?u=1', bio: '' },
+    { id: 7, name: 'NIRANJAN', role: 'Texturing & Prop Artist', category: 'Game Art & Visual Development Team', image: 'https://i.pravatar.cc/400?u=7', bio: '' },
+    { id: 8, name: 'VIKRAM', role: 'Rigging & Skinning Artist', category: 'Animation & Technical Art Team', image: 'https://i.pravatar.cc/400?u=7', bio: '' },
+    { id: 9, name: 'BAVADHARINI', role: 'Game Animator', category: 'Animation & Technical Art Team', image: 'https://i.pravatar.cc/400?u=7', bio: '' },
+    { id: 10, name: 'UMESH', role: 'Game Developer', category: 'Game Design & Development', image: 'https://i.pravatar.cc/400?u=7', bio: '' },
+    { id: 11, name: 'KITHIYON', role: 'UI/UX Game Designer', category: 'Game Design & Development', image: 'https://i.pravatar.cc/400?u=7', bio: '' },
+    { id: 12, name: 'GOWTHAM', role: 'Full-Stack Developer', category: 'Web & Digital Platform Development Team', image: 'https://i.pravatar.cc/400?u=7', bio: '' },
+    { id: 13, name: 'DHANUSH RAM', role: 'Front-End Developer', category: 'Web & Digital Platform Development Team', image: 'https://i.pravatar.cc/400?u=7', bio: '' },
   ];
 
   get filteredMembers(): TeamMember[] {

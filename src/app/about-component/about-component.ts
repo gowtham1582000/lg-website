@@ -100,7 +100,7 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
       year: '2026 Q1',
       title: '✦ Creative technology solutions for interactive media',
       description: 'We develop innovative technology-driven solutions that power engaging and interactive digital experiences.',
-      image: 'assets/images/about-creative.png'
+      image: 'assets/images/Creative technology solutions for interactive media.png'
     },
     {
       year: '2026 Q2',
