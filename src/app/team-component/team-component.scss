@@ -6,8 +6,6 @@ $stone: #1a1a1a;
 $text-primary: #ffffff;
 $text-secondary: rgba(255, 255, 255, 0.85);
 $text-muted: rgba(255, 255, 255, 0.7);
-$card-width: 280px;
-$card-gap: 20px;
 $card-w: 220px;
 $gap: 15px;
 
@@ -396,7 +394,8 @@ $gap: 15px;
   width: ($card-w * 5) + ($gap * 4);
   overflow: hidden;
   padding: 20px 0;
-
+  touch-action: pan-y !important;          // 🔑 let GSAP fully control
+  user-select: none;  
   @media (max-width: 1200px) { width: ($card-w * 3) + ($gap * 2); }
   @media (max-width: 900px) { width: ($card-w * 2) + $gap; }
   @media (max-width: 600px) { width: $card-w; }
@@ -404,7 +403,7 @@ $gap: 15px;
 
 .slider-track {
   display: flex;
-  gap: $card-gap;
+  gap: $gap;
   transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
@@ -426,6 +425,13 @@ $gap: 15px;
     height: 350px;
     border: 1px solid rgba($gold, 0.1);
     transition: 0.4s;
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none; // 🔑 Prevents image drag ghosting
+    }
   }
 
   .card-border-glow {
@@ -736,172 +742,110 @@ $gap: 15px;
   }
 }
 
+$gold: #d4af37;
+$text-primary: #ffffff;
+$text-secondary: rgba(255, 255, 255, 0.7);
+
 .team-cta {
-  position: relative;
-  z-index: 1;
-  padding: 120px 5%;
-  background: linear-gradient(180deg, transparent 0%, rgba($stone, 0.5) 100%);
+  padding: 140px 5%;
+  background: #050505;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid rgba($gold, 0.1);
 
   .cta-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 60px;
-
-    @media (max-width: 900px) {
-      flex-direction: column;
-      text-align: center;
-    }
+    width: 100%;
+    max-width: 800px; /* Narrower for better readability without right section */
+    text-align: left;
   }
 
-  .cta-content {
-    flex: 1;
+  .cta-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
 
-    .cta-tag {
-      display: inline-block;
+    .cta-code-tag {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.7rem;
-      letter-spacing: 0.3rem;
       color: $gold;
-      margin-bottom: 20px;
-      padding: 8px 20px;
-      border: 1px solid rgba($gold, 0.3);
+      letter-spacing: 2px;
     }
 
-    .cta-title {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      margin-bottom: 20px;
-      color: $text-primary;
-    }
-
-    .cta-text {
-      font-size: 1.1rem;
-      color: $text-secondary;
-      margin-bottom: 40px;
-      max-width: 500px;
-
-      @media (max-width: 900px) {
-        margin-left: auto;
-        margin-right: auto;
-      }
-    }
-
-    .cta-button {
-      display: inline-flex;
-      align-items: center;
-      gap: 15px;
-      padding: 18px 40px;
-      background: transparent;
-      border: 2px solid $gold;
-      color: $gold;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      letter-spacing: 0.2rem;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
-
-      &::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: $gold;
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: -1;
-      }
-
-      .btn-icon {
-        display: flex;
-        transition: transform 0.3s ease;
-
-        svg {
-          width: 20px;
-          height: 20px;
-        }
-      }
-
-      &:hover {
-        color: $obsidian;
-        border-color: $gold-bright;
-
-        &::before {
-          transform: scaleX(1);
-        }
-
-        .btn-icon {
-          transform: translateX(5px);
-        }
-      }
+    .cta-line {
+      height: 1px;
+      flex-grow: 1;
+      background: linear-gradient(90deg, rgba($gold, 0.5), transparent);
     }
   }
 
-  .cta-decoration {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    display: flex;
+  .cta-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: $text-primary;
+    line-height: 1.1;
+    margin-bottom: 25px;
+  }
+
+  .cta-text {
+    font-size: 1.2rem;
+    color: $text-secondary;
+    line-height: 1.6;
+    margin-bottom: 50px;
+    max-width: 600px;
+  }
+
+  /* REFINED BUTTON DESIGN */
+  .cta-button-minimal {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
+    gap: 25px;
+    text-decoration: none;
+    color: $gold;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    transition: all 0.3s ease;
 
-    @media (max-width: 900px) {
-      width: 150px;
-      height: 150px;
-    }
-
-    .deco-circle {
-      width: 100%;
-      height: 100%;
-      border: 2px solid rgba($gold, 10);
-      border-radius: 50%;
-      animation: decoRotate 20s linear infinite;
+    .btn-arrow {
       position: relative;
+      width: 40px;
+      height: 20px;
       display: flex;
       align-items: center;
-      justify-content: center;
 
-      &::before {
-        content: '';
-        position: absolute;
-        top: -5px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 10px;
-        height: 10px;
+      .arrow-line {
+        width: 100%;
+        height: 1px;
         background: $gold;
-        border-radius: 50%;
+        transition: transform 0.4s cubic-bezier(0.7, 0, 0.3, 1);
+        transform-origin: right;
       }
 
-      .deco-text {
-        font-family: 'Cinzel', serif;
-        font-size: 2rem;
-        font-weight: 700;
-        color: $gold;
-        letter-spacing: 0.1em;
-        animation: decoRotateReverse 20s linear infinite;
+      .arrow-tip {
+        position: absolute;
+        right: 0;
+        width: 8px;
+        height: 8px;
+        border-top: 1px solid $gold;
+        border-right: 1px solid $gold;
+        transform: rotate(45deg);
+      }
+    }
 
-        @media (max-width: 900px) {
-          font-size: 2rem;
+    &:hover {
+      color: #fff;
+
+      .btn-arrow {
+        .arrow-line {
+          transform: scaleX(1.5); /* Line grows slightly */
+          background: #fff;
+        }
+        .arrow-tip {
+          border-color: #fff;
+          transform: rotate(45deg) translate(5px, -5px); /* Tip moves forward */
         }
       }
     }
   }
-}
-
-@keyframes decoRotateReverse {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(-360deg); }
-}
-
-@keyframes decoRotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }

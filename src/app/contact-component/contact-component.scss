@@ -246,7 +246,7 @@
   box-shadow: 0 50px 100px rgba(0, 0, 0, 0.9);
   opacity: 0;
   animation: formEntrance 1.5s cubic-bezier(0.23, 1, 0.32, 1) 0.8s forwards;
-  
+  z-index: 10;
   &::before {
     content: '';
     position: absolute;
@@ -254,6 +254,18 @@
     background: linear-gradient(135deg, transparent, rgba(212, 175, 55, 0.1), transparent);
     z-index: -1;
   }
+}
+
+.emerald-select select {
+  appearance: none; /* Removes default browser styling */
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23d4af37' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: calc(100% - 15px) center;
+  padding-right: 40px;
+  cursor: pointer;
+  position: relative;
+  z-index: 5;
 }
 
 @keyframes formEntrance {
@@ -647,19 +659,93 @@
 
 .map-container {
   position: relative;
-  border: 1px solid rgba(212, 175, 55, 0.1);
-  overflow: hidden;
-  box-shadow: 0 80px 160px rgba(0, 0, 0, 0.9);
-  background: #0a0a0a;
+  width: 100%;
+  height: 500px; // Fixed height for desktop
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  background: #050202;
+  
+  @media (max-width: 768px) {
+    height: 350px; // Responsive height for mobile
+  }
+}
 
-      &::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(circle, transparent 50%, rgba(0, 0, 0, 0.3) 100%);
-        pointer-events: none;
-      }
-    }
+.interactive-map {
+  width: 100%;
+  height: 100%;
+  /* This filter turns a standard map into your "Ancient Tech" style */
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%) sepia(20%);
+}
+/* Custom Styling for the Permanent Popup */
+::ng-deep .ancient-popup {
+  .leaflet-popup-content-wrapper {
+    color: #d4af37 !important; // Gold text
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    border-radius: 0px; // Sharp technical edges
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+  }
+
+  .leaflet-popup-tip {
+    background: rgba(212, 175, 55, 0.5) !important;
+  }
+}
+
+/* Ensure the marker itself is always visible and pulsing */
+::ng-deep .custom-marker {
+  background: #d4af37;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #d4af37;
+  
+  &::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    animation: markerPulse 2s infinite;
+    background: rgba(212, 175, 55, 0.4);
+  }
+}
+
+@keyframes markerPulse {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(4); opacity: 0; }
+}
+
+.world-map-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.4) sepia(0.5);
+}
+
+.rune-marker {
+  position: absolute;
+  top: 42.2%; /* Chennai relative Latitude */
+  left: 72.1%; /* Chennai relative Longitude */
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  font-size: clamp(24px, 5vw, 40px);
+}
+
+.ley-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.hq-glow {
+  animation: svgPulse 2s infinite;
+  stroke-width: 0.5;
+}
+
+@keyframes svgPulse {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(8); opacity: 0; }
+}
     
     .ancient-map-canvas {
       width: 100%;
@@ -691,11 +777,17 @@
   left: 67.9%;
   transform: translate(-50%, -50%);
   z-index: 10;
-  color: #d4af37;
-  font-size: 40px;
   cursor: pointer;
   transition: all 0.5s ease;
-  pointer-events: auto;
+
+  .marker-link {
+    display: block; // 🔑 Makes the link fill the marker area
+    position: relative;
+    color: #d4af37;
+    text-decoration: none;
+    font-size: 40px;
+    z-index: 11;
+  }
 
   .pulse {
     position: absolute;
@@ -707,15 +799,18 @@
     border-radius: 50%;
     transform: translate(-50%, -50%);
     animation: markerPulse 3s cubic-bezier(0.2, 0, 0.2, 1) infinite;
+    pointer-events: none; // 🔑 Important: Allows clicks to pass through to the link
   }
   
   &:hover {
-    color: #fff;
     transform: translate(-50%, -50%) scale(1.2);
-    text-shadow: 0 0 30px #d4af37;
+    
+    .marker-link {
+      color: #fff;
+      text-shadow: 0 0 30px #d4af37;
+    }
   }
 }
-
 @keyframes markerPulse {
   0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.8; }
   100% { transform: translate(-50%, -50%) scale(4); opacity: 0; }

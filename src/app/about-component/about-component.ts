@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, AfterViewInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, ElementRef, AfterViewInit, OnDestroy, Inject, PLATFORM_ID, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage, isPlatformBrowser } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { gsap } from 'gsap';
@@ -29,7 +29,23 @@ interface Pillar {
 })
 export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
   activeWorld: number = -1;
+  proverbs = signal<string[]>([
+    // Roar / Resolve
+    '𑀭𑁁𑀣𑀺𑀭𑀁 𑀧𑀮𑀕𑀼',
+    'ரௌத்திரம் பழகு',
 
+    // Time remembers
+    '𑀓𑀸𑀮𑀁 𑀏𑀮𑀺𑀮𑀸𑀯𑀺𑀭𑀺𑀬𑀼𑀁 𑀫𑀭𑀓𑀓𑀸𑀢𑀼',
+    'காலம் எல்லாவற்றையும் மறக்காது',
+
+    // Pain becomes strength
+    '𑀧𑀮𑀺𑀬 𑀯𑀮𑀺 𑀢𑀸𑀁 𑀧𑀼𑀢𑀺𑀬 𑀯𑀮𑀺𑀫𑀻',
+    'பழைய வலி தான் புதிய வலிமை',
+
+    // Ruin is not the end
+    '𑀅𑀮𑀺𑀯𑀼 𑀓𑀽𑀟 𑀑𑀭𑀼 𑀫𑀼𑀟𑀺𑀯𑀼 𑀅𑀮𑀮',
+    'அழிவு கூட ஒரு முடிவு அல்ல'
+  ]);
   livingWorlds: Array<{title: string; subtitle: string; image: string; sacredText: string; content: string}> = [
     {
       title: 'Dynamic NPCs',

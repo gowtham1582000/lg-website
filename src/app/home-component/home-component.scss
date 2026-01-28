@@ -154,23 +154,59 @@ $bg: #0a0a0c;
   }
 }
 
-.cta {
+.cta-area {
   margin-top: 40px;
-  padding: 16px 44px;
-  border: 2px solid #ffae42;
-  background: transparent;
-  color: #ffae42;
-  font-family: 'Cinzel', serif;
-  letter-spacing: 3px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  min-height: 60px; // prevents layout jump
+  .cta {
+    margin-top: 40px;
+    padding: 16px 44px;
+    border: 2px solid #ffae42;
+    background: transparent;
+    color: #ffae42;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 
-  &:hover {
-    background: #ffae42;
-    color: #050302;
-    box-shadow: 0 0 35px rgba(255, 174, 66, 0.8);
+    &:hover {
+      background: #ffae42;
+      color: #050302;
+      box-shadow: 0 0 35px rgba(255, 174, 66, 0.8);
+    }
   }
 }
+
+.coming-soon-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  letter-spacing: 4px;
+  color: #ffae42;
+  opacity: 0.9;
+  animation: fadeInSigil 0.6s ease forwards;
+
+  .rune {
+    font-size: 1.2rem;
+    opacity: 0.6;
+  }
+}
+
+@keyframes fadeInSigil {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+}
+
+
+
 
 .arrow-path {
   position: absolute;
@@ -210,59 +246,270 @@ $bg: #0a0a0c;
   }
 }
 
-.aminite-overlay {
-  background-attachment: fixed;
+
+
+/* ================== CONTAINER ================== */
+
+.saga-chronicles {
+  display: flex;
+  height: 90vh;
+  width: 100%;
+  overflow: hidden;
+  background: #000;
+
+  @media (max-width: 992px) {
+    flex-direction: column;
+    height: auto;
+  }
+}
+
+/* ================== CARD ================== */
+
+.chronicle-card {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  overflow: hidden;
+  cursor: pointer;
+  border-right: 1px solid rgba(255, 174, 66, 0.2);
+  transition: flex 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+
+  /* Entrance animation (desktop only) */
+  opacity: 0;
+  transform: translateY(30px);
+  animation: cardFadeIn 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+
+  &:nth-child(1) { animation-delay: 0.2s; }
+  &:nth-child(2) { animation-delay: 0.4s; }
+  &:nth-child(3) { animation-delay: 0.6s; }
+
+  &:last-child {
+    border-right: none;
+  }
+
+  /* ================== BACKGROUND ================== */
+
+  .card-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transform: scale(1);
+    filter: grayscale(1) brightness(0.7);
+    transition: transform 1s ease, filter 1s ease;
+    z-index: 1;
+  }
+
+  .card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.8),
+      rgba(0, 0, 0, 0.4)
+    );
+    transition: background 0.8s ease;
+    z-index: 2;
+  }
+
+  /* ================== CONTENT ================== */
+
+  .card-content {
+
+    opacity: 1;
+  }
+
+  .title,
+  p,
+  .card-footer {
+    opacity: 1;
+    transition: all 0.6s ease;
+  }
+
+  /* ================== DESKTOP HOVER ONLY ================== */
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      flex: 2.5;
+
+      .card-bg {
+        transform: scale(1.1);
+        filter: grayscale(0) brightness(1);
+      }
+
+      .card-overlay {
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.9),
+          rgba(0, 0, 0, 0.2)
+        );
+      }
+    }
+  }
+
+  /* ================== MOBILE & TABLET ================== */
+
+  @media (max-width: 992px) {
+    flex: none;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 174, 66, 0.2);
+    opacity: 1;
+    transform: none;
+    animation: none;
+
+    .card-bg {
+      position: relative;
+      height: 45vh;
+      min-height: 260px;
+      transform: none;
+      filter: brightness(0.9);
+    }
+
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+    }
+
+    .card-content {
+      position: relative;
+      padding: 24px 20px;
+      background: #020205;
+    }
+  }
+
+  /* Tablet fine-tuning */
+  @media (min-width: 600px) and (max-width: 992px) {
+    .card-bg {
+      height: 50vh;
+    }
+  }
+}
+
+/* ================== ANIMATIONS ================== */
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.card-bg {
+  position: absolute;
+  inset: 0;
   background-size: cover;
   background-position: center;
+  transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+  filter: grayscale(0.4) brightness(0.6);
+  transform: scale(1.05);
+
+  @media (max-width: 992px) {
+    filter: grayscale(0) brightness(0.7);
+    transform: scale(1);
+  }
 }
 
-.aminite-overlay .aminite-over-area {
-  padding-top: 1px;
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 100%);
+  transition: background 0.5s ease;
 }
 
-.aminite-overlay .overlay-box {
-  background: rgba(2, 9, 33, 0.8);
-  padding: 40px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-top: 35vh;
-}
+.card-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 60px 40px;
+  z-index: 2;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 
-@media only screen and (max-width: 1199px) {
-  .aminite-overlay .overlay-box {
+  @media (max-width: 992px) {
     padding: 30px;
   }
 }
 
-@media only screen and (max-width: 575px) {
-  .aminite-overlay .overlay-box {
-    margin-top: 150px;
-    padding: 20px;
-  }
+.card-tag {
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  letter-spacing: 4px;
+  color: #fff;
+  margin-bottom: 15px;
+  transition: all 0.5s ease;
+  display: block;
 }
 
-.aminite-overlay .overlay-box .title {
-  font-size: 40px;
+.chronicle-card .title {
+  font-family: 'Cinzel', serif;
+  font-size: 2.5rem;
   color: #fff;
   margin-bottom: 20px;
-}
+  line-height: 1.1;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1) 0.1s;
+  text-shadow: 0 4px 10px rgba(0,0,0,0.5);
 
-@media only screen and (max-width: 1199px) {
-  .aminite-overlay .overlay-box .title {
-    font-size: 28px;
+  @media (max-width: 1199px) {
+    font-size: 1.8rem;
   }
 }
 
-.aminite-overlay .overlay-box p {
-  font-size: 18px;
-  margin-bottom: 0;
-  opacity: 0.7;
-  color: #fff;
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1) 0.3s;
+
+  @media (max-width: 992px) {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .rune {
+    color: #ffae42;
+    font-size: 1.2rem;
+    animation: runePulse 2s infinite;
+  }
+
+  .action {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    color: #ffae42;
+    font-weight: bold;
+  }
 }
 
-@media only screen and (max-width: 1199px) {
-  .aminite-overlay .overlay-box p {
-    font-size: 16px;
+@keyframes runePulse {
+  0% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.2); opacity: 1; text-shadow: 0 0 10px #ffae42; }
+  100% { transform: scale(1); opacity: 0.6; }
+}
+
+/* iOS Safari Fix for flex expansion */
+@supports (-webkit-touch-callout: none) {
+  .saga-chronicles {
+    height: auto;
+    flex-direction: column;
+  }
+  .chronicle-card {
+    height: 60vh;
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+  .chronicle-card p, .card-footer {
+    opacity: 0.8;
+    transform: none;
   }
 }
 

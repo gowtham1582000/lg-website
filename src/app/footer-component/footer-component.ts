@@ -1,10 +1,10 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-footer-component',
   standalone:true,
-  imports: [RouterLink,RouterLinkActive],
+  imports: [RouterLink],
   templateUrl: './footer-component.html',
   styleUrl: './footer-component.scss',
 })

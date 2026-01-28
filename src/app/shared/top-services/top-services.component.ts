@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ElementRef, ViewChild, OnDestroy, HostListener } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, ViewChild, OnDestroy, HostListener, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { gsap } from 'gsap';
 
@@ -42,17 +42,17 @@ export class TopServicesComponent implements AfterViewInit, OnDestroy {
       image: 'assets/images/Game-Design-service.png',
       tags: ['UNITY', 'UNREAL', 'CUSTOM ENGINE']
     },
-      {
-        id: 'IV',
-        title: 'WEB & DIGITAL PLATFORM DEVELOPMENT',
-        description: 'We design and develop modern, responsive websites that deliver performance, clarity, and seamless user experience.',
-        image: 'assets/images/website-service.png',
-        tags: ['ANGULAR', 'GIT', 'UI/UX']
-      }
-    ];
+    {
+      id: 'IV',
+      title: 'WEB & DIGITAL PLATFORM DEVELOPMENT',
+      description: 'We design and develop modern, responsive websites that deliver performance, clarity, and seamless user experience.',
+      image: 'assets/images/website-service.png',
+      tags: ['ANGULAR', 'GIT', 'UI/UX']
+    }
+  ];
 
 
-  currentIndex = 0;
+  currentIndex = signal<number>(0);
   isAnimating = false;
   private autoRotateInterval: any;
   private touchStartX: number = 0;
@@ -121,38 +121,47 @@ export class TopServicesComponent implements AfterViewInit, OnDestroy {
   }
 
   positionCard(card: HTMLElement, index: number) {
-      const angle = (index - this.currentIndex) * this.angleStep;
-      const radian = (angle * Math.PI) / 180;
-      
-      // Dynamic Z-space for clarity
-      const x = Math.sin(radian) * this.radius;
-      const z = Math.cos(radian) * this.radius - this.radius;
-      
-      // Scale logic: make sure the active card is much larger (1.2) than background cards
-      const isActive = index === this.currentIndex;
-      const scale = isActive ? 1.1 : Math.max(0.5, 0.6 + (z / 1000));
-      const opacity = isActive ? 1 : Math.max(0.2, 1 + (z / 500));
-      
-      gsap.to(card, {
-        x: x,
-        z: z,
-        rotateY: angle * -0.5, // Subtle counter-rotation for readability
-        scale: scale,
-        opacity: opacity,
-        zIndex: Math.round(z + 1000),
-        duration: 0.8,
-        perspective: 1500,
-        ease: 'power3.out'
-      });
-    } 
+    const total = this.services.length;
+    let diff = index - this.currentIndex();
+
+    // Normalize to shortest circular distance
+    if (diff > total / 2) diff -= total;
+    if (diff < -total / 2) diff += total;
+
+    const angle = diff * this.angleStep;
+    const radian = (angle * Math.PI) / 180;
+
+    const x = Math.sin(radian) * this.radius;
+    const z = Math.cos(radian) * this.radius - this.radius;
+
+    const isActive = index === this.currentIndex();
+    const scale = isActive ? 1.1 : Math.max(0.55, 0.6 + z / 1000);
+    const opacity = isActive ? 1 : Math.max(0.3, 1 + z / 500);
+
+    gsap.to(card, {
+      x,
+      z,
+      rotateY: -angle * 0.5,
+      scale,
+      opacity,
+      zIndex: Math.round(z + 1000),
+      duration: 0.8,
+      perspective: 1500,
+      ease: 'power3.out'
+    });
+  }
+
 
 
   rotate(direction: number) {
     if (this.isAnimating) return;
     this.isAnimating = true;
 
-    this.currentIndex = (this.currentIndex + direction + this.services.length) % this.services.length;
-    
+    const nextIndex =
+      (this.currentIndex() + direction + this.services.length) % this.services.length;
+
+    this.currentIndex.set(nextIndex);
+
     const cards = document.querySelectorAll('.carousel-card');
     cards.forEach((card, i) => {
       this.positionCard(card as HTMLElement, i);
@@ -163,10 +172,11 @@ export class TopServicesComponent implements AfterViewInit, OnDestroy {
     }, 800);
   }
 
+
   goToSlide(index: number) {
-    if (this.isAnimating || index === this.currentIndex) return;
+    if (this.isAnimating || index === this.currentIndex()) return;
     this.isAnimating = true;
-    this.currentIndex = index;
+    this.currentIndex.set(index);
 
     const cards = document.querySelectorAll('.carousel-card');
     cards.forEach((card, i) => {
