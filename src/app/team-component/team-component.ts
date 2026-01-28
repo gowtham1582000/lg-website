@@ -1,10 +1,13 @@
-import { Component, AfterViewInit, OnDestroy, HostListener, ElementRef, ViewChild } from '@angular/core';
+import { 
+  Component, AfterViewInit, OnDestroy, HostListener, 
+  ElementRef, ViewChild, ChangeDetectorRef, NgZone 
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Observer } from 'gsap/all'; // This is the correct way to get the module
-gsap.registerPlugin(ScrollTrigger, Observer);
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface TeamMember {
   id: number;
@@ -24,31 +27,38 @@ interface TeamMember {
 })
 export class TeamComponent implements AfterViewInit, OnDestroy {
   @ViewChild('sliderViewport', { static: true }) sliderViewport!: ElementRef;
+
   activeFilter = 'all';
   hoveredMember: TeamMember | null = null;
   currentSlide = 0;
   sliderOffset = 0;
 
+  // Swipe logic properties
+  private touchStartX = 0;
+  private touchEndX = 0;
+  private isSwiping = false;
+
   // Configuration - Must match SCSS
-  private cardWidth = 220; // Slightly smaller to fit 5 in a row
+  private cardWidth = 220; 
   private gap = 15; 
-  private observer: any;
 
   teamMembers: TeamMember[] = [
-    { id: 1, name: 'SREE RISHI', role: 'Founder & Head o f the Game Department', category: 'leadership', image: 'https://i.pravatar.cc/400?u=2', bio: '' },
-    { id: 2, name: 'KISHORE KUMAR', role: 'Founder & Creative Director', category: 'leadership', image: 'https://i.pravatar.cc/400?u=2', bio: '' },
-    { id: 3, name: 'MADHAVAN', role: 'CFX Artist', category: 'Game Art & Visual Development Team', image: 'https://i.pravatar.cc/400?u=3', bio: '' },
-    { id: 4, name: 'KAMESH', role: 'Game Environment Artist', category: 'Game Art & Visual Development Team', image: 'https://i.pravatar.cc/400?u=4', bio: '' },
+    { id: 1, name: 'SREE RISHI', role: 'Head of the Game Department', category: 'leadership', image: 'assets/team-images/Sree-Rishi.jpg', bio: '' },
+    { id: 2, name: 'KISHORE KUMAR', role: 'Creative Director', category: 'leadership', image: 'assets/team-images/Kishore-Kumar.png', bio: '' },
+    { id: 3, name: 'MADHAVAN', role: 'CFX Artist', category: 'Game Art & Visual Development Team', image: 'assets/team-images/Madhavan.png', bio: '' },
+    { id: 4, name: 'KAMESH', role: 'Game Environment Artist', category: 'Game Art & Visual Development Team', image: 'assets/team-images/Kamesh.png', bio: '' },
+    { id: 12, name: 'GOWTHAM', role: 'Full-Stack Developer', category: 'Web & Digital Platform Development Team', image: 'assets/team-images/Gowtham-P.png', bio: '' },
+    { id: 13, name: 'DHANUSH RAM', role: 'Front-End Developer', category: 'Web & Digital Platform Development Team', image: 'assets/team-images/Dhanush-Ram.png', bio: '' },
+     { id: 10, name: 'UMESH', role: 'Game Developer', category: 'Game Design & Development', image: 'assets/team-images/Umesh-P.png', bio: '' },
+    { id: 11, name: 'KITHIYON', role: 'UI/UX Game Designer', category: 'Game Design & Development', image: 'assets/team-images/Kithiyon.png', bio: '' },
+    { id: 6, name: 'PRATHIBAN', role: 'Character & Prop Artist', category: 'Game Art & Visual Development Team', image: 'assets/team-images/Parthiban.png', bio: '' },
     { id: 5, name: 'ANUJ', role: 'Game Environment Artist', category: 'Game Art & Visual Development Team', image: 'https://i.pravatar.cc/400?u=5', bio: '' },
-    { id: 6, name: 'PRATHIBAN', role: 'Character & Prop Artist', category: 'Game Art & Visual Development Team', image: 'https://i.pravatar.cc/400?u=1', bio: '' },
-    { id: 7, name: 'NIRANJAN', role: 'Texturing & Prop Artist', category: 'Game Art & Visual Development Team', image: 'https://i.pravatar.cc/400?u=7', bio: '' },
+    { id: 7, name: 'NILANJAN', role: 'Texturing & Prop Artist', category: 'Game Art & Visual Development Team', image: 'https://i.pravatar.cc/400?u=7', bio: '' },
     { id: 8, name: 'VIKRAM', role: 'Rigging & Skinning Artist', category: 'Animation & Technical Art Team', image: 'https://i.pravatar.cc/400?u=7', bio: '' },
-    { id: 9, name: 'BAVADHARINI', role: 'Game Animator', category: 'Animation & Technical Art Team', image: 'https://i.pravatar.cc/400?u=7', bio: '' },
-    { id: 10, name: 'UMESH', role: 'Game Developer', category: 'Game Design & Development', image: 'https://i.pravatar.cc/400?u=7', bio: '' },
-    { id: 11, name: 'KITHIYON', role: 'UI/UX Game Designer', category: 'Game Design & Development', image: 'https://i.pravatar.cc/400?u=7', bio: '' },
-    { id: 12, name: 'GOWTHAM', role: 'Full-Stack Developer', category: 'Web & Digital Platform Development Team', image: 'https://i.pravatar.cc/400?u=7', bio: '' },
-    { id: 13, name: 'DHANUSH RAM', role: 'Front-End Developer', category: 'Web & Digital Platform Development Team', image: 'https://i.pravatar.cc/400?u=7', bio: '' },
+    { id: 9, name: 'BAVADHARINI', role: 'Game Animator', category: 'Animation & Technical Art Team', image: 'https://i.pravatar.cc/400?u=7', bio: '' }
   ];
+
+  constructor(private cdr: ChangeDetectorRef, private zone: NgZone) {}
 
   get filteredMembers(): TeamMember[] {
     return this.activeFilter === 'all' ? this.teamMembers : this.teamMembers.filter(m => m.category === this.activeFilter);
@@ -60,7 +70,7 @@ export class TeamComponent implements AfterViewInit, OnDestroy {
     if (vw <= 600) return 1;
     if (vw <= 900) return 2;
     if (vw <= 1200) return 3;
-    return 5; // Default for large screens
+    return 5;
   }
 
   get maxSlide(): number {
@@ -78,40 +88,47 @@ export class TeamComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     this.updateSliderOffset();
-    this.initSwipeSupport(); // 3. Initialize Swipe
   }
 
-  private initSwipeSupport() {
-    // This creates a listener on the viewport for horizontal "drags"
-    this.observer = Observer.create({
-      target: this.sliderViewport.nativeElement,
-      type: "wheel,touch,pointer",
-      onLeft: () => this.slideNext(),
-      onRight: () => this.slidePrev(),
-      tolerance: 50, // Minimum distance to trigger a swipe
-      preventDefault: false // Allows normal vertical scrolling
-    });
+  // --- MOBILE SWIPE HANDLERS (Same as your Video Slider) ---
+  @HostListener('touchstart', ['$event'])
+  onTouchStart(event: TouchEvent) {
+    this.touchStartX = event.touches[0].clientX;
+    this.isSwiping = true;
   }
 
-  ngOnDestroy() {
-    ScrollTrigger.getAll().forEach((t: { kill: () => any; }) => t.kill());
+  @HostListener('touchmove', ['$event'])
+  onTouchMove(event: TouchEvent) {
+    if (!this.isSwiping) return;
+    this.touchEndX = event.touches[0].clientX;
   }
 
-  setFilter(filter: string) {
-    this.activeFilter = filter;
-    this.currentSlide = 0;
-    this.updateSliderOffset();
+  @HostListener('touchend')
+  onTouchEnd() {
+    if (!this.isSwiping) return;
+    this.handleSwipe();
+    this.isSwiping = false;
   }
 
+  private handleSwipe() {
+    const swipeThreshold = 50;
+    const diffX = this.touchStartX - this.touchEndX;
+
+    if (Math.abs(diffX) > swipeThreshold) {
+      if (diffX > 0) {
+        this.slideNext();
+      } else {
+        this.slidePrev();
+      }
+    }
+  }
+
+  // --- NAVIGATION LOGIC ---
   slideNext() {
     if (this.currentSlide < this.maxSlide) {
       this.currentSlide++;
       this.updateSliderOffset();
     }
-  }
-
-  getFilterCount(category: string): number {
-    return this.teamMembers.filter(m => m.category === category).length;
   }
 
   slidePrev() {
@@ -126,13 +143,29 @@ export class TeamComponent implements AfterViewInit, OnDestroy {
     this.updateSliderOffset();
   }
 
+  setFilter(filter: string) {
+    this.activeFilter = filter;
+    this.currentSlide = 0;
+    this.updateSliderOffset();
+  }
+  getFilterCount(category: string): number {
+    return this.teamMembers.filter(m => m.category === category).length;
+  }
+
   private updateSliderOffset() {
-    this.sliderOffset = -(this.currentSlide * (this.cardWidth + this.gap));
+    this.zone.run(() => {
+      this.sliderOffset = -(this.currentSlide * (this.cardWidth + this.gap));
+      this.cdr.detectChanges();
+    });
   }
 
   @HostListener('window:resize')
   onResize() {
     if (this.currentSlide > this.maxSlide) this.currentSlide = this.maxSlide;
     this.updateSliderOffset();
+  }
+
+  ngOnDestroy() {
+    ScrollTrigger.getAll().forEach((t: { kill: () => any; }) => t.kill());
   }
 }

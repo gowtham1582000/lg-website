@@ -11,6 +11,8 @@ $z-white: #ffffff;
 $z-accent-blue: #00f3ff;
 $z-accent-red: #ff003c; 
 
+@import 'leaflet/dist/leaflet.css';
+
 :root {
   --primary: #ff003c;
   --secondary: #00f3ff;
@@ -183,4 +185,90 @@ button:hover ~ .neural-pulse {
 .awake .awaken-text {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Hide the default browser cursor */
+* {
+  cursor: none !important;
+}
+
+/* 1. THE OUTER RING (The Ancient Crosshair) */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid rgba(212, 175, 55, 0.4); /* Gold color */
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+
+  /* Vertical Notch */
+  &::before {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 120%;
+    background: linear-gradient(to bottom, #d4af37, transparent, #d4af37);
+    opacity: 0.5;
+  }
+
+  /* Horizontal Notch */
+  &::after {
+    content: '';
+    position: absolute;
+    width: 120%;
+    height: 1px;
+    background: linear-gradient(to right, #d4af37, transparent, #d4af37);
+    opacity: 0.5;
+  }
+
+  /* Expand and Glow when hovering over links/buttons */
+  &.hover {
+    width: 65px;
+    height: 65px;
+    border-color: #ffffff;
+    background: rgba(212, 175, 55, 0.1);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+    
+    &::before, &::after {
+        opacity: 0.8;
+        background: #ffffff;
+    }
+  }
+}
+
+/* 2. THE CORE (The Precision Dot) */
+.cursor-core {
+  width: 6px;
+  height: 6px;
+  background: #d4af37;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #d4af37;
+  transition: transform 0.1s ease-out;
+}
+
+/* 3. THE GLOW (Aethereal Lagging Effect) */
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  mix-blend-mode: screen;
+  
+  &.hover {
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+  }
 }

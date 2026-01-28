@@ -66,9 +66,29 @@
         <span class="showcase-tag">CINEMATIC REVEAL STYLE</span>
         <h2 class="showcase-main-title">LIVING WORLDS</h2>
         <p class="showcase-subtitle">Explore the layers of our dynamic universe</p>
+        <div class="proverb-marquee">
+        <div class="proverb-track">
+            <span
+              class="proverb-text"
+              *ngFor="let line of proverbs()"
+            >
+              {{ line }}
+            </span>
+
+            <!-- Duplicate once for seamless loop -->
+            <span
+              class="proverb-text"
+              *ngFor="let line of proverbs()"
+            >
+              {{ line }}
+            </span>
+          </div>
+        </div>
+
+
       </div>
 
-<div class="showcase-gallery">
+        <div class="showcase-gallery">
           <div class="gallery-item" *ngFor="let world of livingWorlds; let i = index"
                [class.active]="activeWorld === i"
                (mouseenter)="activateWorld(i)"
@@ -78,32 +98,28 @@
             <div class="data-stream-frame" [class.active]="activeWorld === i">
               <div class="stream-side top">
                 <div class="stream-track">
-                  <span class="stream-text">{{world.sacredText}}</span>
-                  <span class="stream-text">{{world.sacredText}}</span>
+                  <!-- <span class="stream-text">{{world.sacredText}}</span>
+                  <span class="stream-text">{{world.sacredText}}</span> -->
                 </div>
               </div>
               <div class="stream-side right">
                 <div class="stream-track">
-                  <span class="stream-text">{{world.sacredText}}</span>
-                  <span class="stream-text">{{world.sacredText}}</span>
+                  <!-- <span class="stream-text">{{world.sacredText}}</span>
+                  <span class="stream-text">{{world.sacredText}}</span> -->
                 </div>
               </div>
-              <!-- <div class="stream-side bottom">
+              <div class="stream-side bottom">
                 <div class="stream-track">
-                  <span class="stream-text">{{world.sacredText}}</span>
-                  <span class="stream-text">{{world.sacredText}}</span>
+                  <!-- <span class="stream-text">{{world.sacredText}}</span>
+                  <span class="stream-text">{{world.sacredText}}</span> -->
                 </div>
-              </div> -->
+              </div>
               <div class="stream-side left">
                 <div class="stream-track">
-                  <span class="stream-text">{{world.sacredText}}</span>
-                  <span class="stream-text">{{world.sacredText}}</span>
+                  <!-- <span class="stream-text">{{world.sacredText}}</span>
+                  <span class="stream-text">{{world.sacredText}}</span> -->
                 </div>
               </div>
-              <div class="frame-corner tl"></div>
-              <div class="frame-corner tr"></div>
-              <div class="frame-corner bl"></div>
-              <div class="frame-corner br"></div>
             </div>
 
             <!-- Square Image Container -->

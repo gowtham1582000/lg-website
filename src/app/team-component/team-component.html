@@ -80,7 +80,7 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
     </button>
 
-    <div class="slider-viewport" #sliderViewport style="touch-action: pan-y;">
+    <div class="slider-viewport" #sliderViewport>
       <div class="slider-track" [style.transform]="'translateX(' + sliderOffset + 'px)'">
         <div class="team-card" *ngFor="let member of filteredMembers; let i = index"
              (mouseenter)="hoveredMember = member" 
@@ -117,27 +117,28 @@
   </div>
 </section>
 
-  <section class="team-cta">
-    <div class="cta-container">
-      <div class="cta-content">
-        <span class="cta-tag">JOIN THE CIRCLE</span>
-        <h2 class="cta-title">Ready to Shape the Future?</h2>
-        <p class="cta-text">We're always looking for exceptional talent to join our team.</p>
-        <a routerLink="/contact" class="cta-button">
-          <span class="btn-text">JOIN US</span>
-          <span class="btn-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </span>
-        </a>
+<section class="team-cta">
+  <div class="cta-container">
+    <div class="cta-content">
+      <div class="cta-header">
+        <span class="cta-code-tag">SYSTEM_INIT // 02</span>
+        <div class="cta-line"></div>
       </div>
       
-<div class="cta-decoration">
-        <div class="deco-circle">
-          <span class="deco-text">𑀮𑀺𑀫𑀢𑁆 𑀢𑀼𑀢𑀺𑀬𑀸</span>
+      <h2 class="cta-title">Ready to Shape the Future?</h2>
+      <p class="cta-text">
+        Join our network in Chennai. We are looking for developers who 
+        excel in Angular architecture and technical innovation.
+      </p>
+
+      <a routerLink="/contact" class="cta-button-minimal">
+        <span class="btn-label">JOIN THE CIRCLE</span>
+        <div class="btn-arrow">
+          <div class="arrow-line"></div>
+          <div class="arrow-tip"></div>
         </div>
-      </div>
+      </a>
     </div>
-  </section>
+  </div>
+</section>
 </div>

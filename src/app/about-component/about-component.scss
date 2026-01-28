@@ -390,6 +390,55 @@ $text-muted: rgba(224, 213, 192, 0.5);
     }
   }
 
+  .proverb-marquee {
+    margin: 25px auto 0;
+    max-width: 720px;   // 👈 controls visual width
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 14px 0;
+    border-top: 1px solid rgba($gold, 0.15);
+    border-bottom: 1px solid rgba($gold, 0.15);
+    text-align: center;
+
+    @media (max-width: 768px) {
+      max-width: 90%;
+    }
+  }
+
+  .proverb-track {
+    display: inline-flex;   // 👈 keeps content centered
+    width: max-content;
+    animation: proverbScroll 40s linear infinite;
+  }
+
+  .proverb-text {
+    font-family: 'Noto Sans Tamil', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.35rem;
+    color: rgba($gold, 0.75);
+    white-space: nowrap;
+    padding: 0 60px;
+    text-shadow: 0 0 12px rgba($gold, 0.25);
+
+    @media (max-width: 768px) {
+      font-size: 0.75rem;
+      letter-spacing: 0.25rem;
+      padding: 0 40px;
+    }
+  }
+
+  @keyframes proverbScroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+
+
   .showcase-gallery {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

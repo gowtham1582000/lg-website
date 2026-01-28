@@ -6,8 +6,7 @@
   display: flex;
   align-items: center;
   overflow: hidden;
-  touch-action: pan-y pinch-zoom;
-
+  touch-action: pan-y;
   .background-particles {
     position: absolute;
     inset: 0;
@@ -21,6 +20,7 @@
     width: 95%;
     max-width: 1600px;
     margin: 0 auto;
+    touch-action: pan-y;
   }
 
   .slide {
@@ -92,21 +92,42 @@
     .video-right {
       flex: 2;
       position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       
       .video-wrapper {
         width: 100%;
+        aspect-ratio: 16 / 9; 
         border-radius: 20px;
         overflow: hidden;
-        mask-image: radial-gradient(white, black);
         position: relative;
+        background: rgba(0,0,0,0.2);
 
-        .transparent-video {
+        // Add this keyframe at the bottom of your file
+        @keyframes subtleMove {
+          from { transform: scale(1.0); }
+          to { transform: scale(1.08); }
+        }
+
+        .transparent-video,.slider-image {
           width: 100%;
           height: 100%;
-          object-fit: cover;
+          object-fit: cover; // Crucial: clips the content to fit the 16:9 box
+          display: block;
+          
+          // Matching Visual Treatments
           mix-blend-mode: screen; 
           filter: sepia(0.5) saturate(1.5) hue-rotate(-10deg) contrast(1.2);
+          
+          // Smooth edges
           mask-image: radial-gradient(circle, black 50%, transparent 95%);
+          -webkit-mask-image: radial-gradient(circle, black 50%, transparent 95%);
+        }
+        .slider-image {
+          opacity: 0.8;
+          // Add a very subtle scale animation so it's not a "dead" static image
+          animation: subtleMove 15s infinite alternate linear;
         }
 
         .mute-btn {

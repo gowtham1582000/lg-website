@@ -22,5 +22,10 @@ export class HomeComponent implements OnInit {
     { id: 3, char: 'ᚦ' }, { id: 4, char: 'ᚩ' }
   ];
   correctSequence = [3, 1, 4, 2]; // The secret order
-  
+  showComingSoon = false;
+
+  openComingSoon() {
+    this.showComingSoon = true;
+  }
+
 }

@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, OnInit, signal, OnDestroy } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { AfterViewInit, Component, OnInit, signal, OnDestroy, inject, HostListener } from '@angular/core';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header-component/header-component';
 import { FooterComponent } from './footer-component/footer-component';
 import { TerminalAssistant } from './terminal-assistant/terminal-assistant';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -16,16 +17,34 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   private animationFrameId?: number;
   private particleIntervalId?: any;
   private loaderIntervalId?: any;
+  private router = inject(Router);
+  private viewportScroller = inject(ViewportScroller);
+
+  // Ancient Cursor State
+  cursorTransform: string = 'translate(-50%, -50%)';
 
   ngOnInit() {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.viewportScroller.scrollToPosition([0, 0]); 
+      }
+    });
     this.startLoadingSequence();
+  }
+
+  // Implementation of Ancient Cursor tracking via HostListener
+  @HostListener('document:mousemove', ['$event'])
+  onMouseMove(e: MouseEvent) {
+    this.mouseX = e.clientX;
+    this.mouseY = e.clientY;
+    // Direct transform for the main container for immediate response
+    this.cursorTransform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
   }
 
   ngOnDestroy() {
     if (this.animationFrameId) cancelAnimationFrame(this.animationFrameId);
     if (this.particleIntervalId) clearInterval(this.particleIntervalId);
     if (this.loaderIntervalId) clearInterval(this.loaderIntervalId);
-    document.removeEventListener('mousemove', this.updateMousePos);
     document.removeEventListener('mouseover', this.handleHover);
     document.removeEventListener('mouseout', this.handleHover);
   }
@@ -62,17 +81,14 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
   private mouseX = 0;
   private mouseY = 0;
-  private updateMousePos = (e: MouseEvent) => {
-    this.mouseX = e.clientX;
-    this.mouseY = e.clientY;
-  };
 
   private handleHover = (e: MouseEvent) => {
     const target = e.target as HTMLElement;
-    const interactive = target.closest('a, button, [role="button"], .interactive');
+    const interactive = target.closest('a, button, [role="button"], select, input, textarea, .interactive');
     const cursor = document.querySelector('.custom-cursor');
     const glow = document.querySelector('.cursor-glow');
     
+    // Logic for "Ancient" cursor expansion on interactive elements
     if (e.type === 'mouseover' && interactive) {
       cursor?.classList.add('hover');
       glow?.classList.add('hover');
@@ -96,7 +112,6 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     let glowX = 0, glowY = 0;
     let velocity = 0, angle = 0;
 
-    document.addEventListener('mousemove', this.updateMousePos, { passive: true });
     document.addEventListener('mouseover', this.handleHover);
     document.addEventListener('mouseout', this.handleHover);
 
@@ -127,12 +142,15 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       lastX = this.mouseX;
       lastY = this.mouseY;
 
+      // Smooth interpolation for the Ancient "Follower" effect
       cursorX += (this.mouseX - cursorX) * 0.25;
       cursorY += (this.mouseY - cursorY) * 0.25;
       glowX += (this.mouseX - glowX) * 0.12;
       glowY += (this.mouseY - glowY) * 0.12;
 
       const stretch = 1 + Math.min(velocity / 120, 1.2);
+      
+      // Applying transforms for the Ring, Core, and Glow separately
       cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%) rotate(${angle}deg)`;
       core.style.transform = `scale(${stretch}, ${1/stretch})`;
       glow.style.transform = `translate3d(${glowX}px, ${glowY}px, 0) translate(-50%, -50%)`;

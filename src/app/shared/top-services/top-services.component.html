@@ -10,7 +10,7 @@
   <div class="carousel-stage">
     <div class="carousel-track">
       @for (service of services; track service.id; let i = $index) {
-        <div class="carousel-card" [class.active]="i === currentIndex">
+        <div class="carousel-card" [class.active]="i === currentIndex()">
           <div class="card-inner">
             <div class="card-image">
               <img [src]="service.image" [alt]="service.title">
@@ -44,15 +44,15 @@
   <div class="carousel-controls">
     <div class="carousel-dots">
       @for (service of services; track service.id; let i = $index) {
-        <button class="dot" [class.active]="i === currentIndex" (click)="goToSlide(i)">
+        <button class="dot" [class.active]="i === currentIndex()" (click)="goToSlide(i)">
           <span class="dot-inner"></span>
         </button>
       }
     </div>
   </div>
 
-  <div class="active-service-info" *ngIf="services[currentIndex]">
-    <div class="info-number">{{ services[currentIndex].id }}</div>
-    <div class="info-title">{{ services[currentIndex].title }}</div>
+  <div class="active-service-info" *ngIf="services[currentIndex()]">
+    <div class="info-number">{{ services[currentIndex()].id }}</div>
+    <div class="info-title">{{ services[currentIndex()].title }}</div>
   </div>
 </section>

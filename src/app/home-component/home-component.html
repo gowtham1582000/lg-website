@@ -21,25 +21,26 @@
 
     <!-- TEXT SIDE -->
     <div class="story-panel">
-        <p class="tamil-inscription inscription-line">
-  <span class="ancient">
-    𑀬𑀸𑀢𑀼𑀫𑁆 𑀊𑀭𑁂 𑀬𑀸𑀯𑀭𑀼𑀫𑁆 𑀓𑁂𑀮𑀺𑀭𑁆
-  </span>
-  <span class="modern">
-    யாதும் ஊரே யாவரும் கேளிர்
-  </span>
-        </p>
-        
+      <p class="tamil-inscription inscription-line">
+        <span class="ancient">
+          𑀬𑀸𑀢𑀼𑀫𑁆 𑀊𑀭𑁂 𑀬𑀸𑀯𑀭𑀼𑀫𑁆 𑀓𑁂𑀮𑀺𑀭𑁆
+        </span>
+        <span class="modern">
+          யாதும் ஊரே யாவரும் கேளிர்
+        </span>
+      </p>
+
       <h2 class="section-title">
         LIMAT STUDIO
       </h2>
 
       <p class="studio-desc">
-        LIMAT STUDIO is a next-generation game development studio focused on creating high-quality AAA games rooted in deep worldbuilding, strong narratives, and immersive gameplay systems.
-<br>
-        This is not a story that is told.  
+        LIMAT STUDIO is a next-generation game development studio focused on creating high-quality AAA games rooted in
+        deep worldbuilding, strong narratives, and immersive gameplay systems.
+        <br>
+        This is not a story that is told.
         It is a world that reveals itself!
-              </p>
+      </p>
 
       <div class="divider"></div>
       <h3 class="game-title">
@@ -58,9 +59,21 @@
         <li>🛕 Living ancient Tamil world</li>
       </ul>
 
-      <button class="cta">
-        BEGIN THE SAGA
-      </button>
+      <!-- CTA AREA -->
+      <div class="cta-area">
+
+        <button class="cta" *ngIf="!showComingSoon" (click)="openComingSoon()">
+          BEGIN THE SAGA
+        </button>
+
+        <div class="coming-soon-text" *ngIf="showComingSoon">
+          <span class="rune">❖</span>
+          <span class="text">THE SAGA AWAKENS SOON....</span>
+          <span class="rune">❖</span>
+        </div>
+
+      </div>
+
     </div>
 
   </div>
@@ -69,41 +82,54 @@
 <app-video-scroll-expand></app-video-scroll-expand>
 <app-split-service-reveal></app-split-service-reveal>
 
-<section>				
-  <!-- HERO REALM -->
-  <div class="aminite-overlay parallax" style="background-image:url(../../assets/images/final-attempt.png)">
-    <div class="aminite-over-area">
-      <div class="overlay-box">
-        <h2 class="title">Where Myth and Reality Intertwine</h2>
-        <p>
-          The game world is shaped by the echoes of powerful rulers, legendary beings, and forces that exist between belief and reality. History and myth coexist — not as exposition, but as living influences that shape conflicts, alliances, and the balance of power.
-        </p>
+<section class="saga-chronicles">
+  <div class="chronicle-card">
+    <div class="card-bg" style="background-image:url('/assets/images/final-attempt.png')"></div>
+    <div class="card-overlay"></div>
+    <div class="card-content">
+      <div class="card-tag">MYTH & REALITY</div>
+      <h2 class="title">Where Myth and Reality Intertwine</h2>
+      <p>
+        The game world is shaped by the echoes of powerful rulers, legendary beings, and forces that exist between
+        belief and reality. History and myth coexist as living influences.
+      </p>
+      <div class="card-footer">
+        <span class="rune">❖</span>
+        <span class="action">EXPLORE THE VOID</span>
       </div>
     </div>
   </div>
 
-  <!-- TEMPLE & DYNASTY -->
-  <div class="aminite-overlay" style="background-image:url(../../assets/images/queen\ of\ tirent.png)">
-    <div class="aminite-over-area">
-      <div class="overlay-box ms-0">
-        <h2 class="title">A Civilization Reimagined</h2>
-        <p>
-          Players explore expansive lands filled with towering cities, sacred spaces, and long-forgotten places hidden beyond the surface.
-<br>Inspired by classical literature, ancient architecture, and cultural symbolism, the world feels both authentic and otherworldly.
-
-        </p>
+  <div class="chronicle-card">
+    <div class="card-bg" style="background-image:url('/assets/images/queen%20of%20tirent.png')"></div>
+    <div class="card-overlay"></div>
+    <div class="card-content">
+      <div class="card-tag">ANCIENT LEGACY</div>
+      <h2 class="title">A Civilization Reimagined</h2>
+      <p>
+        Explore expansive lands filled with towering cities and sacred spaces. Inspired by ancient architecture, the
+        world feels both authentic and otherworldly.
+      </p>
+      <div class="card-footer">
+        <span class="rune">❖</span>
+        <span class="action">ENTER THE TEMPLE</span>
       </div>
     </div>
   </div>
 
-  <!-- WARRIOR COMBAT -->
-  <div class="aminite-overlay" style="background-image:url(../../assets/images/yazli.png)">
-    <div class="aminite-over-area">
-      <div class="overlay-box">
-        <h2 class="title">A Living, Breathing World</h2>
-        <p>
-          Decisions ripple across political, cultural, and unseen layers of the world, influencing how regions develop and how history unfolds. The player is not just part of the story — they become a force that reshapes it.
-        </p>
+  <div class="chronicle-card">
+    <div class="card-bg" style="background-image:url('/assets/images/yazli.png')"></div>
+    <div class="card-overlay"></div>
+    <div class="card-content">
+      <div class="card-tag">LIVING WORLD</div>
+      <h2 class="title">A Living, Breathing World</h2>
+      <p>
+        Decisions ripple across political and cultural layers. The player is not just part of the story — they become a
+        force that reshapes it.
+      </p>
+      <div class="card-footer">
+        <span class="rune">❖</span>
+        <span class="action">SHAPE THE FUTURE</span>
       </div>
     </div>
   </div>
