@@ -52,10 +52,10 @@ export class TeamComponent implements AfterViewInit, OnDestroy {
      { id: 10, name: 'UMESH', role: 'Game Developer', category: 'Game Design & Development', image: 'assets/team-images/Umesh-P.png', bio: '' },
     { id: 11, name: 'KITHIYON', role: 'UI/UX Game Designer', category: 'Game Design & Development', image: 'assets/team-images/Kithiyon.png', bio: '' },
     { id: 6, name: 'PRATHIBAN', role: 'Character & Prop Artist', category: 'Game Art & Visual Development Team', image: 'assets/team-images/Parthiban.png', bio: '' },
-    { id: 5, name: 'ANUJ', role: 'Game Environment Artist', category: 'Game Art & Visual Development Team', image: 'https://i.pravatar.cc/400?u=5', bio: '' },
-    { id: 7, name: 'NILANJAN', role: 'Texturing & Prop Artist', category: 'Game Art & Visual Development Team', image: 'https://i.pravatar.cc/400?u=7', bio: '' },
-    { id: 8, name: 'VIKRAM', role: 'Rigging & Skinning Artist', category: 'Animation & Technical Art Team', image: 'https://i.pravatar.cc/400?u=7', bio: '' },
-    { id: 9, name: 'BAVADHARINI', role: 'Game Animator', category: 'Animation & Technical Art Team', image: 'https://i.pravatar.cc/400?u=7', bio: '' }
+    { id: 5, name: 'ANUJ', role: 'Game Environment Artist', category: 'Game Art & Visual Development Team', image: '', bio: '' },
+    { id: 7, name: 'NILANJAN', role: 'Texturing & Prop Artist', category: 'Game Art & Visual Development Team', image: '', bio: '' },
+    { id: 8, name: 'VIKRAM', role: 'Rigging & Skinning Artist', category: 'Animation & Technical Art Team', image: '', bio: '' },
+    { id: 9, name: 'BAVADHARINI', role: 'Game Animator', category: 'Animation & Technical Art Team', image: '', bio: '' }
   ];
 
   constructor(private cdr: ChangeDetectorRef, private zone: NgZone) {}
