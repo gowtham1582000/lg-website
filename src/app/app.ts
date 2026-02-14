@@ -7,7 +7,7 @@ import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [HeaderComponent, RouterOutlet, FooterComponent, TerminalAssistant],
+  imports: [HeaderComponent, RouterOutlet, FooterComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

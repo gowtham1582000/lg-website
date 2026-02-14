@@ -294,9 +294,10 @@ $bg: #0a0a0c;
     inset: 0;
     background-size: cover;
     background-position: center;
-    transform: scale(1);
-    filter: grayscale(1) brightness(0.7);
-    transition: transform 1s ease, filter 1s ease;
+    transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1),
+              filter 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+    filter: brightness(1.05) contrast(1.1) saturate(1.15);
+    transform: scale(1.03);
     z-index: 1;
   }
 
@@ -305,10 +306,10 @@ $bg: #0a0a0c;
     inset: 0;
     background: linear-gradient(
       to top,
-      rgba(0, 0, 0, 0.8),
-      rgba(0, 0, 0, 0.4)
+      rgba(0, 0, 0, 0.65),
+      rgba(0, 0, 0, 0.15)
     );
-    transition: background 0.8s ease;
+    transition: background 0.6s ease;
     z-index: 2;
   }
 
@@ -334,14 +335,14 @@ $bg: #0a0a0c;
 
       .card-bg {
         transform: scale(1.1);
-        filter: grayscale(0) brightness(1);
+        filter: brightness(1.15) contrast(1.15) saturate(1.25);
       }
 
       .card-overlay {
         background: linear-gradient(
           to top,
-          rgba(0, 0, 0, 0.9),
-          rgba(0, 0, 0, 0.2)
+          rgba(0, 0, 0, 0.75),
+          rgba(0, 0, 0, 0.05)
         );
       }
     }
@@ -362,8 +363,8 @@ $bg: #0a0a0c;
       position: relative;
       height: 45vh;
       min-height: 260px;
-      transform: none;
-      filter: brightness(0.9);
+      filter: brightness(1.1) contrast(1.1) saturate(1.15);
+      transform: scale(1);
     }
 
     .card-overlay {
